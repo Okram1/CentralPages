@@ -15,7 +15,7 @@ import com.vaadin.ui.VerticalSplitPanel;
 public class ProductionStatsView extends VerticalSplitPanel implements
 	Property.ValueChangeListener{
 
-protected transient Logger log = Logger.getLogger(this.getClass().getName());
+	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
 	protected CentralpagesApplication app;
 	protected ProductionStatsDAO dao;
