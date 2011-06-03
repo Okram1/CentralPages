@@ -7,12 +7,8 @@ import com.argility.centralpages.dao.ProductionStatsDAO;
 import com.argility.centralpages.ui.ProductionStatsTable;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
-import com.vaadin.data.Property.ConversionException;
-import com.vaadin.data.Property.ReadOnlyException;
 import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.ui.Form;
 import com.vaadin.ui.TextArea;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalSplitPanel;
 
 @SuppressWarnings("serial")

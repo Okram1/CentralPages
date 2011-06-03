@@ -9,7 +9,6 @@ import com.argility.centralpages.ui.StatsProdTable;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalSplitPanel;
 
 @SuppressWarnings("serial")
