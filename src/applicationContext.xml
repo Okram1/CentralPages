@@ -55,4 +55,6 @@
 	
 	<bean id="switchLoadFailedDAO" class="com.argility.centralpages.dao.SwitchLoadFailedJdbcDAO" parent="abstractDAO"/>
 	
+	<bean id="productionStatsDAO" class="com.argility.centralpages.dao.ProductionStatsJdbcDAO" parent="abstractDAO"/>
+	
 </beans>

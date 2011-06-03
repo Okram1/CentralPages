@@ -9,6 +9,7 @@ import com.argility.centralpages.ui.StatsProdTable;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalSplitPanel;
 
 @SuppressWarnings("serial")
@@ -33,13 +34,10 @@ public abstract class StatsProdView extends VerticalSplitPanel implements
 		Property property = event.getProperty();
 		if (property == table) {
 			Item item = table.getItem(table.getValue());
-			if (form == null) {
-				form = new StatsProdForm();
-			} 
 			
-			form.setItemDataSource(item);
+			form = new StatsProdForm(item);
 			setSecondComponent(form);
-
+			
 			if (item == null) {
 				setSplitPosition(100);
 			} else {

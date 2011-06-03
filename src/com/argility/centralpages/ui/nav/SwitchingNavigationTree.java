@@ -2,6 +2,8 @@ package com.argility.centralpages.ui.nav;
 
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.view.ImportSwitchingFailedView;
+import com.argility.centralpages.view.ProductionStatsAllView;
+import com.argility.centralpages.view.ProductionStatsPerBranchView;
 import com.argility.centralpages.view.StatsProdOverviewView;
 import com.argility.centralpages.view.SwLoadManyToImportView;
 import com.argility.centralpages.view.SwNotImportedForDaysView;
@@ -19,9 +21,12 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 	public static final Object SW_REPLICATED_AND_NOT_LOADED = "Replicated and not imported";
 	public static final Object SW_NOT_LOADED_FOR_DAYS = "Not imported for days";
 	public static final Object SW_LOAD_TRANS_SKIPPED = "Crashed and skipped audits";
-	public static final Object SW_LOAD_TRANS_SKIPPED_ALL = "Show all";
-	public static final Object SW_LOAD_TRANS_SKIPPED_BRANCH = "Search By Branch";
+	public static final Object SW_LOAD_TRANS_SKIPPED_ALL = "Show All Audits";
+	public static final Object SW_LOAD_TRANS_SKIPPED_BRANCH = "Search By Branch ";
+	
 	public static final Object SW_PRODUCTION_LOG = "Switching production log";
+	public static final Object SW_PRODUCTION_LOG_BY_BR = "Search By Branch code";
+	public static final Object SW_PRODUCTION_LOG_ALL = "Show All";
 	
 	/**
 	 * 
@@ -59,7 +64,14 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		setChildrenAllowed(SW_LOAD_TRANS_SKIPPED_BRANCH, false);
 		
 		addItem(SW_PRODUCTION_LOG);
-		setChildrenAllowed(SW_PRODUCTION_LOG, false);
+		//addItem(SW_PRODUCTION_LOG_ALL);
+		//setParent(SW_PRODUCTION_LOG_ALL, SW_PRODUCTION_LOG);
+		
+		addItem(SW_PRODUCTION_LOG_BY_BR);
+		setParent(SW_PRODUCTION_LOG_BY_BR, SW_PRODUCTION_LOG);
+		
+		setChildrenAllowed(SW_PRODUCTION_LOG_ALL, false);
+		setChildrenAllowed(SW_PRODUCTION_LOG_BY_BR, false);
 		
 	}
 
@@ -85,6 +97,12 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 			app.setMainView(new SwitchLoadFailedPerBranchView(app));
 		} else if (itemId == SW_LOAD_TRANS_SKIPPED) {
 			expandItem(SW_LOAD_TRANS_SKIPPED);
+		} else if (itemId == SW_PRODUCTION_LOG) {
+			expandItem(SW_PRODUCTION_LOG);
+		} else if (itemId == SW_PRODUCTION_LOG_ALL) {
+			app.setMainView(new ProductionStatsAllView(app));
+		} else if (itemId == SW_PRODUCTION_LOG_BY_BR) {
+			app.setMainView(new ProductionStatsPerBranchView(app));
 		} else {
 			app.setMainView(new Panel(itemId + " is work in progress..."));
 		}

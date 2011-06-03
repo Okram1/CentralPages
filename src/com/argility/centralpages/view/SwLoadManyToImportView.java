@@ -20,6 +20,7 @@ public class SwLoadManyToImportView extends StatsProdView {
 		table.setVisibleColumns(new String[] {"brCde","central","lastSwLoad","swDiff", "swCrashed"});
 		table.setColumnHeaders(new String[] {"Branch","Central","Last Switching load","Trans os", "Import Crashed"});
 		table.setSortContainerPropertyId("swDiff");
+		table.setSortAscending(false);
 
 		table.addBrTotalCountFooter(cont);
 
