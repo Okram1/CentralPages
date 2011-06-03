@@ -44,6 +44,8 @@ public class SwitchLoadFailedPerBranchView extends SwitchLoadFailedView {
 				dao.getSwitchLoadFailedFromBranch(brCde));
 		
 		table = new SwitchLoadFailedTable(null, cont);
+		table.setSortContainerPropertyId("dateTime");
+		table.setSortAscending(false);
 		
 		setFirstComponent(table);
 		setSplitPosition(100);

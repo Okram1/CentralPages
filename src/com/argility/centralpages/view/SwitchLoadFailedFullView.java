@@ -16,6 +16,8 @@ public class SwitchLoadFailedFullView extends SwitchLoadFailedView {
 				dao.getAllSwitchLoadFailed());
 		
 		table = new SwitchLoadFailedTable(null, cont);
+		table.setSortContainerPropertyId("dateTime");
+		table.setSortAscending(false);
 		
 		setFirstComponent(table);
 		setSplitPosition(100);

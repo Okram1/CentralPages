@@ -21,7 +21,7 @@ public class CentralpagesApplication extends Application {
 	private HorizontalSplitPanel horizontalSplit = new HorizontalSplitPanel(); 
 	private Component topView = new Panel("Top view initialized");
 	
-	private SpringContextHelper springContext;
+	private transient SpringContextHelper springContext;
 	
 	/**
 	 * 
