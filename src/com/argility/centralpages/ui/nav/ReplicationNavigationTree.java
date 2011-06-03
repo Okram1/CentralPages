@@ -1,10 +1,10 @@
 package com.argility.centralpages.ui.nav;
 
 import com.argility.centralpages.CentralpagesApplication;
-import com.argility.centralpages.view.CentNotReplicatedForDaysView;
-import com.argility.centralpages.view.CentProcessCrashedView;
-import com.argility.centralpages.view.CentXoutReceivedNotProcessedView;
-import com.argility.centralpages.view.StatsProdOverviewView;
+import com.argility.centralpages.ui.view.CentNotReplicatedForDaysView;
+import com.argility.centralpages.ui.view.CentProcessCrashedView;
+import com.argility.centralpages.ui.view.CentXoutReceivedNotProcessedView;
+import com.argility.centralpages.ui.view.StatsProdOverviewView;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Panel;
 

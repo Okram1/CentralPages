@@ -1,4 +1,4 @@
-package com.argility.centralpages.view;
+package com.argility.centralpages.ui.view;
 
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.data.StatsProd;

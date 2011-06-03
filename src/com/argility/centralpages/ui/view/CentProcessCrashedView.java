@@ -1,4 +1,4 @@
-package com.argility.centralpages.view;
+package com.argility.centralpages.ui.view;
 
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.data.StatsProd;
@@ -7,26 +7,27 @@ import com.argility.centralpages.ui.StatsProdTable;
 import com.vaadin.data.Property;
 
 @SuppressWarnings("serial")
-public class SwReplicatedNotImportedView extends StatsProdView {
+public class CentProcessCrashedView extends StatsProdView {
 
-	public SwReplicatedNotImportedView(CentralpagesApplication app) {
+	public CentProcessCrashedView(CentralpagesApplication app) {
 		super(app);
 		
 		StatsProdContainer cont = new StatsProdContainer(StatsProd.class,
-				dao.getReplicateAndNotImportedList());
-
+				dao.getCentralProcCrashedList());
+		
 		table = new StatsProdTable(cont);
-
-		table.setVisibleColumns(new String[] {"brCde","central","lastReplicated","xoutReceived", "lastSwLoad", "swDiff"});
-		table.setColumnHeaders(new String[] {"Branch","Central","Last Replicated","Xout Received", "Last Switching Load", "Switching Trans Outstanding"});
-		table.setSortContainerPropertyId("lastSwLoad");
-
+		
+		table.setVisibleColumns(new String[] {"brCde","central","lastReplicated","xoutReceived", "replDiff", "replProcess", "triadProcess"});
+		table.setColumnHeaders(new String[] {"Branch","Central","Last Replicated","Xout Received", "Repl diff", "Process", "Triad Process"});
+		table.setSortContainerPropertyId("lastReplicated");
+		
 		table.addBrTotalCountFooter(cont);
-
+		
 		setFirstComponent(table);
 		setSplitPosition(100);
 
 		table.addListener((Property.ValueChangeListener) this);
+
 	}
 
 }

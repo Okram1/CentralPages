@@ -1,4 +1,4 @@
-package com.argility.centralpages.view;
+package com.argility.centralpages.ui.view;
 
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.data.StatsProd;
@@ -7,18 +7,20 @@ import com.argility.centralpages.ui.StatsProdTable;
 import com.vaadin.data.Property;
 
 @SuppressWarnings("serial")
-public class CentProcessCrashedView extends StatsProdView {
+public class CentNotReplicatedForDaysView extends StatsProdView {
 
-	public CentProcessCrashedView(CentralpagesApplication app) {
+	public CentNotReplicatedForDaysView(CentralpagesApplication app) {
 		super(app);
 		
 		StatsProdContainer cont = new StatsProdContainer(StatsProd.class,
-				dao.getCentralProcCrashedList());
-		
+				dao.getNotReplicatedForDays());
+
 		table = new StatsProdTable(cont);
-		
-		table.setVisibleColumns(new String[] {"brCde","central","lastReplicated","xoutReceived", "replDiff", "replProcess", "triadProcess"});
-		table.setColumnHeaders(new String[] {"Branch","Central","Last Replicated","Xout Received", "Repl diff", "Process", "Triad Process"});
+
+		table.setVisibleColumns(new String[] { "brCde", "central", "lastReplicated",
+				"xoutReceived", "replDiff" });
+		table.setColumnHeaders(new String[] { "Branch", "Central", "Last Replicated",
+				"Xout Received", "Repl Difference" });
 		table.setSortContainerPropertyId("lastReplicated");
 		
 		table.addBrTotalCountFooter(cont);
@@ -27,7 +29,6 @@ public class CentProcessCrashedView extends StatsProdView {
 		setSplitPosition(100);
 
 		table.addListener((Property.ValueChangeListener) this);
-
 	}
 
 }

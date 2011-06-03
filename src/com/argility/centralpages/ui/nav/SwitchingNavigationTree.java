@@ -1,15 +1,15 @@
 package com.argility.centralpages.ui.nav;
 
 import com.argility.centralpages.CentralpagesApplication;
-import com.argility.centralpages.view.ImportSwitchingFailedView;
-import com.argility.centralpages.view.ProductionStatsAllView;
-import com.argility.centralpages.view.ProductionStatsPerBranchView;
-import com.argility.centralpages.view.StatsProdOverviewView;
-import com.argility.centralpages.view.SwLoadManyToImportView;
-import com.argility.centralpages.view.SwNotImportedForDaysView;
-import com.argility.centralpages.view.SwReplicatedNotImportedView;
-import com.argility.centralpages.view.SwitchLoadFailedFullView;
-import com.argility.centralpages.view.SwitchLoadFailedPerBranchView;
+import com.argility.centralpages.ui.view.ImportSwitchingFailedView;
+import com.argility.centralpages.ui.view.ProductionStatsAllView;
+import com.argility.centralpages.ui.view.ProductionStatsPerBranchView;
+import com.argility.centralpages.ui.view.StatsProdOverviewView;
+import com.argility.centralpages.ui.view.SwLoadManyToImportView;
+import com.argility.centralpages.ui.view.SwNotImportedForDaysView;
+import com.argility.centralpages.ui.view.SwReplicatedNotImportedView;
+import com.argility.centralpages.ui.view.SwitchLoadFailedFullView;
+import com.argility.centralpages.ui.view.SwitchLoadFailedPerBranchView;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Panel;
 

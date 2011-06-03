@@ -1,4 +1,4 @@
-package com.argility.centralpages.view;
+package com.argility.centralpages.ui.view;
 
 import org.apache.log4j.Logger;
 
