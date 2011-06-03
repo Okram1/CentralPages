@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jdbc 
+		http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+	<context:property-placeholder location="classpath*:META-INF/spring/*.properties" />
+
+	<bean class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" id="dataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+
+		<!-- property name="url" value="jdbc:postgresql://10.221.212.128:5432/db1137"/ -->
+		<property name="url" value="jdbc:postgresql://localhost:5432/db0740" />
+		<property name="username" value="postgres" />
+		<property name="password" value="postgres" />
+
+		<!-- Connection pooling setup -->
+		<property name="initialSize" value="2" />
+		<property name="maxActive" value="5" />
+		<property name="maxIdle" value="3" />
+
+		<property name="validationQuery" value="SELECT 1" />
+		<property name="testWhileIdle" value="true" />
+		<property name="timeBetweenEvictionRunsMillis" value="1200000" />
+		<property name="minEvictableIdleTimeMillis" value="1800000" />
+		<property name="numTestsPerEvictionRun" value="5" />
+
+	</bean>
+
+	<!-- enable the configuration of transactional behavior based on annotations -->
+	<!-- tx:annotation-driven transaction-manager="transactionManager" / -->
+	
+	<!-- Setup our transaction manager to be a datasource tm -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Import all the services we provide -->
+	<!-- <import resource="webservices.xml"/> -->
+	
+	<bean id="abstractDAO" class="com.argility.centralpages.dao.AbstractDAO" abstract="true">
+      <property name="dataSource" ref="dataSource" />
+    </bean>
+	
+	<bean id="statsProdDAO" class="com.argility.centralpages.dao.StatsProdJdbcDAO" parent="abstractDAO"/>
+	
+	<bean id="switchLoadFailedDAO" class="com.argility.centralpages.dao.SwitchLoadFailedJdbcDAO" parent="abstractDAO"/>
+	
+</beans>
