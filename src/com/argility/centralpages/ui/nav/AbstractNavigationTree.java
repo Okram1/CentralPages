@@ -10,6 +10,7 @@ public abstract class AbstractNavigationTree extends Tree implements ItemClickLi
 	public AbstractNavigationTree() {
 		
 		addListener((ItemClickListener)this);
+		
 	}
 	
 	public Panel asPanel(String caption) {
