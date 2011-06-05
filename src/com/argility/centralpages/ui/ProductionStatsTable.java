@@ -11,7 +11,7 @@ public class ProductionStatsTable extends Table {
 	};
 	
 	public static final String[] COL_HEADINGS = new String[] {
-		"Branch", "Date", "audit", "Message"
+		"Branch", "Date", "Audit", "Message"
 	};
 	
 	public ProductionStatsTable() {
@@ -19,7 +19,6 @@ public class ProductionStatsTable extends Table {
 	}
 
 	public ProductionStatsTable(String caption) {
-		super(caption);
 		new ProductionStatsTable(caption, null);
 	}
 

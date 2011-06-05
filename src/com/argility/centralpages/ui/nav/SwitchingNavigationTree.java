@@ -1,13 +1,8 @@
 package com.argility.centralpages.ui.nav;
 
 import com.argility.centralpages.CentralpagesApplication;
-import com.argility.centralpages.ui.view.ImportSwitchingFailedView;
-import com.argility.centralpages.ui.view.ProductionStatsAllView;
-import com.argility.centralpages.ui.view.ProductionStatsPerBranchView;
-import com.argility.centralpages.ui.view.StatsProdOverviewView;
-import com.argility.centralpages.ui.view.SwLoadManyToImportView;
-import com.argility.centralpages.ui.view.SwNotImportedForDaysView;
-import com.argility.centralpages.ui.view.SwReplicatedNotImportedView;
+import com.argility.centralpages.ui.view.ProdStatsView;
+import com.argility.centralpages.ui.view.StatsProdView;
 import com.argility.centralpages.ui.view.SwitchLoadFailedFullView;
 import com.argility.centralpages.ui.view.SwitchLoadFailedPerBranchView;
 import com.vaadin.event.ItemClickEvent;
@@ -24,17 +19,18 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 	public static final Object SW_LOAD_TRANS_SKIPPED_ALL = "Show All Audits";
 	public static final Object SW_LOAD_TRANS_SKIPPED_BRANCH = "Search By Branch ";
 	
-	public static final Object SW_PRODUCTION_LOG = "Switching production log";
+	public static final Object SW_PRODUCTION_LOG = "Search production log";
 	public static final Object SW_PRODUCTION_LOG_BY_BR = "Search By Branch code";
 	public static final Object SW_PRODUCTION_LOG_ALL = "Show All";
+	
+	private StatsProdView view = null;
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7397892538375894658L;
 
-	public SwitchingNavigationTree(CentralpagesApplication app) {
-		super(app);
+	public SwitchingNavigationTree() {
 		
 		setCaption("Switching");
 		
@@ -64,14 +60,7 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		setChildrenAllowed(SW_LOAD_TRANS_SKIPPED_BRANCH, false);
 		
 		addItem(SW_PRODUCTION_LOG);
-		//addItem(SW_PRODUCTION_LOG_ALL);
-		//setParent(SW_PRODUCTION_LOG_ALL, SW_PRODUCTION_LOG);
-		
-		addItem(SW_PRODUCTION_LOG_BY_BR);
-		setParent(SW_PRODUCTION_LOG_BY_BR, SW_PRODUCTION_LOG);
-		
-		setChildrenAllowed(SW_PRODUCTION_LOG_ALL, false);
-		setChildrenAllowed(SW_PRODUCTION_LOG_BY_BR, false);
+		setChildrenAllowed(SW_PRODUCTION_LOG, false);
 		
 	}
 
@@ -81,16 +70,25 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		//app.getMainWindow()
 		//	.showNotification("You clicked 2: " + itemId.toString(), Notification.TYPE_TRAY_NOTIFICATION);
 		
+		CentralpagesApplication app = CentralpagesApplication.getInstance();
+		
+		view = getStatsProdView();
+		
 		if (itemId == SW_OVERVIEW) {
-			app.setMainView(new StatsProdOverviewView(app));
+			getStatsProdView().wireAllData();
+			app.setMainView(getStatsProdView());
 		} else if (itemId == SW_LOAD_CRASHED) {
-			app.setMainView(new ImportSwitchingFailedView(app));
+			getStatsProdView().wireImportSwitchingFailedData();
+			app.setMainView(getStatsProdView());
 		} else if (itemId == SW_LOAD_LARGE_DIFF) {
-			app.setMainView(new SwLoadManyToImportView(app));
+			getStatsProdView().wireHighSwitchingVolumesToImportData();
+			app.setMainView(getStatsProdView());
 		} else if (itemId == SW_REPLICATED_AND_NOT_LOADED) {
-			app.setMainView(new SwReplicatedNotImportedView(app));
+			getStatsProdView().wireReplicatedAndNotImportedData();
+			app.setMainView(getStatsProdView());
 		} else if (itemId == SW_NOT_LOADED_FOR_DAYS) {
-			app.setMainView(new SwNotImportedForDaysView(app));
+			getStatsProdView().wireSwitchingNotImportedForDaysData();
+			app.setMainView(getStatsProdView());
 		} else if (itemId == SW_LOAD_TRANS_SKIPPED_ALL) {
 			app.setMainView(new SwitchLoadFailedFullView(app));
 		} else if (itemId == SW_LOAD_TRANS_SKIPPED_BRANCH) {
@@ -98,15 +96,19 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		} else if (itemId == SW_LOAD_TRANS_SKIPPED) {
 			expandItem(SW_LOAD_TRANS_SKIPPED);
 		} else if (itemId == SW_PRODUCTION_LOG) {
-			expandItem(SW_PRODUCTION_LOG);
-		} else if (itemId == SW_PRODUCTION_LOG_ALL) {
-			app.setMainView(new ProductionStatsAllView(app));
-		} else if (itemId == SW_PRODUCTION_LOG_BY_BR) {
-			app.setMainView(new ProductionStatsPerBranchView(app));
+			app.setMainView(new ProdStatsView());
+			//app.setMainView(new ProductionStatsPerBranchView(app));
 		} else {
 			app.setMainView(new Panel(itemId + " is work in progress..."));
 		}
 		
 	}
-
+	
+	public StatsProdView getStatsProdView() {
+		if (view == null) {
+			view = new StatsProdView(CentralpagesApplication.getInstance());
+		}
+		return view;
+	}
+	
 }

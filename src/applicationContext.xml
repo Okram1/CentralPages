@@ -57,4 +57,6 @@
 	
 	<bean id="productionStatsDAO" class="com.argility.centralpages.dao.ProductionStatsJdbcDAO" parent="abstractDAO"/>
 	
+	<bean id="switchingErrorsDAO" class="com.argility.centralpages.dao.SwitchingErrorsJdbcDAO" parent="abstractDAO"/>
+	
 </beans>

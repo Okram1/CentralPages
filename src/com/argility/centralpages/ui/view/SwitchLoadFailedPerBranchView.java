@@ -10,6 +10,8 @@ import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 
 @SuppressWarnings("serial")
 public class SwitchLoadFailedPerBranchView extends SwitchLoadFailedView {
@@ -29,12 +31,30 @@ public class SwitchLoadFailedPerBranchView extends SwitchLoadFailedView {
 	private Form getBranchSearchForm() {
 		
 		form = new Form();
-		form.addField("branch", tf);
-		form.addField("submit", new Button("Search"));
+		
+		final TextField tf = new TextField("Branch: ");
+		tf.setColumns(20);
 		
 		tf.addValidator(new RegexpValidator("[0-9][0-9][0-9][0-9]", "Must be 4 digits long!"));
 		tf.setRequired(true);
+		tf.setRequiredError("Required field");
+		tf.setInputPrompt("Enter a 4 digit branch");
+
+		Button b = new Button("Search", new ClickListener() {
+			
+			public void buttonClick(ClickEvent event) {
+				if (!tf.isValid()) {
+					return;
+				}
+				
+				createTable(tf.getValue()+"");
+				
+			}
+		});
 		
+		form.addField("branch", tf);
+		form.addField("submit", b);
+
 		return form;
 	}
 
@@ -56,17 +76,4 @@ public class SwitchLoadFailedPerBranchView extends SwitchLoadFailedView {
 		table.addListener((Property.ValueChangeListener) this);
 	}
 	
-	public void valueChange(ValueChangeEvent event) {
-		Property property = event.getProperty();
-		log.info("pro" + property);
-		if (property == table) {
-			super.valueChange(event);
-		} else if (property == tf) {
-			log.info("Property " + tf.getValue());
-			if (form.isValid()) {
-				createTable(""+tf.getValue());
-			}
-		}
-		
-	}
 }
