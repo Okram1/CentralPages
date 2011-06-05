@@ -4,7 +4,6 @@ import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.nav.ReplicationNavigationTree;
 import com.argility.centralpages.ui.nav.SwitchingErrorNavigationTree;
 import com.argility.centralpages.ui.nav.SwitchingNavigationTree;
-import com.vaadin.terminal.Sizeable;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;

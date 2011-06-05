@@ -14,7 +14,7 @@ public class StatsProdTable extends Table {
 	protected transient Logger log = Logger
 			.getLogger(this.getClass().getName());
 
-	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
 	public StatsProdTable(StatsProdContainer cont) {
 

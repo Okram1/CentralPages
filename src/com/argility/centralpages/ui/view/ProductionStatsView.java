@@ -21,7 +21,6 @@ import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.NativeSelect;
@@ -69,6 +68,7 @@ public class ProductionStatsView extends VerticalSplitPanel implements
 		table.setSortAscending(false);
 
 		table.setCellStyleGenerator(new ProductionStatsStyleGenerator());
+		table.addListener(this);
 	}
 
 	private void wireTable() {
@@ -98,7 +98,7 @@ public class ProductionStatsView extends VerticalSplitPanel implements
 		tf.addValidator(branchValidator);
 		tf.setRequired(true);
 		tf.setRequiredError("Required field");
-		tf.setInputPrompt("Enter 4 digit branch");
+		tf.setInputPrompt("Enter a 4 digit branch code");
 
 		dateField = new DateField("Choose Date");
 		dateField.setVisible(false);
