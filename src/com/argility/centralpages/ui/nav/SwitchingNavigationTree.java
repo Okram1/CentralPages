@@ -1,5 +1,7 @@
 package com.argility.centralpages.ui.nav;
 
+import java.util.Iterator;
+
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.view.ProductionStatsView;
 import com.argility.centralpages.ui.view.StatsProdView;
@@ -36,18 +38,23 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		setCaption("Switching");
 		
 		addItem(SW_OVERVIEW);
+		//setItemIcon(SW_OVERVIEW, new ThemeResource(ICO));
 		setChildrenAllowed(SW_OVERVIEW, false);
 		
 		addItem(SW_LOAD_CRASHED);
+		//setItemIcon(SW_LOAD_CRASHED, new ThemeResource(ICO));
 		setChildrenAllowed(SW_LOAD_CRASHED, false);
 		
 		addItem(SW_LOAD_LARGE_DIFF);
+		//setItemIcon(SW_LOAD_LARGE_DIFF, new ThemeResource(ICO));
 		setChildrenAllowed(SW_LOAD_LARGE_DIFF, false);
 		
 		addItem(SW_REPLICATED_AND_NOT_LOADED);
+		//setItemIcon(SW_REPLICATED_AND_NOT_LOADED, new ThemeResource(ICO));
 		setChildrenAllowed(SW_REPLICATED_AND_NOT_LOADED, false);
 		
 		addItem(SW_NOT_LOADED_FOR_DAYS);
+		//setItemIcon(SW_NOT_LOADED_FOR_DAYS, new ThemeResource(ICO));
 		setChildrenAllowed(SW_NOT_LOADED_FOR_DAYS, false);
 		
 		addItem(SW_PRODUCTION_LOG);

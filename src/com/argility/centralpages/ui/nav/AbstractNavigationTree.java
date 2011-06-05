@@ -7,6 +7,8 @@ import com.vaadin.ui.Tree;
 @SuppressWarnings("serial")
 public abstract class AbstractNavigationTree extends Tree implements ItemClickListener{
 	
+	protected static String ICO = "icons/media-playback-start-5.png";
+	
 	public AbstractNavigationTree() {
 		
 		addListener((ItemClickListener)this);
