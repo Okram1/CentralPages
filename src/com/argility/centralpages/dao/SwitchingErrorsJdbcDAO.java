@@ -109,4 +109,31 @@ public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
 		return list;
 
 	}
+
+	public List<SwitchingErrors> getSwitchingErrorsByError(String error) {
+		log.info("getSwitchingErrorsByError("+error+")");
+		String sql = SwitchingErrorsRowMapper.SELECT_COL_SQL + " WHERE switching_errors.error ilike ?";
+		
+		return getJdbcTemplate().query(sql,
+				new Object[] {"%" + error + "%"},
+				new SwitchingErrorsRowMapper<SwitchingErrors>());
+	}
+
+	public List<SwitchingErrors> getSwitchingErrorsByAudit(Integer audit) {
+		log.info("getSwitchingErrorsByAudit("+audit+")");
+		String sql = SwitchingErrorsRowMapper.SELECT_COL_SQL + " WHERE switching_errors.aud_id = ?";
+		
+		return getJdbcTemplate().query(sql,
+				new Object[] {audit},
+				new SwitchingErrorsRowMapper<SwitchingErrors>());
+	}
+
+	public List<SwitchingErrors> getSwitchingErrorsBySwAudit(Integer swAudit) {
+		log.info("getSwitchingErrorsBySwAudit("+swAudit+")");
+		String sql = SwitchingErrorsRowMapper.SELECT_COL_SQL + " WHERE switching_errors.sw_aud_id = ?";
+		
+		return getJdbcTemplate().query(sql,
+				new Object[] {swAudit},
+				new SwitchingErrorsRowMapper<SwitchingErrors>());
+	}
 }

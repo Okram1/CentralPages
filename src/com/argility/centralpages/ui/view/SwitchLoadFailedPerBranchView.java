@@ -6,6 +6,7 @@ import com.argility.centralpages.ui.SwitchLoadFailedTable;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.RegexpValidator;
+import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -51,9 +52,13 @@ public class SwitchLoadFailedPerBranchView extends SwitchLoadFailedView {
 			}
 		});
 		
+		b.setClickShortcut(KeyCode.ENTER);
+		
 		form.addField("branch", tf);
 		form.addField("submit", b);
 
+		tf.focus();
+		
 		return form;
 	}
 

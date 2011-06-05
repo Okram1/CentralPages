@@ -11,9 +11,9 @@ import com.vaadin.ui.Panel;
 public class SwitchingNavigationTree extends AbstractNavigationTree {
 
 	public static final Object SW_OVERVIEW = "Switching overview";
-	public static final Object SW_LOAD_CRASHED = "Import failed";
+	public static final Object SW_LOAD_CRASHED = "Switching Import failed";
 	public static final Object SW_LOAD_LARGE_DIFF = "Many outstanding to import";
-	public static final Object SW_REPLICATED_AND_NOT_LOADED = "Replicated and not imported";
+	public static final Object SW_REPLICATED_AND_NOT_LOADED = "Replicated and no import";
 	public static final Object SW_NOT_LOADED_FOR_DAYS = "Not imported for days";
 	public static final Object SW_LOAD_TRANS_SKIPPED = "Crashed and skipped audits";
 	public static final Object SW_LOAD_TRANS_SKIPPED_ALL = "Show All Audits";
@@ -61,7 +61,7 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		
 		addItem(SW_PRODUCTION_LOG);
 		setChildrenAllowed(SW_PRODUCTION_LOG, false);
-		
+
 	}
 
 	public void itemClick(ItemClickEvent event) {
@@ -95,6 +95,7 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 			app.setMainView(new SwitchLoadFailedPerBranchView(app));
 		} else if (itemId == SW_LOAD_TRANS_SKIPPED) {
 			expandItem(SW_LOAD_TRANS_SKIPPED);
+			select(SW_LOAD_TRANS_SKIPPED);
 		} else if (itemId == SW_PRODUCTION_LOG) {
 			app.setMainView(new ProductionStatsView());
 			//app.setMainView(new ProductionStatsPerBranchView(app));

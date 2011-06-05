@@ -20,6 +20,7 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 	
 	public DefaultToolbar() {
 		
+		switchingButton.setStyleName("toolbar-selected");
 		switchingButton.setIcon(new ThemeResource("icons/32/reload.png"));
 		switchingButton.addListener((Button.ClickListener)this);
 		addComponent(switchingButton);
@@ -37,7 +38,9 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 		
 		setWidth("100%");
 		
-		Embedded em = new Embedded("", new ThemeResource("images/cp_logo_metallic.png"));
+		String image = "cooltext528009102.png";
+		image = "cp_logo_metallic.png";
+		Embedded em = new Embedded("", new ThemeResource("images/" + image));
 		em.setHeight("55px");
 		addComponent(em);
 		setComponentAlignment(em, Alignment.MIDDLE_RIGHT);
@@ -51,12 +54,17 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 		
 		CentralpagesApplication app = CentralpagesApplication.getInstance();
 		
+		switchingButton.setStyleName("toolbar-deselected");
+		replicationButton.setStyleName("toolbar-deselected");
+		switchingErrorsButton.setStyleName("toolbar-deselected");
+		
+		source.setStyleName("toolbar-selected");
+		
 		if (source == switchingButton) {
 			app.setNavigationTree(new SwitchingNavigationTree());
 		} else if (source == replicationButton) {
 			app.setNavigationTree(new ReplicationNavigationTree());
 		} else if (source == switchingErrorsButton) {
-//			app.setMainView(new Panel("Work in progress..."));
 			app.setNavigationTree(new SwitchingErrorNavigationTree());
 		}
 	}

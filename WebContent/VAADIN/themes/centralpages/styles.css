@@ -23,7 +23,8 @@
 }
 
 .toolbar .v-button span {
-      font-size: x-small;
+	  font-size: x-medium;
+	  font-weight: bolder;
       text-shadow: #fafafa 1px 1px 0;
 }
 
@@ -112,3 +113,20 @@
    background-color: #FF4D4D;
 }
 
+.toolbar .v-button .v-button-wrap {
+	border: outset 2px ;
+}
+
+.v-button-toolbar-selected .v-button-wrap {
+	border: inset 1px !important;
+}
+
+.v-button-toolbar-deselected .v-button-wrap {
+	border: outset 2px !important;
+}
+
+.v-tree-node-caption div {
+	text-shadow: 0px 0px gray;
+	font-size: x-medium;
+	font-weight: bold;
+}

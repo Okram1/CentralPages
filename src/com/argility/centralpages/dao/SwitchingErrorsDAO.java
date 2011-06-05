@@ -17,5 +17,11 @@ public interface SwitchingErrorsDAO {
 	public List<SwitchingErrors> getSwitchingErrorsToBranch(String brCde);
 	
 	public List<ActionTypeCountBean> getActionTypeTotalsWithError();
+
+	public List<SwitchingErrors> getSwitchingErrorsByError(String error);
+	
+	public List<SwitchingErrors> getSwitchingErrorsByAudit(Integer audit);
+	
+	public List<SwitchingErrors> getSwitchingErrorsBySwAudit(Integer swAudit);
 	
 }

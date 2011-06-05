@@ -16,6 +16,7 @@ import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.IntegerValidator;
 import com.vaadin.data.validator.RegexpValidator;
+import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -53,7 +54,7 @@ public class ProductionStatsView extends VerticalSplitPanel implements
 				.getSpringContext().getBean("productionStatsDAO");
 
 		setSizeFull();
-		addStyleName("view");
+		//addStyleName("view");
 		getSearchForm();
 	}
 
@@ -123,10 +124,14 @@ public class ProductionStatsView extends VerticalSplitPanel implements
 			}
 		});
 		
+		b.setClickShortcut(KeyCode.ENTER);
+		
 		form.addField("select", select);
 		form.addField("branch", tf);
 		form.addField("date", dateField);
 		form.addField("submit", b);
+		
+		tf.focus();
 		
 		setFirstComponent(form);
 		setSplitPosition(100);
