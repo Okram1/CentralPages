@@ -14,6 +14,7 @@ import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.IntegerValidator;
 import com.vaadin.event.ShortcutAction.KeyCode;
+import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -102,6 +103,8 @@ public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChan
 		form.addField("combo", select);
 		form.addField("search", field);
 		form.addField("submit", submit);
+		
+		submit.setIcon(new ThemeResource("icons/Search.png"));
 		
 		form.setImmediate(true);
 		submit.setClickShortcut(KeyCode.ENTER);

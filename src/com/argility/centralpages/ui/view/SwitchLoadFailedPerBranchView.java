@@ -7,6 +7,7 @@ import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.event.ShortcutAction.KeyCode;
+import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -32,7 +33,7 @@ public class SwitchLoadFailedPerBranchView extends SwitchLoadFailedView {
 		
 		form = new Form();
 		
-		final TextField tf = new TextField("Branch: ");
+		final TextField tf = new TextField("Branch code ");
 		tf.setColumns(20);
 		
 		tf.addValidator(new RegexpValidator("[0-9][0-9][0-9][0-9]", "Must be 4 digits long!"));
@@ -53,6 +54,7 @@ public class SwitchLoadFailedPerBranchView extends SwitchLoadFailedView {
 		});
 		
 		b.setClickShortcut(KeyCode.ENTER);
+		b.setIcon(new ThemeResource("icons/Search.png"));
 		
 		form.addField("branch", tf);
 		form.addField("submit", b);

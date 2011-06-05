@@ -4,6 +4,7 @@ import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.nav.ReplicationNavigationTree;
 import com.argility.centralpages.ui.nav.SwitchingErrorNavigationTree;
 import com.argility.centralpages.ui.nav.SwitchingNavigationTree;
+import com.vaadin.terminal.Sizeable;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -21,15 +22,15 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 	public DefaultToolbar() {
 		
 		switchingButton.setStyleName("toolbar-selected");
-		switchingButton.setIcon(new ThemeResource("icons/32/reload.png"));
+		switchingButton.setIcon(new ThemeResource("icons/switching.png"));
 		switchingButton.addListener((Button.ClickListener)this);
 		addComponent(switchingButton);
 		
-		replicationButton.setIcon(new ThemeResource("icons/32/note.png"));
+		replicationButton.setIcon(new ThemeResource("icons/replication.png"));
 		replicationButton.addListener((Button.ClickListener)this);
 		addComponent(replicationButton);
 		
-		switchingErrorsButton.setIcon(new ThemeResource("icons/32/globe.png"));
+		switchingErrorsButton.setIcon(new ThemeResource("icons/sw_errors.png"));
 		switchingErrorsButton.addListener((Button.ClickListener)this);
 		addComponent(switchingErrorsButton);
 		

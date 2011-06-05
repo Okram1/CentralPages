@@ -4,6 +4,7 @@ import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.view.ActTypCountView;
 import com.argility.centralpages.ui.view.SwitchingErrorsView;
 import com.vaadin.event.ItemClickEvent;
+import com.vaadin.terminal.ThemeResource;
 
 @SuppressWarnings("serial")
 public class SwitchingErrorNavigationTree extends AbstractNavigationTree {
@@ -23,6 +24,7 @@ public class SwitchingErrorNavigationTree extends AbstractNavigationTree {
 		setChildrenAllowed(ERROR_COUNT, false);
 		
 		addItem(SW_ERR_OVERVIEW);
+		setItemIcon(SW_ERR_OVERVIEW, new ThemeResource("icons/edit-find-and-replace.png"));
 		setChildrenAllowed(SW_ERR_OVERVIEW, false);
 	}
 

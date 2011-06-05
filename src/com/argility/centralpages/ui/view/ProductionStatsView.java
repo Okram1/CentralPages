@@ -17,9 +17,11 @@ import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.IntegerValidator;
 import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.event.ShortcutAction.KeyCode;
+import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.NativeSelect;
@@ -124,6 +126,8 @@ public class ProductionStatsView extends VerticalSplitPanel implements
 			}
 		});
 		
+		b.setIcon(new ThemeResource("icons/Search.png"));
+		
 		b.setClickShortcut(KeyCode.ENTER);
 		
 		form.addField("select", select);
@@ -132,6 +136,8 @@ public class ProductionStatsView extends VerticalSplitPanel implements
 		form.addField("submit", b);
 		
 		tf.focus();
+		
+		setMargin(true);
 		
 		setFirstComponent(form);
 		setSplitPosition(100);

@@ -6,6 +6,7 @@ import com.argility.centralpages.ui.view.StatsProdView;
 import com.argility.centralpages.ui.view.SwitchLoadFailedFullView;
 import com.argility.centralpages.ui.view.SwitchLoadFailedPerBranchView;
 import com.vaadin.event.ItemClickEvent;
+import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Panel;
 
 public class SwitchingNavigationTree extends AbstractNavigationTree {
@@ -49,6 +50,10 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		addItem(SW_NOT_LOADED_FOR_DAYS);
 		setChildrenAllowed(SW_NOT_LOADED_FOR_DAYS, false);
 		
+		addItem(SW_PRODUCTION_LOG);
+		setItemIcon(SW_PRODUCTION_LOG, new ThemeResource("icons/edit-find-and-replace.png"));
+		setChildrenAllowed(SW_PRODUCTION_LOG, false);
+
 		addItem(SW_LOAD_TRANS_SKIPPED);
 		addItem(SW_LOAD_TRANS_SKIPPED_ALL);
 		setParent(SW_LOAD_TRANS_SKIPPED_ALL, SW_LOAD_TRANS_SKIPPED);
@@ -59,9 +64,6 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		setChildrenAllowed(SW_LOAD_TRANS_SKIPPED_ALL, false);
 		setChildrenAllowed(SW_LOAD_TRANS_SKIPPED_BRANCH, false);
 		
-		addItem(SW_PRODUCTION_LOG);
-		setChildrenAllowed(SW_PRODUCTION_LOG, false);
-
 	}
 
 	public void itemClick(ItemClickEvent event) {
