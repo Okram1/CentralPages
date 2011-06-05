@@ -109,8 +109,12 @@
       font-size: 85%;
 }
 
-.v-table-cell-content-highlight {
+.v-table-cell-content-problem {
    background-color: #FF4D4D;
+}
+
+.v-table-cell-content-warn {
+   background-color: orange;
 }
 
 .toolbar .v-button .v-button-wrap {

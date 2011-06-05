@@ -6,7 +6,7 @@ import com.vaadin.ui.Table.CellStyleGenerator;
 @SuppressWarnings("serial")
 public class ProductionStatsStyleGenerator implements CellStyleGenerator {
 
-	public static String highlight = "highlight";
+	public static String PROBLEM = "problem";
 	
 	public String getStyle(Object itemId, Object propertyId) {
 		ProductionStats stats = (ProductionStats)itemId;
@@ -15,7 +15,7 @@ public class ProductionStatsStyleGenerator implements CellStyleGenerator {
 		if (propertyId == null) return null;
 		
 		if (stats.getStackTrace() != null && !"".equals(stats.getStackTrace())) {
-			style = highlight;
+			style = PROBLEM;
 		}
 		
 		return style;
