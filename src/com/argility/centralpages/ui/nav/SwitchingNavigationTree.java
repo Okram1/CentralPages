@@ -1,7 +1,7 @@
 package com.argility.centralpages.ui.nav;
 
 import com.argility.centralpages.CentralpagesApplication;
-import com.argility.centralpages.ui.view.ProdStatsView;
+import com.argility.centralpages.ui.view.ProductionStatsView;
 import com.argility.centralpages.ui.view.StatsProdView;
 import com.argility.centralpages.ui.view.SwitchLoadFailedFullView;
 import com.argility.centralpages.ui.view.SwitchLoadFailedPerBranchView;
@@ -96,7 +96,7 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		} else if (itemId == SW_LOAD_TRANS_SKIPPED) {
 			expandItem(SW_LOAD_TRANS_SKIPPED);
 		} else if (itemId == SW_PRODUCTION_LOG) {
-			app.setMainView(new ProdStatsView());
+			app.setMainView(new ProductionStatsView());
 			//app.setMainView(new ProductionStatsPerBranchView(app));
 		} else {
 			app.setMainView(new Panel(itemId + " is work in progress..."));

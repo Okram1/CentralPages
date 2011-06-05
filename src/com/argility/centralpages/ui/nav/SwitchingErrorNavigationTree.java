@@ -4,7 +4,6 @@ import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.view.ActTypCountView;
 import com.argility.centralpages.ui.view.SwitchingErrorsView;
 import com.vaadin.event.ItemClickEvent;
-import com.vaadin.ui.Window.Notification;
 
 @SuppressWarnings("serial")
 public class SwitchingErrorNavigationTree extends AbstractNavigationTree {

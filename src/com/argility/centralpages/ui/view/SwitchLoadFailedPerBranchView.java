@@ -4,14 +4,13 @@ import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.data.SwitchLoadFailed;
 import com.argility.centralpages.ui.SwitchLoadFailedTable;
 import com.vaadin.data.Property;
-import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Form;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Form;
+import com.vaadin.ui.TextField;
 
 @SuppressWarnings("serial")
 public class SwitchLoadFailedPerBranchView extends SwitchLoadFailedView {

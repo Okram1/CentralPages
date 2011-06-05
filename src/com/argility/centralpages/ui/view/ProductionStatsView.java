@@ -10,7 +10,6 @@ import com.argility.centralpages.dao.ProductionStatsDAO;
 import com.argility.centralpages.data.ProductionStats;
 import com.argility.centralpages.ui.ProductionStatsStyleGenerator;
 import com.argility.centralpages.ui.ProductionStatsTable;
-import com.google.gwt.i18n.client.impl.DateRecord;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -18,17 +17,17 @@ import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.IntegerValidator;
 import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalSplitPanel;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 
 @SuppressWarnings("serial")
-public class ProdStatsView extends VerticalSplitPanel implements
+public class ProductionStatsView extends VerticalSplitPanel implements
 		Property.ValueChangeListener {
 
 	public static final String SEARCH_BR_CDE = "Search by branch";
@@ -49,7 +48,7 @@ public class ProdStatsView extends VerticalSplitPanel implements
 	protected ProductionStatsTable table;
 	private Form form;
 
-	public ProdStatsView() {
+	public ProductionStatsView() {
 		dao = (ProductionStatsDAO) CentralpagesApplication.getInstance()
 				.getSpringContext().getBean("productionStatsDAO");
 
