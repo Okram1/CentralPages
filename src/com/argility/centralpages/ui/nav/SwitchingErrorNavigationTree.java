@@ -1,7 +1,7 @@
 package com.argility.centralpages.ui.nav;
 
 import com.argility.centralpages.CentralpagesApplication;
-import com.argility.centralpages.ui.view.ActTypCountView;
+import com.argility.centralpages.ui.view.SwErrorsCountView;
 import com.argility.centralpages.ui.view.SwitchingErrorsView;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.terminal.ThemeResource;
@@ -11,9 +11,11 @@ public class SwitchingErrorNavigationTree extends AbstractNavigationTree {
 
 	public static final Object ACT_TYP_COUNT = "Totals by action type";
 	public static final Object ERROR_COUNT = "Totals by error type";
+	public static final Object BR_COUNT = "Totals by branch code";
+	public static final Object OBO_BR_COUNT = "Totals by obo branch";
 	public static final Object SW_ERR_OVERVIEW = "Search switching errors";
 	
-	private ActTypCountView actTypView;
+	private SwErrorsCountView actTypView;
 	
 	public SwitchingErrorNavigationTree() {
 		
@@ -22,6 +24,12 @@ public class SwitchingErrorNavigationTree extends AbstractNavigationTree {
 		
 		addItem(ERROR_COUNT);
 		setChildrenAllowed(ERROR_COUNT, false);
+		
+		addItem(BR_COUNT);
+		setChildrenAllowed(BR_COUNT, false);
+		
+		addItem(OBO_BR_COUNT);
+		setChildrenAllowed(OBO_BR_COUNT, false);
 		
 		addItem(SW_ERR_OVERVIEW);
 		setItemIcon(SW_ERR_OVERVIEW, new ThemeResource("icons/edit-find-and-replace.png"));
@@ -49,12 +57,18 @@ public class SwitchingErrorNavigationTree extends AbstractNavigationTree {
 			SwitchingErrorsView view = new SwitchingErrorsView();
 			view.createCaptureForm();
 			app.setMainView(view);
+		} else if (itemId == BR_COUNT) {
+			getActTypView().wireFromBranchCounts();
+			app.setMainView(getActTypView());
+		} else if (itemId == OBO_BR_COUNT) {
+			getActTypView().wireToBranchCounts();
+			app.setMainView(getActTypView());
 		}
 	}
 
-	private ActTypCountView getActTypView() {
+	private SwErrorsCountView getActTypView() {
 		if (actTypView == null) {
-			actTypView = new ActTypCountView();
+			actTypView = new SwErrorsCountView();
 		}
 		return actTypView;
 	}

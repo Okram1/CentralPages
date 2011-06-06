@@ -7,7 +7,9 @@ import org.apache.log4j.Logger;
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.dao.SwitchingErrorsDAO;
 import com.argility.centralpages.data.ActionTypeCountBean;
+import com.argility.centralpages.data.BranchCountsBean;
 import com.argility.centralpages.ui.ActTypCountTable;
+import com.argility.centralpages.ui.SwErrorCountsTable;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Button;
@@ -15,10 +17,11 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
+import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalSplitPanel;
 
 @SuppressWarnings("serial")
-public class ActTypCountView extends VerticalSplitPanel {
+public class SwErrorsCountView extends VerticalSplitPanel {
 
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
@@ -26,8 +29,9 @@ public class ActTypCountView extends VerticalSplitPanel {
 	protected SwitchingErrorsDAO dao = null;
 	
 	private ActTypCountTable table;
+	private SwErrorCountsTable countTbl;
 	
-	public ActTypCountView() {
+	public SwErrorsCountView() {
 		dao = (SwitchingErrorsDAO)CentralpagesApplication.getInstance()
 			.getSpringContext().getBean("switchingErrorsDAO");
 		
@@ -37,7 +41,7 @@ public class ActTypCountView extends VerticalSplitPanel {
 	public void wireCountByErrorData() {
 		initTable(dao.getActionTypeTotalsWithError());
 		
-		wireTable();
+		wireTable(table);
 	}
 	
 	public void wireCountByActionTypeData() {
@@ -46,7 +50,22 @@ public class ActTypCountView extends VerticalSplitPanel {
 		table.setVisibleColumns(new Object[] {"actTyp","actionDesc","count"});
 		table.setColumnHeaders(new String[] {"Action Type","Transaction Description","Total"});
 		
-		wireTable();
+		wireTable(table);
+	}
+	
+	public void wireToBranchCounts() {
+		initSwErrCntTable(dao.getTotalsByReceivingBranch());
+		countTbl.setToBranchSearch(true);
+		
+		wireTable(countTbl);
+	}
+	
+	public void wireFromBranchCounts() {
+		initSwErrCntTable(dao.getTotalsBySendingBranch());
+		countTbl.setToBranchSearch(false);
+		countTbl.setColumnHeaders(new String[] {"OBO Branch Code","Total"});
+		
+		wireTable(countTbl);
 	}
 	
 	public void initTable(List<ActionTypeCountBean> list) {
@@ -55,16 +74,22 @@ public class ActTypCountView extends VerticalSplitPanel {
 		table = new ActTypCountTable(null, cont);
 	}
 	
-	private void wireTable() {
-		setFirstComponent(table);
-		table.setSizeFull();
+	public void initSwErrCntTable(List<BranchCountsBean> list) {
+		BeanItemContainer<BranchCountsBean> cont = 
+			new BeanItemContainer<BranchCountsBean>(BranchCountsBean.class, list);
+		countTbl = new SwErrorCountsTable(cont);
+	}
+	
+	private void wireTable(Table t) {
+		setFirstComponent(t);
+		t.setSizeFull();
 		setSplitPosition(100);
 	}
 	
 	class MyFieldFactory extends DefaultFieldFactory {
 		
-		ActTypCountView view = null;
-		public MyFieldFactory(final ActTypCountView view) {
+		SwErrorsCountView view = null;
+		public MyFieldFactory(final SwErrorsCountView view) {
 			this.view = view;
 		}
 		

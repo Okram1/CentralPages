@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.argility.centralpages.dao.mapper.SwitchingErrorsRowMapper;
 import com.argility.centralpages.data.ActionTypeCountBean;
+import com.argility.centralpages.data.BranchCountsBean;
 import com.argility.centralpages.data.SwitchingErrors;
 
 public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
@@ -135,5 +136,57 @@ public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
 		return getJdbcTemplate().query(sql,
 				new Object[] {swAudit},
 				new SwitchingErrorsRowMapper<SwitchingErrors>());
+	}
+
+	public List<BranchCountsBean> getTotalsBySendingBranch() {
+		
+		String sql = "SELECT switching_errors.br_cde, " +
+				"count(1) FROM switching_errors " +
+				"group by br_cde order by count desc;";
+		
+		List<BranchCountsBean> list = new ArrayList<BranchCountsBean>();
+		
+		list = getJdbcTemplate().query(sql, new RowMapper<BranchCountsBean>() {
+
+			public BranchCountsBean mapRow(ResultSet rs, int i) throws SQLException {
+				BranchCountsBean bean = new BranchCountsBean();
+				
+				bean.setBrCde(rs.getString("br_cde"));
+				bean.setCount(rs.getInt("count"));
+				
+				return bean;
+			}
+			
+		});
+		
+		log.info("Size is " + list.size());
+		
+		return list;
+	}
+	
+	public List<BranchCountsBean> getTotalsByReceivingBranch() {
+		
+		String sql = "SELECT switching_errors.obo_br_cde, " +
+				"count(1) FROM switching_errors " +
+				"group by obo_br_cde order by count desc;";
+		
+		List<BranchCountsBean> list = new ArrayList<BranchCountsBean>();
+		
+		list = getJdbcTemplate().query(sql, new RowMapper<BranchCountsBean>() {
+
+			public BranchCountsBean mapRow(ResultSet rs, int i) throws SQLException {
+				BranchCountsBean bean = new BranchCountsBean();
+				
+				bean.setBrCde(rs.getString("obo_br_cde"));
+				bean.setCount(rs.getInt("count"));
+				
+				return bean;
+			}
+			
+		});
+		
+		log.info("Size is " + list.size());
+		
+		return list;
 	}
 }
