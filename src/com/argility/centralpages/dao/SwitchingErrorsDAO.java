@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.argility.centralpages.data.ActionTypeCountBean;
 import com.argility.centralpages.data.BranchCountsBean;
+import com.argility.centralpages.data.SwAudit;
 import com.argility.centralpages.data.SwitchingErrors;
 
 
@@ -28,5 +29,7 @@ public interface SwitchingErrorsDAO {
 	public List<BranchCountsBean> getTotalsBySendingBranch();
 	
 	public List<BranchCountsBean> getTotalsByReceivingBranch();
+	
+	public SwAudit getSwAudit(Integer swAudId);
 	
 }

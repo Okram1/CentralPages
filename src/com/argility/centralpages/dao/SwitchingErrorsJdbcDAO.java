@@ -7,9 +7,11 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.argility.centralpages.dao.mapper.SwAuditRowMapper;
 import com.argility.centralpages.dao.mapper.SwitchingErrorsRowMapper;
 import com.argility.centralpages.data.ActionTypeCountBean;
 import com.argility.centralpages.data.BranchCountsBean;
+import com.argility.centralpages.data.SwAudit;
 import com.argility.centralpages.data.SwitchingErrors;
 
 public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
@@ -188,5 +190,14 @@ public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
 		log.info("Size is " + list.size());
 		
 		return list;
+	}
+
+	public SwAudit getSwAudit(Integer swAudId) {
+		log.info("getSwAudit("+swAudId+")");
+		String sql = SwAuditRowMapper.SELECT_COLUMNS_SQL + " WHERE sw_aud_id = ?";
+		
+		return getJdbcTemplate().queryForObject(sql,
+				new Object[] {swAudId},
+				new SwAuditRowMapper<SwAudit>());
 	}
 }

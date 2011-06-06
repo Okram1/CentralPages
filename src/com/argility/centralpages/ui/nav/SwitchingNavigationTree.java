@@ -1,7 +1,5 @@
 package com.argility.centralpages.ui.nav;
 
-import java.util.Iterator;
-
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.view.ProductionStatsView;
 import com.argility.centralpages.ui.view.StatsProdView;

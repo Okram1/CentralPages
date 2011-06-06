@@ -6,8 +6,11 @@ import org.apache.log4j.Logger;
 
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.dao.SwitchingErrorsDAO;
+import com.argility.centralpages.data.SwAudit;
 import com.argility.centralpages.data.SwitchingErrors;
+import com.argility.centralpages.ui.SwAuditHorizontalSplit;
 import com.argility.centralpages.ui.SwitchingErrorsTable;
+import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
@@ -36,7 +39,9 @@ public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChan
 	public static final String SW_AUDIT_SEARCH_OPT = "Search using switch audit id";
 	
 	protected SwitchingErrorsDAO dao;
-	private Form form;
+	
+	private SwitchingErrorsTable table;
+	private Form searchForm;
 	private NativeSelect select;
 	private IntegerValidator intVal = new IntegerValidator("Only integers allowed");
 
@@ -49,7 +54,7 @@ public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChan
 	}
 	
 	public void createCaptureForm() {
-		form = new Form();
+		searchForm = new Form();
 		
 		select = new NativeSelect("Please select search type");
 		select.setWidth("30%");
@@ -78,7 +83,7 @@ public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChan
 				log.info("Search " + select.getCaption());
 				log.info("Search val " + field.getValue());
 				
-				if (!form.isValid()) return;
+				if (!searchForm.isValid()) return;
 				
 				Object searchType = select.getValue();
 				String searchValue = (String)field.getValue();
@@ -100,18 +105,18 @@ public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChan
 			}
 		});
 		
-		form.addField("combo", select);
-		form.addField("search", field);
-		form.addField("submit", submit);
+		searchForm.addField("combo", select);
+		searchForm.addField("search", field);
+		searchForm.addField("submit", submit);
 		
 		submit.setIcon(new ThemeResource("icons/Search.png"));
 		
-		form.setImmediate(true);
+		searchForm.setImmediate(true);
 		submit.setClickShortcut(KeyCode.ENTER);
 		
 		select.focus();
 		
-		setFirstComponent(form);
+		setFirstComponent(searchForm);
 		setSplitPosition(100);
 	}
 	
@@ -146,24 +151,43 @@ public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChan
 	private void createTable(List<SwitchingErrors> errors) {
 		BeanItemContainer<SwitchingErrors> cont = 
 			new BeanItemContainer<SwitchingErrors>(SwitchingErrors.class, errors);
-		SwitchingErrorsTable table = new SwitchingErrorsTable(null, cont);
+		table = new SwitchingErrorsTable(null, cont);
 		
 		table.setSortContainerPropertyId("swAudId");
 		table.setSortAscending(false);
 		table.addListener(this);
+		table.setSelectable(true);
+		table.setImmediate(true);
 		setFirstComponent(table);
 		setSplitPosition(100);
 	}
 
 	public void valueChange(ValueChangeEvent event) {
 		Property prod = event.getProperty();
+		int split = 40;
 		
 		if (prod == select) {
 			if (AUDIT_SEARCH_OPT.equals(prod.getValue()) || SW_AUDIT_SEARCH_OPT.equals(prod.getValue())) {
-				form.getField("search").addValidator(intVal);
+				searchForm.getField("search").addValidator(intVal);
 			} else {
-				form.getField("search").removeValidator(intVal);
+				searchForm.getField("search").removeValidator(intVal);
 			}
+		} else if (prod == table) {
+			Item item = table.getItem(table.getValue());
+			
+			if (item == null) {
+				setSplitPosition(100);
+			} else {
+				Integer swAudId = Integer.parseInt(item.getItemProperty("swAudId")+"");
+				
+				SwAudit swAud = dao.getSwAudit(swAudId);
+				SwAuditHorizontalSplit swAudSplit = new SwAuditHorizontalSplit(swAud);
+				
+				setSecondComponent(swAudSplit);
+				setSplitPosition(split);
+			}
+
 		}
 	}
+	
 }
