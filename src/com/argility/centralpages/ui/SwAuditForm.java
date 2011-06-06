@@ -14,8 +14,8 @@ import com.vaadin.ui.Form;
 public class SwAuditForm extends Form {
 
 	public static final Object[] VISIBLE_PROPERTIES = {
-		"swAudId", "swAudDte", "audId", "actTyp", "usrId", "audDeviceId", 
-		"audTs", "fppCde", "audDocNo", "audDocTs", "brCde"
+		"swAudId", "audId", "swAudDte", "audTs", "actTyp", "usrId", "audDeviceId", 
+		"fppCde", "audDocNo", "audDocTs", "brCde"
 	};
 	
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());

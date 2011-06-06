@@ -111,18 +111,18 @@ public class ProductionStatsView extends VerticalSplitPanel implements
 				
 				if (select.getValue().equals(SEARCH_BR_CDE)) {
 					if (!tf.isValid()) return;
-					setProductionStatsTable(dao.getAllProductionStatsForBranch(tf.getValue()+""));
+					wireSearchByBranch(tf.getValue()+"");
 				} else if (select.getValue().equals(SEARCH_DATE)) {
 					if (!dateField.isValid()) return;
 					Date d = (Date)dateField.getValue();
 					log.info("Date is " + d.toString());
-					setProductionStatsTable(dao.getAllProductionStatsForDate(d));
+					wireSearchByDate(d);
 				} else if (select.getValue().equals(SEARCH_AUDIT)) {
 					if (!tf.isValid()) return;
 					Integer search = Integer.parseInt(tf.getValue()+"");
-					setProductionStatsTable(dao.getAllProductionStatsForAudit(search));
+					wireSearchByAudit(search);
 				}
-				wireTable();
+				//wireTable();
 			}
 		});
 		
@@ -145,6 +145,21 @@ public class ProductionStatsView extends VerticalSplitPanel implements
 		return form;
 	}
 
+	public void wireSearchByAudit(Integer search) {
+		setProductionStatsTable(dao.getAllProductionStatsForAudit(search));
+		wireTable();
+	}
+	
+	public void wireSearchByBranch(String search) {
+		setProductionStatsTable(dao.getAllProductionStatsForBranch(search));
+		wireTable();
+	}
+	
+	public void wireSearchByDate(Date d) {
+		setProductionStatsTable(dao.getAllProductionStatsForDate(d));
+		wireTable();
+	}
+	
 	public void valueChange(ValueChangeEvent event) {
 		Property property = event.getProperty();
 		int splitPos = 60;

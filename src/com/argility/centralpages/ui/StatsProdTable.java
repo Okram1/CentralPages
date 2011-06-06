@@ -29,6 +29,10 @@ public class StatsProdTable extends Table {
 		setContainerDataSource(cont);
 
 		setCellStyleGenerator(new StatsTableCellStyleGenerator());
+		
+		addGeneratedColumn("swCrashAudId", new CrashedAuditColGenerator());
+		addGeneratedColumn("brCde", new BranchStatsProdColGenerator());
+		
 		// addStyleName("view");
 	}
 

@@ -100,6 +100,8 @@ public class StatsProdView extends VerticalSplitPanel implements
 		table.setColumnHeaders(new String[] {"Branch","Central","Last Switching Load","Transactions Outstanding", "Crash audit id"});
 		table.setSortContainerPropertyId("lastSwLoad");
 		
+		//table.addGeneratedColumn("swCrashAudId", new CrashedAuditColGenerator());
+		
 		wireTable(true);
 	}
 	

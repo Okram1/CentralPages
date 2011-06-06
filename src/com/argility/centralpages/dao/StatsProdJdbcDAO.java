@@ -24,7 +24,7 @@ public class StatsProdJdbcDAO extends AbstractDAO implements StatsProdDAO{
 	public List<StatsProd> getCentralProcCrashedList() {
 		log.info("getCentralProcCrashedList()");
 		String sql = StatsProdRowMapper.SELECT_COLUMNS_SQL + 
-		" WHERE repl_process ilike 'crashed' " +
+		" WHERE repl_process ilike '%crashed%' " +
 		"		OR triad_process ilike '%crashed%'";
 		
 		return getJdbcTemplate().query(sql, new StatsProdRowMapper<StatsProd>());
