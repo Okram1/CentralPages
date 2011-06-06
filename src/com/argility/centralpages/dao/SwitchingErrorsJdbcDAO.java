@@ -38,9 +38,11 @@ public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
 
 	public List<ActionTypeCountBean> getActionTypeTotals() {
 		
+		String sql = "SELECT * FROM sw_error_by_action_type";
+		
 		List<ActionTypeCountBean> list = new ArrayList<ActionTypeCountBean>();
 		
-		list = getJdbcTemplate().query(actTypTotalsSQL, new RowMapper<ActionTypeCountBean>() {
+		list = getJdbcTemplate().query(sql, new RowMapper<ActionTypeCountBean>() {
 
 			public ActionTypeCountBean mapRow(ResultSet rs, int i) throws SQLException {
 				ActionTypeCountBean bean = new ActionTypeCountBean();
@@ -90,9 +92,12 @@ public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
 	}
 
 	public List<ActionTypeCountBean> getActionTypeTotalsWithError() {
+		
+		String sql = "SELECT * FROM sw_error_by_error_type";
+		
 		List<ActionTypeCountBean> list = new ArrayList<ActionTypeCountBean>();
 		
-		list = getJdbcTemplate().query(swErrorActTypCountSQL, new RowMapper<ActionTypeCountBean>() {
+		list = getJdbcTemplate().query(sql, new RowMapper<ActionTypeCountBean>() {
 
 			public ActionTypeCountBean mapRow(ResultSet rs, int i) throws SQLException {
 				ActionTypeCountBean bean = new ActionTypeCountBean();

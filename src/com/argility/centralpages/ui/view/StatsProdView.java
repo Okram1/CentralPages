@@ -39,6 +39,7 @@ public class StatsProdView extends VerticalSplitPanel implements
 		table.setVisibleColumns(new String[] {"brCde","central","lastReplicated","xoutReceived", "replDiff", "replProcess", "triadProcess"});
 		table.setColumnHeaders(new String[] {"Branch","Central","Last Replicated","Xout Received", "Replication diff", "Process", "Triad Process"});
 		table.setSortContainerPropertyId("lastReplicated");
+		table.removeGeneratedColumn("brCde");
 		
 		wireTable(true);
 
@@ -65,6 +66,7 @@ public class StatsProdView extends VerticalSplitPanel implements
 		table.setVisibleColumns(new String[] {"brCde","central","lastReplicated","xoutReceived", "replDiff"});
 		table.setColumnHeaders(new String[] {"Branch","Central","Last Replicated","Xout Received", "Replication Diff"});
 		table.setSortContainerPropertyId("lastReplicated");
+		table.removeGeneratedColumn("brCde");
 		
 		wireTable(true);	
 	}
@@ -77,6 +79,7 @@ public class StatsProdView extends VerticalSplitPanel implements
 		table.setColumnHeaders(new String[] { "Branch", "Central", "Last Replicated",
 				"Xout Received", "Repl Difference" });
 		table.setSortContainerPropertyId("lastReplicated");
+		table.removeGeneratedColumn("brCde");
 		
 		wireTable(true);
 	}
@@ -132,6 +135,7 @@ public class StatsProdView extends VerticalSplitPanel implements
 		table.setVisibleColumns(new String[] {"brCde","central","lastReplicated","xoutReceived", "lastSwLoad", "swDiff"});
 		table.setColumnHeaders(new String[] {"Branch","Central","Last Replicated","Xout Received", "Last Switching Load", "Switching Trans Outstanding"});
 		table.setSortContainerPropertyId("lastSwLoad");
+		table.removeGeneratedColumn("brCde");
 
 		wireTable(true);
 	}
