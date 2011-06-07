@@ -25,7 +25,6 @@ public class CrashedAuditColGenerator implements ColumnGenerator, ClickListener{
             source.getItem(itemId).getItemProperty(columnId);
 		
 		String value = prop.getValue() + "";
-		log.info("Property values is " + value);
 		
 		int audit = 0;
 		try {

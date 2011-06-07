@@ -2,11 +2,15 @@ package com.argility.centralpages.ui.nav;
 
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.view.StatsProdView;
+import com.argility.centralpages.ui.view.UucpStatusView;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Panel;
 
 public class ReplicationNavigationTree extends AbstractNavigationTree {
 
+	public static final Object UUCP_STATUS = "Uucp Status";
+	public static final Object UUCP_STATUS_ALL = "Show all";
+	public static final Object UUCP_STATUS_PROBLEMS = "Show problems";
 	public static final Object OVERVIEW = "Replication Overview";
 	public static final Object CRASHED_PROC = "Crashed Processes";
 	public static final Object XOUT_NOT_PROCESSED = "Xout file not processed";
@@ -14,6 +18,7 @@ public class ReplicationNavigationTree extends AbstractNavigationTree {
 	public static final Object CENT_PROD_LOG = "Central production log";
 
 	private StatsProdView view = null;
+	private UucpStatusView uucpStatusView;
 
 	/**
 	 * 
@@ -22,6 +27,16 @@ public class ReplicationNavigationTree extends AbstractNavigationTree {
 
 	public ReplicationNavigationTree() {
 
+		addItem(UUCP_STATUS);
+		
+		addItem(UUCP_STATUS_ALL);
+		setChildrenAllowed(UUCP_STATUS_ALL, false);
+		setParent(UUCP_STATUS_ALL, UUCP_STATUS);
+		
+		addItem(UUCP_STATUS_PROBLEMS);
+		setChildrenAllowed(UUCP_STATUS_PROBLEMS, false);
+		setParent(UUCP_STATUS_PROBLEMS, UUCP_STATUS);
+		
 		addItem(OVERVIEW);
 		setChildrenAllowed(OVERVIEW, false);
 		
@@ -58,6 +73,14 @@ public class ReplicationNavigationTree extends AbstractNavigationTree {
 		} else if (itemId == NOT_REPLICATED_DAYS) {
 			view.wireNotReplicatedForDaysData();
 			app.setMainView(view);
+		} else if (itemId == UUCP_STATUS) {
+			expandItem(UUCP_STATUS);
+		} else if (itemId == UUCP_STATUS_ALL) {
+			getUucpStatusView().wireShowAllData();
+			app.setMainView(getUucpStatusView());
+		} else if (itemId == UUCP_STATUS_PROBLEMS) {
+			getUucpStatusView().wireShowProblemData();
+			app.setMainView(getUucpStatusView());
 		} else {
 			app.setMainView(new Panel(itemId + " is work in progress..."));
 		}
@@ -68,6 +91,13 @@ public class ReplicationNavigationTree extends AbstractNavigationTree {
 			view = new StatsProdView(CentralpagesApplication.getInstance());
 		}
 		return view;
+	}
+	
+	public UucpStatusView getUucpStatusView() {
+		if (uucpStatusView == null) {
+			uucpStatusView = new UucpStatusView();
+		}
+		return uucpStatusView;
 	}
 
 }
