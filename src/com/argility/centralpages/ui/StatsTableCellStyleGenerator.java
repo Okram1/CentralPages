@@ -47,7 +47,7 @@ public class StatsTableCellStyleGenerator implements CellStyleGenerator {
 			if (row.getTriadProcess() != null && row.getTriadProcess().matches(".*CRASH.*")) {
 				style = PROBLEM;
 			}
-		} else if (propertyId.equals("lastReplicated")) {
+		} else if (propertyId.equals("lastReplicated") || propertyId.equals("xoutReceived")) {
 			if (row.getLastReplicated() != null && row.getXoutReceived() != null) {
 				DateTime lastRepl = new DateTime(row.getLastReplicated().getTime());
 				DateTime xoutRec = new DateTime(row.getXoutReceived().getTime());

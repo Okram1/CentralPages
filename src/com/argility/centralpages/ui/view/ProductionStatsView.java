@@ -162,7 +162,7 @@ public class ProductionStatsView extends VerticalSplitPanel implements
 	
 	public void valueChange(ValueChangeEvent event) {
 		Property property = event.getProperty();
-		int splitPos = 60;
+		int splitPos = 40;
 		TextArea ta = null;
 
 		if (property == table) {

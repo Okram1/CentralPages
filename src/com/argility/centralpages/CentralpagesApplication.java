@@ -41,6 +41,7 @@ public class CentralpagesApplication extends Application implements
 	public void init() {
 
 		setTheme("centralpages");
+		//setTheme("chameleon-vaadin");
 
 		initLayout();
 		initDefaultView();

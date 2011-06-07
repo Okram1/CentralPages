@@ -56,6 +56,7 @@ public class SwErrorsCountView extends VerticalSplitPanel {
 	public void wireToBranchCounts() {
 		initSwErrCntTable(dao.getTotalsByReceivingBranch());
 		countTbl.setToBranchSearch(true);
+		countTbl.setColumnHeaders(new String[] {"Branch Code","Total"});
 		
 		wireTable(countTbl);
 	}
@@ -63,7 +64,6 @@ public class SwErrorsCountView extends VerticalSplitPanel {
 	public void wireFromBranchCounts() {
 		initSwErrCntTable(dao.getTotalsBySendingBranch());
 		countTbl.setToBranchSearch(false);
-		countTbl.setColumnHeaders(new String[] {"OBO Branch Code","Total"});
 		
 		wireTable(countTbl);
 	}

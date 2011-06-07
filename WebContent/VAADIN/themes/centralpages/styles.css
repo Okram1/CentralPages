@@ -1,6 +1,9 @@
 @CHARSET "UTF-8";
 
 @import url(../runo/styles.css);
+/*@import url(../reindeer/styles.css);*/
+/*@import url(../chameleon-vaadin/styles.css);*/
+
 
 .v-tree {
       padding-top: 8px;
@@ -110,11 +113,12 @@
 }
 
 .v-table-cell-content-problem {
-   background-color: #FF4D4D;
+   /*background-color: #FF4D4D;*/
+   background-color: #FFD5D5;
 }
 
 .v-table-cell-content-warn {
-   background-color: orange;
+   background-color: #FFF777;
 }
 
 .toolbar .v-button .v-button-wrap {
