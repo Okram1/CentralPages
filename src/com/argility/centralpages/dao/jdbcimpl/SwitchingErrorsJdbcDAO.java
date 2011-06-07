@@ -1,4 +1,4 @@
-package com.argility.centralpages.dao;
+package com.argility.centralpages.dao.jdbcimpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.argility.centralpages.dao.SwitchingErrorsDAO;
 import com.argility.centralpages.dao.mapper.SwAuditRowMapper;
 import com.argility.centralpages.dao.mapper.SwitchingErrorsRowMapper;
 import com.argility.centralpages.data.ActionTypeCountBean;

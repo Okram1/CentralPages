@@ -18,13 +18,17 @@
 		<property name="driverClassName" value="org.postgresql.Driver" />
 
 		<!-- property name="url" value="jdbc:postgresql://10.221.212.128:5432/db1137"/ -->
+		<!-- property name="url" value="jdbc:postgresql://localhost:5432/db0740" /-->
+		<!-- property name="url" value="jdbc:postgresql://c9900:59900/c9900" /-->
+		
 		<property name="url" value="jdbc:postgresql://localhost:5432/db0740" />
+		
 		<property name="username" value="postgres" />
 		<property name="password" value="postgres" />
 
 		<!-- Connection pooling setup -->
 		<property name="initialSize" value="2" />
-		<property name="maxActive" value="5" />
+		<property name="maxActive" value="8" />
 		<property name="maxIdle" value="3" />
 
 		<property name="validationQuery" value="SELECT 1" />
@@ -47,16 +51,18 @@
 	<!-- Import all the services we provide -->
 	<!-- <import resource="webservices.xml"/> -->
 	
-	<bean id="abstractDAO" class="com.argility.centralpages.dao.AbstractDAO" abstract="true">
+	<bean id="abstractDAO" class="com.argility.centralpages.dao.jdbcimpl.AbstractDAO" abstract="true">
       <property name="dataSource" ref="dataSource" />
     </bean>
 	
-	<bean id="statsProdDAO" class="com.argility.centralpages.dao.StatsProdJdbcDAO" parent="abstractDAO"/>
+	<bean id="statsProdDAO" class="com.argility.centralpages.dao.jdbcimpl.StatsProdJdbcDAO" parent="abstractDAO"/>
 	
-	<bean id="switchLoadFailedDAO" class="com.argility.centralpages.dao.SwitchLoadFailedJdbcDAO" parent="abstractDAO"/>
+	<bean id="switchLoadFailedDAO" class="com.argility.centralpages.dao.jdbcimpl.SwitchLoadFailedJdbcDAO" parent="abstractDAO"/>
 	
-	<bean id="productionStatsDAO" class="com.argility.centralpages.dao.ProductionStatsJdbcDAO" parent="abstractDAO"/>
+	<bean id="productionStatsDAO" class="com.argility.centralpages.dao.jdbcimpl.ProductionStatsJdbcDAO" parent="abstractDAO"/>
 	
-	<bean id="switchingErrorsDAO" class="com.argility.centralpages.dao.SwitchingErrorsJdbcDAO" parent="abstractDAO"/>
+	<bean id="switchingErrorsDAO" class="com.argility.centralpages.dao.jdbcimpl.SwitchingErrorsJdbcDAO" parent="abstractDAO"/>
+	
+	<bean id="systemStatsDAO" class="com.argility.centralpages.dao.jdbcimpl.SystemStatsJdbcDAO" parent="abstractDAO"/>
 	
 </beans>

@@ -1,7 +1,8 @@
-package com.argility.centralpages.dao;
+package com.argility.centralpages.dao.jdbcimpl;
 
 import java.util.List;
 
+import com.argility.centralpages.dao.SwitchLoadFailedDAO;
 import com.argility.centralpages.dao.mapper.SwitchLoadFailedRowMapper;
 import com.argility.centralpages.data.SwitchLoadFailed;
 

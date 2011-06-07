@@ -1,7 +1,8 @@
-package com.argility.centralpages.dao;
+package com.argility.centralpages.dao.jdbcimpl;
 
 import java.util.List;
 
+import com.argility.centralpages.dao.SystemStatsDAO;
 import com.argility.centralpages.dao.mapper.UucpStatusRowMapper;
 import com.argility.centralpages.data.UucpStatus;
 

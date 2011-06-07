@@ -15,9 +15,6 @@ public class UucpStatusView extends VerticalSplitPanel {
 	private SystemStatsDAO dao;
 	private UucpStatusTable table;
 	
-	public static String PROBLEM = "problem";
-	public static String WARN = "warn";
-	
 	public UucpStatusView() {
 		dao = (SystemStatsDAO)CentralpagesApplication.getInstance()
 			.getSpringContext().getBean("systemStatsDAO");

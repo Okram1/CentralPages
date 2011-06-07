@@ -1,7 +1,8 @@
-package com.argility.centralpages.dao;
+package com.argility.centralpages.dao.jdbcimpl;
 
 import java.util.List;
 
+import com.argility.centralpages.dao.StatsProdDAO;
 import com.argility.centralpages.dao.mapper.StatsProdRowMapper;
 import com.argility.centralpages.data.StatsProd;
 

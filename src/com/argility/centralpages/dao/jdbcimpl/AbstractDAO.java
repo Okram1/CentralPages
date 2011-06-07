@@ -1,4 +1,4 @@
-package com.argility.centralpages.dao;
+package com.argility.centralpages.dao.jdbcimpl;
 
 import javax.sql.DataSource;
 
