@@ -56,13 +56,10 @@
     </bean>
 	
 	<bean id="statsProdDAO" class="com.argility.centralpages.dao.jdbcimpl.StatsProdJdbcDAO" parent="abstractDAO"/>
-	
 	<bean id="switchLoadFailedDAO" class="com.argility.centralpages.dao.jdbcimpl.SwitchLoadFailedJdbcDAO" parent="abstractDAO"/>
-	
 	<bean id="productionStatsDAO" class="com.argility.centralpages.dao.jdbcimpl.ProductionStatsJdbcDAO" parent="abstractDAO"/>
-	
 	<bean id="switchingErrorsDAO" class="com.argility.centralpages.dao.jdbcimpl.SwitchingErrorsJdbcDAO" parent="abstractDAO"/>
-	
 	<bean id="systemStatsDAO" class="com.argility.centralpages.dao.jdbcimpl.SystemStatsJdbcDAO" parent="abstractDAO"/>
+	<bean id="switchingTransDAO" class="com.argility.centralpages.dao.jdbcimpl.SwitchingTransJdbcDAO" parent="abstractDAO"/>
 	
 </beans>

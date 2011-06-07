@@ -4,6 +4,7 @@ import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.nav.ReplicationNavigationTree;
 import com.argility.centralpages.ui.nav.SwitchingErrorNavigationTree;
 import com.argility.centralpages.ui.nav.SwitchingNavigationTree;
+import com.argility.centralpages.ui.nav.SwitchingTransTree;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -17,6 +18,7 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 	private Button switchingButton = new Button("Switching");
 	private Button replicationButton = new Button("Replication");
 	private Button switchingErrorsButton = new Button("Switching Errors");
+	private Button switchingTransButton = new Button("Switching Transactions"); 
 	
 	public DefaultToolbar() {
 		
@@ -32,6 +34,10 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 		switchingErrorsButton.setIcon(new ThemeResource("icons/sw_errors.png"));
 		switchingErrorsButton.addListener((Button.ClickListener)this);
 		addComponent(switchingErrorsButton);
+		
+		switchingTransButton.setIcon(new ThemeResource("icons/switching2.png"));
+		switchingTransButton.addListener((Button.ClickListener)this);
+		addComponent(switchingTransButton);
 		
 		setMargin(true);
 		setSpacing(true);
@@ -57,6 +63,7 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 		switchingButton.setStyleName("toolbar-deselected");
 		replicationButton.setStyleName("toolbar-deselected");
 		switchingErrorsButton.setStyleName("toolbar-deselected");
+		switchingTransButton.setStyleName("toolbar-deselected");
 		
 		source.setStyleName("toolbar-selected");
 		
@@ -66,6 +73,8 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 			app.setNavigationTree(new ReplicationNavigationTree());
 		} else if (source == switchingErrorsButton) {
 			app.setNavigationTree(new SwitchingErrorNavigationTree());
+		} else if (source == switchingTransButton) {
+			app.setNavigationTree(new SwitchingTransTree());
 		}
 	}
 }

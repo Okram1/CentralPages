@@ -9,7 +9,7 @@ import com.argility.centralpages.dao.SwitchingErrorsDAO;
 import com.argility.centralpages.data.ActionTypeCountBean;
 import com.argility.centralpages.data.BranchCountsBean;
 import com.argility.centralpages.ui.ActTypCountTable;
-import com.argility.centralpages.ui.SwErrorCountsTable;
+import com.argility.centralpages.ui.BranchCountsTable;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Button;
@@ -29,7 +29,7 @@ public class SwErrorsCountView extends VerticalSplitPanel {
 	protected SwitchingErrorsDAO dao = null;
 	
 	private ActTypCountTable table;
-	private SwErrorCountsTable countTbl;
+	private BranchCountsTable countTbl;
 	
 	public SwErrorsCountView() {
 		dao = (SwitchingErrorsDAO)CentralpagesApplication.getInstance()
@@ -71,13 +71,13 @@ public class SwErrorsCountView extends VerticalSplitPanel {
 	public void initTable(List<ActionTypeCountBean> list) {
 		BeanItemContainer<ActionTypeCountBean> cont = 
 			new BeanItemContainer<ActionTypeCountBean>(ActionTypeCountBean.class, list);
-		table = new ActTypCountTable(null, cont);
+		table = new ActTypCountTable(true, cont);
 	}
 	
 	public void initSwErrCntTable(List<BranchCountsBean> list) {
 		BeanItemContainer<BranchCountsBean> cont = 
 			new BeanItemContainer<BranchCountsBean>(BranchCountsBean.class, list);
-		countTbl = new SwErrorCountsTable(cont);
+		countTbl = new BranchCountsTable(true , cont);
 	}
 	
 	private void wireTable(Table t) {

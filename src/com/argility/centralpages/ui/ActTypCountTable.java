@@ -1,9 +1,11 @@
 package com.argility.centralpages.ui;
 
+import org.apache.commons.collections.functors.SwitchTransformer;
 import org.apache.log4j.Logger;
 
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.view.SwitchingErrorsView;
+import com.argility.centralpages.ui.view.SwitchingTranView;
 import com.vaadin.data.Container;
 import com.vaadin.data.Property;
 import com.vaadin.ui.Button;
@@ -18,13 +20,24 @@ public class ActTypCountTable extends Table implements ClickListener{
 
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
-	public ActTypCountTable(String caption, Container cont) {
+	private boolean linkToErrors = true;
+	
+	public ActTypCountTable(boolean linkToErrors, Container cont) {
 		super();
+		
+		this.linkToErrors = linkToErrors;
 		
 		setContainerDataSource(cont);
 		
-		setVisibleColumns(new Object[] {"actTyp","actionDesc","count","error"});
-		setColumnHeaders(new String[] {"Action Type","Transaction Description","Total", "Error Message"});
+		if (linkToErrors) {
+			setVisibleColumns(new Object[] {"actTyp","actionDesc","count","error"});
+			setColumnHeaders(new String[] {"Action Type","Transaction Description","Total", "Error Message"});
+		} else {
+			setVisibleColumns(new Object[] {"actTyp","actionDesc","count"});
+			setColumnHeaders(new String[] {"Action Type","Transaction Description","Total"});
+		}
+		
+		setColumnExpandRatio("actionDesc", 1f);
 		
 		addGeneratedColumn("actTyp", new ColumnGenerator() {
 			
@@ -33,6 +46,7 @@ public class ActTypCountTable extends Table implements ClickListener{
 		            source.getItem(itemId).getItemProperty(columnId);
 				
 				Button action = new Button(prop.getValue()+"", (ClickListener)source);
+				action.setDescription("Click to display all action type " + prop.getValue() + " transactions.");
 				action.setStyleName(Runo.BUTTON_LINK);
 				return action;
 			}
@@ -42,10 +56,20 @@ public class ActTypCountTable extends Table implements ClickListener{
 	}
 
 	public void buttonClick(ClickEvent event) {
-		log.info("Selected type " + event.getButton().getCaption());
-		Integer actTyp = Integer.valueOf(event.getButton().getCaption());
-		SwitchingErrorsView view = new SwitchingErrorsView();
-		view.wireByActionType(actTyp);
-		CentralpagesApplication.getInstance().setMainView(view, true);
+		String value = event.getButton().getCaption();
+		
+		log.info("Selected type " + value);
+		
+		if (linkToErrors) {
+			Integer actTyp = Integer.valueOf(event.getButton().getCaption());
+			SwitchingErrorsView view = new SwitchingErrorsView();
+			view.wireByActionType(actTyp);
+			CentralpagesApplication.getInstance().setMainView(view, true);
+		} else {
+			SwitchingTranView view = new SwitchingTranView();
+			Integer actTyp = Integer.parseInt(value);
+			view.wireSwitchingByActionTypeData(actTyp);
+			CentralpagesApplication.getInstance().setMainView(view, true);
+		}
 	}
 }

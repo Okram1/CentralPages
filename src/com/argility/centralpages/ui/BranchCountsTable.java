@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.view.SwitchingErrorsView;
+import com.argility.centralpages.ui.view.SwitchingTranView;
 import com.vaadin.data.Container;
 import com.vaadin.data.Property;
 import com.vaadin.ui.Button;
@@ -14,17 +15,23 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.Runo;
 
 @SuppressWarnings("serial")
-public class SwErrorCountsTable extends Table implements ClickListener{
+public class BranchCountsTable extends Table implements ClickListener{
 	
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
-	private boolean toBranchSearch;
+	public static final Object[] COL_ORDER = new Object[] {"brCde","count"};
+	public static final String[] COL_HEADINGS = new String[] {"Branch Code","Total"};
 	
-	public SwErrorCountsTable(Container cont) {
+	private boolean toBranchSearch;
+	private boolean showErrors;
+	
+	public BranchCountsTable(boolean showErrors, Container cont) {
 		super(null, cont);
 		
-		setVisibleColumns(new Object[] {"brCde","count"});
-		setColumnHeaders(new String[] {"Branch Code","Total"});
+		this.showErrors = showErrors;
+		
+		setVisibleColumns(COL_ORDER);
+		setColumnHeaders(COL_HEADINGS);
 		
 		addGeneratedColumn("brCde", new ColumnGenerator() {
 			
@@ -33,6 +40,7 @@ public class SwErrorCountsTable extends Table implements ClickListener{
 		            source.getItem(itemId).getItemProperty(columnId);
 				
 				Button action = new Button(prop.getValue()+"", (ClickListener)source);
+				action.setDescription("Click to show more details");
 				action.setStyleName(Runo.BUTTON_LINK);
 				return action;
 			}
@@ -45,6 +53,24 @@ public class SwErrorCountsTable extends Table implements ClickListener{
 	public void buttonClick(ClickEvent event) {
 		log.info("Selected branch " + event.getButton().getCaption());
 		String branch = event.getButton().getCaption();
+		if (showErrors) {
+			showSwitchErrors(branch);
+		} else {
+			showSwitchingTrans(branch);
+		}
+	}
+
+	private void showSwitchingTrans(String branch) {
+		SwitchingTranView view = new SwitchingTranView();
+		if (toBranchSearch) {
+			view.wireForBranchByActionTypeData(branch);
+		} else {
+			view.wireFromBranchByActionTypeData(branch);
+		}
+		CentralpagesApplication.getInstance().setMainView(view, true);
+	}
+	
+	private void showSwitchErrors(String branch) {
 		SwitchingErrorsView view = new SwitchingErrorsView();
 		if (toBranchSearch) {
 			view.wireByToBranch(branch);
@@ -53,7 +79,7 @@ public class SwErrorCountsTable extends Table implements ClickListener{
 		}
 		CentralpagesApplication.getInstance().setMainView(view, true);
 	}
-
+	
 	public boolean isToBranchSearch() {
 		return toBranchSearch;
 	}

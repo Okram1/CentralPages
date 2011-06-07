@@ -27,6 +27,7 @@ public class BranchStatsProdColGenerator implements ColumnGenerator, ClickListen
 		Object value = prop.getValue();
 		if (value != null) {
 			Button action = new Button(value+"", (ClickListener)this);
+			action.setDescription("Click to display the full log for branch " + value);
 			//action.setIcon(new ThemeResource("icons/magnifier.png"));
 			action.setStyleName(Runo.BUTTON_LINK);
 			return action;
