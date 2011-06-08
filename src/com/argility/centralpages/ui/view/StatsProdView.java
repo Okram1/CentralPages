@@ -101,7 +101,8 @@ public class StatsProdView extends VerticalSplitPanel implements
 		
 		table.setVisibleColumns(new String[] {"brCde","central","lastSwLoad","swDiff", "swCrashAudId"});
 		table.setColumnHeaders(new String[] {"Branch","Central","Last Switching Load","Transactions Outstanding", "Crash audit id"});
-		table.setSortContainerPropertyId("lastSwLoad");
+		table.setSortContainerPropertyId("swDiff");
+		table.setSortAscending(false);
 		
 		//table.addGeneratedColumn("swCrashAudId", new CrashedAuditColGenerator());
 		
