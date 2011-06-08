@@ -107,9 +107,7 @@ public class CentralpagesApplication extends Application implements
 		if (c instanceof AbstractNavigationTree) {
 			
 			Tree tree = (Tree)c;
-			log.info("mmm " + tree.getData());
-			log.info("me " + tree.getItem(tree.getData()));
-		
+			
 			Item item = tree.getItem(tree.getData());
 			if (item != null) {
 				tree.unselect(tree.getData());

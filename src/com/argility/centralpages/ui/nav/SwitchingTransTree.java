@@ -6,6 +6,7 @@ import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.view.SwitchingTranView;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
+import com.vaadin.terminal.ThemeResource;
 
 @SuppressWarnings("serial")
 public class SwitchingTransTree extends AbstractNavigationTree {
@@ -15,6 +16,7 @@ public class SwitchingTransTree extends AbstractNavigationTree {
 	public static final String TOT_BY_ACT_TYP = "Totals by action type";
 	public static final String TOT_BY_BRANCH = "Totals by sending branch";
 	public static final String TOT_BY_OBO_BRANCH = "Totals by obo branch";
+	public static final String SW_TRAN_SEARCH = "Search transactions";
 	//public static final String TOT_BY_ACT_TYP = "Totals by action type";
 	
 	
@@ -30,6 +32,10 @@ public class SwitchingTransTree extends AbstractNavigationTree {
 		
 		addItem(TOT_BY_OBO_BRANCH);
 		setChildrenAllowed(TOT_BY_OBO_BRANCH, false);
+		
+		addItem(SW_TRAN_SEARCH);
+		setItemIcon(SW_TRAN_SEARCH, new ThemeResource("icons/edit-find-and-replace.png"));
+		setChildrenAllowed(SW_TRAN_SEARCH, false);
 		
 		addListener((ItemClickListener)this);
 	}
@@ -49,7 +55,10 @@ public class SwitchingTransTree extends AbstractNavigationTree {
 		} else if (itemId == TOT_BY_OBO_BRANCH) {
 			getSwTranView().wireTotalByOboBranchData();
 			app.setMainView(getSwTranView());
-		} 
+		} else if (itemId == SW_TRAN_SEARCH) {
+			getSwTranView().wireSearchForm();
+			app.setMainView(getSwTranView());
+		}  
 	}
 
 	public SwitchingTranView getSwTranView() {

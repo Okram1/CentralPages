@@ -12,6 +12,7 @@ import com.argility.centralpages.data.SwitchingTran;
 import com.argility.centralpages.ui.ActTypCountTable;
 import com.argility.centralpages.ui.BranchCountsTable;
 import com.argility.centralpages.ui.SwitchingTranTable;
+import com.argility.centralpages.ui.SwitchingTransSearchForm;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -28,12 +29,37 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 	private SwitchingTranTable table;
 	private ActTypCountTable actTypCountTable;
 	private BranchCountsTable countTbl;
+	private SwitchingTransSearchForm searchForm;
 	
 	public SwitchingTranView() {
 		dao = (SwitchingTransDAO)CentralpagesApplication.getInstance()
 			.getSpringContext().getBean("switchingTransDAO");
 		
 		setSizeFull();
+	}
+	
+	public void wireSearchForm() {
+		if (searchForm == null) {
+			searchForm = new SwitchingTransSearchForm();
+		}
+		
+		if (table != null) {
+			setFirstComponent(table);
+			setSecondComponent(searchForm);
+			setSplitPosition(60);
+		} else {
+			setFirstComponent(searchForm);
+			setSplitPosition(100);
+		}
+		
+		//Component comp = getFirstComponent();
+		//if (comp != null && !(comp instanceof SwitchingTransSearchForm)) {
+		//	setSecondComponent(comp);
+		//	setSplitPosition(50);
+		//} else {
+		//	setSplitPosition(100);
+		//}
+		
 	}
 	
 	public void wireSwitchingForBranchData(String brCde) {
