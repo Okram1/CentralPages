@@ -35,7 +35,7 @@ public class SwitchingTransSearchForm extends Form implements Property.ValueChan
 		select.addItem(BR_SEARCH_OPT);
 		select.addItem(OBO_BR_SEARCH_OPT);
 		select.addItem(AUDIT_SEARCH_OPT);
-		select.addItem(SW_AUDIT_SEARCH_OPT);
+		//select.addItem(SW_AUDIT_SEARCH_OPT);
 		select.setNullSelectionAllowed(false);
 		select.setValue(TYPE_SEARCH_OPT);
 		//select.addListener((ValueChangeListener)this);
@@ -87,6 +87,7 @@ public class SwitchingTransSearchForm extends Form implements Property.ValueChan
 	
 	private void wireBySwAudit(int parseInt) {
 		//getView().wi
+		//TODO add this function
 	}
 
 	private void wireByAudit(int parseInt) {

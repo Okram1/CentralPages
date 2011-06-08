@@ -8,9 +8,11 @@ import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.dao.SwitchingTransDAO;
 import com.argility.centralpages.data.ActionTypeCountBean;
 import com.argility.centralpages.data.BranchCountsBean;
+import com.argility.centralpages.data.SwAudit;
 import com.argility.centralpages.data.SwitchingTran;
 import com.argility.centralpages.ui.ActTypCountTable;
 import com.argility.centralpages.ui.BranchCountsTable;
+import com.argility.centralpages.ui.SwAuditHorizontalSplit;
 import com.argility.centralpages.ui.SwitchingTranTable;
 import com.argility.centralpages.ui.SwitchingTransSearchForm;
 import com.vaadin.data.Item;
@@ -43,22 +45,8 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 			searchForm = new SwitchingTransSearchForm();
 		}
 		
-		if (table != null) {
-			setFirstComponent(table);
-			setSecondComponent(searchForm);
-			setSplitPosition(60);
-		} else {
-			setFirstComponent(searchForm);
-			setSplitPosition(100);
-		}
-		
-		//Component comp = getFirstComponent();
-		//if (comp != null && !(comp instanceof SwitchingTransSearchForm)) {
-		//	setSecondComponent(comp);
-		//	setSplitPosition(50);
-		//} else {
-		//	setSplitPosition(100);
-		//}
+		setFirstComponent(searchForm);
+		setSplitPosition(100);
 		
 	}
 	
@@ -111,7 +99,13 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 		table.setSizeFull();
 		table.setColumnReorderingAllowed(true);
 		
+		table.setNullSelectionAllowed(true);
+		
 		table.addBrTotalCountFooter();
+		
+		table.addListener((Property.ValueChangeListener) this);
+		table.setSelectable(true);
+		table.setImmediate(true);
 		
 		wireTable(table);
 	}
@@ -152,11 +146,19 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 		setFirstComponent(tbl);
 		setSplitPosition(100);
 	}
+	
+	private void setSwAuditSplit(SwitchingTran tran) {
+		SwAudit swAud = dao.getSwAudit(tran.getSwAudId());
+		SwAuditHorizontalSplit swSplit = new SwAuditHorizontalSplit(swAud);
+		setSecondComponent(swSplit);
+		setSplitPosition(40);
+
+	}
 
 	public void valueChange(ValueChangeEvent event) {
 		Property property = event.getProperty();
 		
-		log.info("HERE " + property);
+		log.info("Clicked property " + property);
 		
 		if (property == countTbl) {
 			log.info("Right table");
@@ -178,6 +180,16 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 				setSecondComponent(actTypCountTable);
 				setSplitPosition(40);
 			}
+		} else if (property == table) {
+			SwitchingTran tran = (SwitchingTran)property.getValue();
+			
+			if (tran == null) {
+				setSplitPosition(100);
+				return;
+			}
+			
+			setSwAuditSplit(tran);
+			
 		}
 	}
 }

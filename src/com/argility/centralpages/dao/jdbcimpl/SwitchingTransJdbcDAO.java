@@ -8,9 +8,11 @@ import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.argility.centralpages.dao.SwitchingTransDAO;
+import com.argility.centralpages.dao.mapper.SwAuditRowMapper;
 import com.argility.centralpages.dao.mapper.SwitchingTranMapper;
 import com.argility.centralpages.data.ActionTypeCountBean;
 import com.argility.centralpages.data.BranchCountsBean;
+import com.argility.centralpages.data.SwAudit;
 import com.argility.centralpages.data.SwitchingTran;
 
 public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTransDAO {
@@ -200,6 +202,15 @@ public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTrans
 		return getJdbcTemplate().query(sql,
 				new Object[]{swAudId},
 				new SwitchingTranMapper<SwitchingTran>());
+	}
+	
+	public SwAudit getSwAudit(Integer swAudId) {
+		log.info("getSwAudit("+swAudId+")");
+		String sql = SwAuditRowMapper.SELECT_COLUMNS_SQL + " WHERE sw_aud_id = ?";
+		
+		return getJdbcTemplate().queryForObject(sql,
+				new Object[] {swAudId},
+				new SwAuditRowMapper<SwAudit>());
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.argility.centralpages.data.ActionTypeCountBean;
 import com.argility.centralpages.data.BranchCountsBean;
+import com.argility.centralpages.data.SwAudit;
 import com.argility.centralpages.data.SwitchingTran;
 
 public interface SwitchingTransDAO {
@@ -27,4 +28,6 @@ public interface SwitchingTransDAO {
 	public List<SwitchingTran> getSwitchTransByAuditId(Integer audId);
 	
 	public List<SwitchingTran> getSwitchTransBySwAuditId(Integer swAudId);
+	
+	public SwAudit getSwAudit(Integer swAudId);
 }

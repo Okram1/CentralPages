@@ -166,6 +166,8 @@ public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChan
 		Property prod = event.getProperty();
 		int split = 40;
 		
+		log.info("Clicked property " + prod);
+		
 		if (prod == select) {
 			if (AUDIT_SEARCH_OPT.equals(prod.getValue()) || SW_AUDIT_SEARCH_OPT.equals(prod.getValue())) {
 				searchForm.getField("search").addValidator(intVal);
