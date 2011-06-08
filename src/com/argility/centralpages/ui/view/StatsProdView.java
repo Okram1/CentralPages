@@ -142,7 +142,7 @@ public class StatsProdView extends VerticalSplitPanel implements
 	
 	public void valueChange(ValueChangeEvent event) {
 		
-		Property property = event.getProperty();
+		Property property = event.getProperty(); 
 		if (property == table) {
 			Item item = table.getItem(table.getValue());
 			

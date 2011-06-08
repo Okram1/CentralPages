@@ -32,7 +32,7 @@ public class SwitchingErrorNavigationTree extends AbstractNavigationTree {
 		setChildrenAllowed(OBO_BR_COUNT, false);
 		
 		addItem(SW_ERR_OVERVIEW);
-		setItemIcon(SW_ERR_OVERVIEW, new ThemeResource("icons/edit-find-and-replace.png"));
+		setItemIcon(SW_ERR_OVERVIEW, new ThemeResource(CentralpagesApplication.SEARCH_ICON));
 		setChildrenAllowed(SW_ERR_OVERVIEW, false);
 	}
 

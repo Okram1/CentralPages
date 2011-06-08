@@ -34,7 +34,7 @@ public class SwitchingTransTree extends AbstractNavigationTree {
 		setChildrenAllowed(TOT_BY_OBO_BRANCH, false);
 		
 		addItem(SW_TRAN_SEARCH);
-		setItemIcon(SW_TRAN_SEARCH, new ThemeResource("icons/edit-find-and-replace.png"));
+		setItemIcon(SW_TRAN_SEARCH, new ThemeResource(CentralpagesApplication.SEARCH_ICON));
 		setChildrenAllowed(SW_TRAN_SEARCH, false);
 		
 		addListener((ItemClickListener)this);

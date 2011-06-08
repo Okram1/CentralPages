@@ -21,6 +21,8 @@ import com.vaadin.ui.Window;
 public class CentralpagesApplication extends Application implements
 		HttpServletRequestListener {
 
+	public static final String SEARCH_ICON = "icons/magnifier.png";
+	
 	private static ThreadLocal<CentralpagesApplication> threadLocal = new ThreadLocal<CentralpagesApplication>();
 
 	protected transient Logger log = Logger

@@ -56,7 +56,8 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		setChildrenAllowed(SW_NOT_LOADED_FOR_DAYS, false);
 		
 		addItem(SW_PRODUCTION_LOG);
-		setItemIcon(SW_PRODUCTION_LOG, new ThemeResource("icons/edit-find-and-replace.png"));
+		//setItemIcon(SW_PRODUCTION_LOG, new ThemeResource("icons/edit-find-and-replace.png"));
+		setItemIcon(SW_PRODUCTION_LOG, new ThemeResource(CentralpagesApplication.SEARCH_ICON));
 		setChildrenAllowed(SW_PRODUCTION_LOG, false);
 
 		addItem(SW_LOAD_TRANS_SKIPPED);

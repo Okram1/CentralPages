@@ -35,6 +35,7 @@ public class CrashedAuditColGenerator implements ColumnGenerator, ClickListener{
 			
 			Button action = new Button(value+"", (ClickListener)this);
 			action.setIcon(new ThemeResource("icons/magnifier.png"));
+			action.setDescription("Click to see log entries related to audit " + value);
 			action.setStyleName(Runo.BUTTON_LINK);
 			return action;
 		}
