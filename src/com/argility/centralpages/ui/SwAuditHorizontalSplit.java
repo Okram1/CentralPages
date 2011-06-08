@@ -30,7 +30,6 @@ public class SwAuditHorizontalSplit extends HorizontalSplitPanel {
 		xmlText = getSwitchXmlTextArea();
 		
 		setSizeFull();
-		form.setSizeFull();
 		
 		setFirstComponent(form);
 		setSecondComponent(xmlText);

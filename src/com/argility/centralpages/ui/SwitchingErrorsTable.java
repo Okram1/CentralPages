@@ -1,7 +1,12 @@
 package com.argility.centralpages.ui;
 
 import com.vaadin.data.Container;
+import com.vaadin.data.util.filter.SimpleStringFilter;
+import com.vaadin.event.FieldEvents.TextChangeEvent;
+import com.vaadin.event.FieldEvents.TextChangeListener;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.TextField;
 
 @SuppressWarnings("serial")
 public class SwitchingErrorsTable extends Table {
@@ -30,14 +35,60 @@ public class SwitchingErrorsTable extends Table {
 		setVisibleColumns(COL_NATURAL_ORDER);
 		setColumnHeaders(COL_HEADINGS);
 		
-		setCaption("Act Description");
 		setSizeFull();
 		
-		addBrTotalCountFooter(dataSource);
+		addBrTotalCountFooter();
 	}
 
-	public void addBrTotalCountFooter(Container cont) {
+	public void addBrTotalCountFooter() {
 		setFooterVisible(true);
-		setColumnFooter("brCde", cont.size() + " Rows");
+		setColumnFooter("brCde", getContainerDataSource().size() + " Rows");
+	}
+	
+	public HorizontalLayout getFilters() {
+		setFooterVisible(true);
+		
+		HorizontalLayout hl = new HorizontalLayout();
+		
+		final TextField brCdeText = new TextField("Branch");
+		brCdeText.addListener(new TextChangeListener() {
+			
+			private SimpleStringFilter brCdeFilter;
+			
+			public void textChange(TextChangeEvent event) {
+				Filterable f = (Filterable)getContainerDataSource();
+				
+				if (brCdeFilter != null) {
+					f.removeContainerFilter(brCdeFilter);
+				}
+				
+				brCdeFilter = new SimpleStringFilter("brCde", event.getText(), true, false);
+				
+				f.addContainerFilter(brCdeFilter);
+			}
+		});
+		
+		final TextField errorText = new TextField("Error");
+		errorText.addListener(new TextChangeListener() {
+			
+			private SimpleStringFilter errorFilter;
+			
+			public void textChange(TextChangeEvent event) {
+				Filterable f = (Filterable)getContainerDataSource();
+				
+				if (errorFilter != null) {
+					f.removeContainerFilter(errorFilter);
+				}
+				
+				errorFilter = new SimpleStringFilter("error", event.getText(), true, false);
+				
+				f.addContainerFilter(errorFilter);
+			}
+		});
+		
+		hl.addComponent(brCdeText);
+		hl.addComponent(errorText);
+		
+		return hl;
 	}
 }

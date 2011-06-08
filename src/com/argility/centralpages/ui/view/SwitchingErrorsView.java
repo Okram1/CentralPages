@@ -158,6 +158,7 @@ public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChan
 		table.addListener(this);
 		table.setSelectable(true);
 		table.setImmediate(true);
+		
 		setFirstComponent(table);
 		setSplitPosition(100);
 	}

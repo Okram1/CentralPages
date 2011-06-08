@@ -51,6 +51,7 @@ public class ActTypCountTable extends Table implements ClickListener{
 			}
 		});
 		
+		setSizeFull();
 		setColumnReorderingAllowed(true);
 	}
 
