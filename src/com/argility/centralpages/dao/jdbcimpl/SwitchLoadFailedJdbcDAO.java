@@ -26,13 +26,30 @@ public class SwitchLoadFailedJdbcDAO extends AbstractDAO implements SwitchLoadFa
 				new SwitchLoadFailedRowMapper<SwitchLoadFailed>());
 	}
 
-	public List<SwitchLoadFailed> getSwitchLoadFailedBranchAudit(String brCde,
-			Integer audId) {
+	public List<SwitchLoadFailed> getSwitchLoadFailedByAudit(Integer audId) {
 		log.info("getSwitchLoadFailedBranchAudit()");
-		String sql = SwitchLoadFailedRowMapper.SELECT_COLUMNS_SQL + " WHERE br_cde = ? AND aud_id = ?";
+		String sql = SwitchLoadFailedRowMapper.SELECT_COLUMNS_SQL + " WHERE aud_id = ?";
 		
 		return getJdbcTemplate().query(sql, 
-				new Object[] {brCde, audId}, 
+				new Object[] {audId}, 
+				new SwitchLoadFailedRowMapper<SwitchLoadFailed>());
+	}
+
+	public List<SwitchLoadFailed> getSwitchLoadFailedToBranch(String brCde) {
+		log.info("getSwitchLoadFailedToBranch()");
+		String sql = SwitchLoadFailedRowMapper.SELECT_COLUMNS_SQL + " WHERE obo_br_cde = ?";
+		
+		return getJdbcTemplate().query(sql, 
+				new Object[] {brCde}, 
+				new SwitchLoadFailedRowMapper<SwitchLoadFailed>());
+	}
+
+	public List<SwitchLoadFailed> getSwitchLoadFailedByActionType(Integer actTyp) {
+		log.info("getSwitchLoadFailedByActionType()");
+		String sql = SwitchLoadFailedRowMapper.SELECT_COLUMNS_SQL + " WHERE act_typ = ?";
+		
+		return getJdbcTemplate().query(sql, 
+				new Object[] {actTyp}, 
 				new SwitchLoadFailedRowMapper<SwitchLoadFailed>());
 	}
 

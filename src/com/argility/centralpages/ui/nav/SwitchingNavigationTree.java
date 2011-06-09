@@ -3,8 +3,7 @@ package com.argility.centralpages.ui.nav;
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.view.ProductionStatsView;
 import com.argility.centralpages.ui.view.StatsProdView;
-import com.argility.centralpages.ui.view.SwitchLoadFailedFullView;
-import com.argility.centralpages.ui.view.SwitchLoadFailedPerBranchView;
+import com.argility.centralpages.ui.view.SwitchImportFailedView;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Panel;
@@ -16,13 +15,9 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 	public static final Object SW_LOAD_LARGE_DIFF = "Many outstanding to import";
 	public static final Object SW_REPLICATED_AND_NOT_LOADED = "Replicated and no import";
 	public static final Object SW_NOT_LOADED_FOR_DAYS = "Not imported for days";
-	public static final Object SW_LOAD_TRANS_SKIPPED = "Crashed and skipped audits";
-	public static final Object SW_LOAD_TRANS_SKIPPED_ALL = "Show All Audits";
-	public static final Object SW_LOAD_TRANS_SKIPPED_BRANCH = "Search By Branch ";
+	public static final Object SW_LOAD_TRANS_SKIPPED = "Search skipped audits";
 	
 	public static final Object SW_PRODUCTION_LOG = "Search production log";
-	public static final Object SW_PRODUCTION_LOG_BY_BR = "Search By Branch code";
-	public static final Object SW_PRODUCTION_LOG_ALL = "Show All";
 	
 	private StatsProdView view = null;
 	
@@ -61,14 +56,8 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		setChildrenAllowed(SW_PRODUCTION_LOG, false);
 
 		addItem(SW_LOAD_TRANS_SKIPPED);
-		addItem(SW_LOAD_TRANS_SKIPPED_ALL);
-		setParent(SW_LOAD_TRANS_SKIPPED_ALL, SW_LOAD_TRANS_SKIPPED);
-		
-		addItem(SW_LOAD_TRANS_SKIPPED_BRANCH);
-		setParent(SW_LOAD_TRANS_SKIPPED_BRANCH, SW_LOAD_TRANS_SKIPPED);
-		
-		setChildrenAllowed(SW_LOAD_TRANS_SKIPPED_ALL, false);
-		setChildrenAllowed(SW_LOAD_TRANS_SKIPPED_BRANCH, false);
+		setChildrenAllowed(SW_LOAD_TRANS_SKIPPED, false);
+		setItemIcon(SW_LOAD_TRANS_SKIPPED, new ThemeResource(CentralpagesApplication.SEARCH_ICON));
 		
 	}
 
@@ -97,13 +86,8 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		} else if (itemId == SW_NOT_LOADED_FOR_DAYS) {
 			getStatsProdView().wireSwitchingNotImportedForDaysData();
 			app.setMainView(getStatsProdView());
-		} else if (itemId == SW_LOAD_TRANS_SKIPPED_ALL) {
-			app.setMainView(new SwitchLoadFailedFullView(app));
-		} else if (itemId == SW_LOAD_TRANS_SKIPPED_BRANCH) {
-			app.setMainView(new SwitchLoadFailedPerBranchView(app));
 		} else if (itemId == SW_LOAD_TRANS_SKIPPED) {
-			expandItem(SW_LOAD_TRANS_SKIPPED);
-			select(SW_LOAD_TRANS_SKIPPED);
+			app.setMainView(new SwitchImportFailedView());
 		} else if (itemId == SW_PRODUCTION_LOG) {
 			app.setMainView(new ProductionStatsView());
 			//app.setMainView(new ProductionStatsPerBranchView(app));

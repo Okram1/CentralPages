@@ -10,5 +10,9 @@ public interface SwitchLoadFailedDAO {
 	
 	public List<SwitchLoadFailed> getSwitchLoadFailedFromBranch(String brCde);
 	
-	public List<SwitchLoadFailed> getSwitchLoadFailedBranchAudit(String brCde, Integer audId);
+	public List<SwitchLoadFailed> getSwitchLoadFailedToBranch(String brCde);
+	
+	public List<SwitchLoadFailed> getSwitchLoadFailedByAudit(Integer audId);
+	
+	public List<SwitchLoadFailed> getSwitchLoadFailedByActionType(Integer audId);
 }
