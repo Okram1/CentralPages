@@ -11,7 +11,7 @@ public class SwitchLoadFailedJdbcDAO extends AbstractDAO implements SwitchLoadFa
 	public List<SwitchLoadFailed> getAllSwitchLoadFailed() {
 		log.info("getAllSwitchLoadFailed()");
 		String sql = SwitchLoadFailedRowMapper.SELECT_COLUMNS_SQL + 
-		"WHERE date_time > now() - '31 days'::interval ORDER BY date_time desc";
+		"WHERE date_time > now() - '61 days'::interval ORDER BY date_time desc";
 		
 		return getJdbcTemplate().query(sql, new SwitchLoadFailedRowMapper<SwitchLoadFailed>());
 

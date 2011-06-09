@@ -13,12 +13,14 @@ import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.validator.IntegerValidator;
+import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Form;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
@@ -76,6 +78,7 @@ public class SwitchImportFailedView extends VerticalSplitPanel implements
 		
 		setSizeFull();
 		table.setSizeFull();
+		table.addBrTotalCountFooter();
 		
 		table.addListener((Property.ValueChangeListener) this);
 	}
@@ -91,6 +94,7 @@ public class SwitchImportFailedView extends VerticalSplitPanel implements
 		private NativeSelect select;
 		private TextField search;
 		private IntegerValidator intVal = new IntegerValidator("Must be an integer value");
+		private RegexpValidator brValid = new RegexpValidator("[0-9][0-9][0-9][0-9]", "Must be 4 digits long!");
 		
 		SearchForm() {
 			
@@ -114,6 +118,8 @@ public class SwitchImportFailedView extends VerticalSplitPanel implements
 			search.setRequiredError("Required field");
 			search.setValidationVisible(true);
 
+			HorizontalLayout hl = new HorizontalLayout();
+			
 			Button submit = new Button("Search");
 			submit.addListener(new ClickListener() {
 				
@@ -141,11 +147,25 @@ public class SwitchImportFailedView extends VerticalSplitPanel implements
 				}
 			});
 			
+			Button showAll = new Button("Show all");
+			showAll.addListener(new ClickListener() {
+				public void buttonClick(ClickEvent event) {
+					createTable(dao.getAllSwitchLoadFailed());
+				}
+			});
+			
+			hl.addComponent(submit);
+			hl.addComponent(showAll);
+			
 			addField("combo", select);
 			addField("search", search);
+			//addComponent(hl);
+			//hl.setSizeFull();
 			addField("submit", submit);
+			addField("showall", showAll);
 			
 			submit.setIcon(new ThemeResource("icons/Search.png"));
+			showAll.setIcon(new ThemeResource("icons/Search.png"));
 			
 			setImmediate(true);
 			submit.setClickShortcut(KeyCode.ENTER);
@@ -159,11 +179,17 @@ public class SwitchImportFailedView extends VerticalSplitPanel implements
 			
 			log.info("AUDIT_SEARCH_OPT " + AUDIT_SEARCH_OPT);
 			
-			if (prop.getValue() == AUDIT_SEARCH_OPT) {
-				log.info("clicked " + AUDIT_SEARCH_OPT);
+			if (prop.getValue() == AUDIT_SEARCH_OPT || prop.getValue() == TYPE_SEARCH_OPT) {
+				log.info("clicked " + prop.getValue());
 				search.addValidator(intVal);
+				search.removeValidator(brValid);
+			} else if (prop.getValue() == BR_SEARCH_OPT || prop.getValue() == OBO_BR_SEARCH_OPT) {
+				log.info("clicked " + prop.getValue());
+				search.addValidator(brValid);
+				search.removeValidator(intVal);
 			} else {
 				search.removeValidator(intVal);
+				search.removeValidator(brValid);
 			}
 			
 		}
