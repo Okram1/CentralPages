@@ -36,5 +36,11 @@ public class SwitchLoadFailedTable extends Table {
 		setImmediate(true);
 
 	}
+	
+	public void addBrTotalCountFooter() {
+		setFooterVisible(true);
+		setColumnFooter("brCde", getContainerDataSource().size() + " Rows");
+	}
+
 
 }

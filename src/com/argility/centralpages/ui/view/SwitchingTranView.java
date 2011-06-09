@@ -106,6 +106,7 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 		table.addListener((Property.ValueChangeListener) this);
 		table.setSelectable(true);
 		table.setImmediate(true);
+		table.addBrTotalCountFooter();
 		
 		wireTable(table);
 	}
