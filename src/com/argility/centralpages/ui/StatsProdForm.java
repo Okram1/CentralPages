@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import com.argility.centralpages.data.StatsProd;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.ui.DateField;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.TextField;
@@ -35,6 +36,9 @@ public class StatsProdForm extends Form {
 	protected void attachField(Object propertyId, Field field) {
 		if (field instanceof TextField) {
 			((TextField) field).setColumns(20);
+		}
+		if (field instanceof DateField) {
+			((DateField) field).setResolution(DateField.RESOLUTION_MIN);
 		}
 		super.attachField(propertyId, field);
 		

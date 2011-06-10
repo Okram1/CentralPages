@@ -2,6 +2,8 @@ package com.argility.centralpages.dao.jdbcimpl;
 
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
+
 import com.argility.centralpages.dao.SystemStatsDAO;
 import com.argility.centralpages.dao.mapper.BranchInfoRowMapper;
 import com.argility.centralpages.dao.mapper.UucpStatusRowMapper;
@@ -27,9 +29,17 @@ public class SystemStatsJdbcDAO extends AbstractDAO implements SystemStatsDAO {
 		log.info("getBrInfo(" + brCde + ")");
 		String sql = BranchInfoRowMapper.SELECT_COL_SQL + " WHERE br_cde = ?";
 		
-		return getJdbcTemplate().queryForObject(sql,
-				new Object[] {brCde},
-				new BranchInfoRowMapper<BranchInfo>());
+		BranchInfo brInfo = null;
+		
+		try {
+			brInfo = getJdbcTemplate().queryForObject(sql,
+					new Object[] {brCde},
+					new BranchInfoRowMapper<BranchInfo>());
+		} catch (EmptyResultDataAccessException e) {}
+		
+		log.info("BR INFO " + brInfo);
+		
+		return brInfo;
 	}
 
 }
