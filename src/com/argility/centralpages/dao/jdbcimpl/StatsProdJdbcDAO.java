@@ -31,7 +31,7 @@ public class StatsProdJdbcDAO extends AbstractDAO implements StatsProdDAO{
 		return getJdbcTemplate().query(sql, new StatsProdRowMapper<StatsProd>());
 	}
 
-	public List<StatsProd> getSwManyToImportList() {
+	public List<StatsProd> getSwImportBehindList() {
 		log.info("getSwManyToImportList()");
 		String sql = StatsProdRowMapper.SELECT_COLUMNS_SQL + " WHERE sw_diff > 1000";
 		

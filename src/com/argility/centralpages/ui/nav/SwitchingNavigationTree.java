@@ -12,8 +12,8 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 
 	public static final Object SW_OVERVIEW = "Switching overview";
 	public static final Object SW_LOAD_CRASHED = "Switching Import failed";
-	public static final Object SW_LOAD_LARGE_DIFF = "Many outstanding to import";
-	public static final Object SW_REPLICATED_AND_NOT_LOADED = "Replicated and no import";
+	public static final Object SW_IMPORT_BEHIND = "Switching import behind";
+	public static final Object SW_REPLICATED_AND_NOT_LOADED = "Replicated and not imported";
 	public static final Object SW_NOT_LOADED_FOR_DAYS = "Not imported for days";
 	public static final Object SW_LOAD_TRANS_SKIPPED = "Search skipped audits";
 	
@@ -38,9 +38,9 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		//setItemIcon(SW_LOAD_CRASHED, new ThemeResource(ICO));
 		setChildrenAllowed(SW_LOAD_CRASHED, false);
 		
-		addItem(SW_LOAD_LARGE_DIFF);
+		addItem(SW_IMPORT_BEHIND);
 		//setItemIcon(SW_LOAD_LARGE_DIFF, new ThemeResource(ICO));
-		setChildrenAllowed(SW_LOAD_LARGE_DIFF, false);
+		setChildrenAllowed(SW_IMPORT_BEHIND, false);
 		
 		addItem(SW_REPLICATED_AND_NOT_LOADED);
 		//setItemIcon(SW_REPLICATED_AND_NOT_LOADED, new ThemeResource(ICO));
@@ -77,7 +77,7 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		} else if (itemId == SW_LOAD_CRASHED) {
 			getStatsProdView().wireImportSwitchingFailedData();
 			app.setMainView(getStatsProdView());
-		} else if (itemId == SW_LOAD_LARGE_DIFF) {
+		} else if (itemId == SW_IMPORT_BEHIND) {
 			getStatsProdView().wireHighSwitchingVolumesToImportData();
 			app.setMainView(getStatsProdView());
 		} else if (itemId == SW_REPLICATED_AND_NOT_LOADED) {

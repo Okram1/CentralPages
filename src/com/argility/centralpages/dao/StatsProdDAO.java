@@ -10,7 +10,7 @@ public interface StatsProdDAO {
 	
 	public List<StatsProd> getSwImportFailedList();
 	
-	public List<StatsProd> getSwManyToImportList();
+	public List<StatsProd> getSwImportBehindList();
 	
 	public List<StatsProd> getReplicateAndNotImportedList();
 	

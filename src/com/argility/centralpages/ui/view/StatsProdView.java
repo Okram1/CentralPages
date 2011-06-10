@@ -116,7 +116,7 @@ public class StatsProdView extends VerticalSplitPanel implements
 	}
 	
 	public void wireHighSwitchingVolumesToImportData() {
-		setStatsTable(dao.getSwManyToImportList());
+		setStatsTable(dao.getSwImportBehindList());
 		
 		table.setVisibleColumns(new String[] {"brCde","central","lastSwLoad","swDiff", "swCrashed"});
 		table.setColumnHeaders(new String[] {"Branch","Central","Last Switching load","Transactions Outstanding", "Import Crashed"});
