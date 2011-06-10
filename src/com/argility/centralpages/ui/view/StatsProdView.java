@@ -6,13 +6,17 @@ import org.apache.log4j.Logger;
 
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.dao.StatsProdDAO;
+import com.argility.centralpages.dao.SystemStatsDAO;
+import com.argility.centralpages.data.BranchInfo;
 import com.argility.centralpages.data.StatsProd;
 import com.argility.centralpages.data.StatsProdContainer;
+import com.argility.centralpages.ui.BranchInfoForm;
 import com.argility.centralpages.ui.StatsProdForm;
 import com.argility.centralpages.ui.StatsProdTable;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalSplitPanel;
 
 @SuppressWarnings("serial")
@@ -22,6 +26,7 @@ public class StatsProdView extends VerticalSplitPanel implements
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
 	protected CentralpagesApplication app;
+	protected SystemStatsDAO sysStatsDao;
 	protected StatsProdDAO dao;
 	protected StatsProdTable table;
 	protected StatsProdForm form;
@@ -29,6 +34,7 @@ public class StatsProdView extends VerticalSplitPanel implements
 	public StatsProdView(CentralpagesApplication app) {
 		this.app = app;
 		dao = (StatsProdDAO)app.getSpringContext().getBean("statsProdDAO");
+		sysStatsDao = (SystemStatsDAO)app.getSpringContext().getBean("systemStatsDAO");
 		addStyleName("view");
 	}
 	
@@ -141,6 +147,20 @@ public class StatsProdView extends VerticalSplitPanel implements
 		wireTable(true);
 	}
 	
+	public HorizontalSplitPanel getBottomPanel(StatsProd statsProd) {
+		HorizontalSplitPanel hsp = new HorizontalSplitPanel();
+		
+		BranchInfo brInfo = sysStatsDao.getBrInfo(statsProd.getBrCde());
+		
+		form = new StatsProdForm(statsProd);
+		BranchInfoForm brForm = new BranchInfoForm(brInfo); 
+		
+		hsp.setFirstComponent(form);
+		hsp.setSecondComponent(brForm);
+		
+		return hsp;
+	}
+	
 	public void valueChange(ValueChangeEvent event) {
 		
 		Property property = event.getProperty(); 
@@ -150,8 +170,11 @@ public class StatsProdView extends VerticalSplitPanel implements
 			if (item == null) {
 				setSplitPosition(100);
 			} else {
-				form = new StatsProdForm(item);
-				setSecondComponent(form);
+				
+				StatsProd sp = (StatsProd)table.getValue();
+				HorizontalSplitPanel hsp = getBottomPanel(sp);
+				
+				setSecondComponent(hsp);
 				setSplitPosition(40);
 			}
 		}

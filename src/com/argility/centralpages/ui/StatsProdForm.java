@@ -3,10 +3,10 @@ package com.argility.centralpages.ui;
 import org.apache.log4j.Logger;
 
 import com.argility.centralpages.data.StatsProd;
-import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
+import com.vaadin.ui.TextField;
 
 @SuppressWarnings("serial")
 public class StatsProdForm extends Form {
@@ -23,16 +23,8 @@ public class StatsProdForm extends Form {
 	}
 	
 	public StatsProdForm(StatsProd data) {
-		new StatsProdForm(new BeanItem<StatsProd>(data));
-	}
-
-	public StatsProdForm(Item item) {
-	
-		//setLayout(new VerticalLayout());
-		getLayout().setMargin(true);
-		//setCaption("Branch details");
-
-		setItemDataSource(item);
+		
+		setItemDataSource(new BeanItem<StatsProd>(data));
 		
 		setVisibleItemProperties(VISIBLE_PROPERTIES);
 		
@@ -41,7 +33,9 @@ public class StatsProdForm extends Form {
 	
 	@Override
 	protected void attachField(Object propertyId, Field field) {
-		
+		if (field instanceof TextField) {
+			((TextField) field).setColumns(20);
+		}
 		super.attachField(propertyId, field);
 		
 		/*if (propertyId.equals("brCde")) {
