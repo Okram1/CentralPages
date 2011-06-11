@@ -6,7 +6,7 @@ import java.util.List;
 import com.argility.centralpages.dao.ProductionStatsDAO;
 import com.argility.centralpages.dao.mapper.ProductionStatsRowMapper;
 import com.argility.centralpages.data.ProductionStats;
-import com.argility.centralpages.data.StatsProd;
+import com.argility.centralpages.data.BranchProdDetails;
 
 public class ProductionStatsJdbcDAO extends AbstractDAO implements
 		ProductionStatsDAO {
@@ -15,7 +15,7 @@ public class ProductionStatsJdbcDAO extends AbstractDAO implements
 		log.info("getAllProductionStats()");
 		String sql = ProductionStatsRowMapper.SELECT_COLUMNS_SQL;
 		
-		return getJdbcTemplate().query(sql, new ProductionStatsRowMapper<StatsProd>());
+		return getJdbcTemplate().query(sql, new ProductionStatsRowMapper<BranchProdDetails>());
 	}
 
 	public List<ProductionStats> getAllProductionStatsForBranch(String brCde) {
@@ -24,7 +24,7 @@ public class ProductionStatsJdbcDAO extends AbstractDAO implements
 		
 		return getJdbcTemplate().query(sql,
 				new Object[] {brCde},
-				new ProductionStatsRowMapper<StatsProd>());
+				new ProductionStatsRowMapper<BranchProdDetails>());
 	}
 
 	public List<ProductionStats> getAllProductionStatsForDate(Date date) {
@@ -33,7 +33,7 @@ public class ProductionStatsJdbcDAO extends AbstractDAO implements
 		
 		return getJdbcTemplate().query(sql,
 				new Object[] {date},
-				new ProductionStatsRowMapper<StatsProd>());
+				new ProductionStatsRowMapper<BranchProdDetails>());
 	}
 
 	public List<ProductionStats> getAllProductionStatsForAudit(Integer audId) {
@@ -42,7 +42,7 @@ public class ProductionStatsJdbcDAO extends AbstractDAO implements
 		
 		return getJdbcTemplate().query(sql,
 				new Object[] {audId},
-				new ProductionStatsRowMapper<StatsProd>());
+				new ProductionStatsRowMapper<BranchProdDetails>());
 	}
 
 }

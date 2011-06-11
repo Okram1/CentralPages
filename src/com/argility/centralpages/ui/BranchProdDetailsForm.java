@@ -2,7 +2,7 @@ package com.argility.centralpages.ui;
 
 import org.apache.log4j.Logger;
 
-import com.argility.centralpages.data.StatsProd;
+import com.argility.centralpages.data.BranchProdDetails;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Field;
@@ -10,22 +10,25 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.TextField;
 
 @SuppressWarnings("serial")
-public class StatsProdForm extends Form {
+public class BranchProdDetailsForm extends Form {
 
 	public static final Object[] VISIBLE_PROPERTIES = {
-		"brCde", "central", "lastReplicated", "xoutReceived", "replProcess", "triadProcess", 
-		"replAuditUpTo", "replUpTo", "replDiff", "lastSwLoad", "swAudUpTo", "swDiff", "swCrashed", "swCrashAudId"
+		"brCde", "central", "brBatch", "fppCde", "meRolledDate",
+		"brReplLockDate", "xoutReceived", "replProcess", "replLocked", "xoutQueued", 
+		"replAuditUpTo", "replUpTo", "replDiff", 
+		"brReplUnlockDate", "triadLive", "triadLocked", "meReplicateStartedDate", 
+		"lastSwLoad", "swAudUpTo", "swDiff", "swCrashed", "swCrashAudId"
 	};
 	
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
-	public StatsProdForm() {
-		new StatsProdForm(new StatsProd());
+	public BranchProdDetailsForm() {
+		new BranchProdDetailsForm(new BranchProdDetails());
 	}
 	
-	public StatsProdForm(StatsProd data) {
+	public BranchProdDetailsForm(BranchProdDetails data) {
 		
-		setItemDataSource(new BeanItem<StatsProd>(data));
+		setItemDataSource(new BeanItem<BranchProdDetails>(data));
 		
 		setVisibleItemProperties(VISIBLE_PROPERTIES);
 		

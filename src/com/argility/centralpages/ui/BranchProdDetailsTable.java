@@ -5,18 +5,18 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
-import com.argility.centralpages.data.StatsProdContainer;
+import com.argility.centralpages.data.BranchProdDetailsContainer;
 import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
-public class StatsProdTable extends Table {
+public class BranchProdDetailsTable extends Table {
 
 	protected transient Logger log = Logger
 			.getLogger(this.getClass().getName());
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
-	public StatsProdTable(StatsProdContainer cont) {
+	public BranchProdDetailsTable(BranchProdDetailsContainer cont) {
 
 		setSizeFull();
 
@@ -28,7 +28,7 @@ public class StatsProdTable extends Table {
 
 		setContainerDataSource(cont);
 
-		setCellStyleGenerator(new StatsTableCellStyleGenerator());
+		setCellStyleGenerator(new BranchProdDetsTableCellStyleGenerator());
 		
 		addGeneratedColumn("swCrashAudId", new CrashedAuditColGenerator());
 		addGeneratedColumn("brCde", new BranchStatsProdColGenerator());
@@ -36,7 +36,7 @@ public class StatsProdTable extends Table {
 		// addStyleName("view");
 	}
 
-	public void addBrTotalCountFooter(StatsProdContainer cont) {
+	public void addBrTotalCountFooter(BranchProdDetailsContainer cont) {
 		setFooterVisible(true);
 		setColumnFooter("brCde", cont.size() + " Rows");
 	}

@@ -2,17 +2,17 @@ package com.argility.centralpages.ui;
 
 import org.joda.time.DateTime;
 
-import com.argility.centralpages.data.StatsProd;
+import com.argility.centralpages.data.BranchProdDetails;
 import com.vaadin.ui.Table.CellStyleGenerator;
 
 @SuppressWarnings("serial")
-public class StatsTableCellStyleGenerator implements CellStyleGenerator {
+public class BranchProdDetsTableCellStyleGenerator implements CellStyleGenerator {
 
 	public static String PROBLEM = "problem";
 	public static String WARN = "warn";
 	
 	public String getStyle(Object itemId, Object propertyId) {
-		StatsProd row = (StatsProd)itemId;
+		BranchProdDetails row = (BranchProdDetails)itemId;
 		String style = null;
 		
 		if (propertyId == null) return null; 
@@ -43,13 +43,9 @@ public class StatsTableCellStyleGenerator implements CellStyleGenerator {
 			if (row.getReplProcess() != null && row.getReplProcess().matches(".*CRASH.*")) {
 				style = PROBLEM;
 			}
-		} else if (propertyId.equals("triadProcess")) {
-			if (row.getTriadProcess() != null && row.getTriadProcess().matches(".*CRASH.*")) {
-				style = PROBLEM;
-			}
-		} else if (propertyId.equals("lastReplicated") || propertyId.equals("xoutReceived")) {
-			if (row.getLastReplicated() != null && row.getXoutReceived() != null) {
-				DateTime lastRepl = new DateTime(row.getLastReplicated().getTime());
+		} else if (propertyId.equals("brReplLockDate") || propertyId.equals("xoutReceived")) {
+			if (row.getBrReplLockDate() != null && row.getXoutReceived() != null) {
+				DateTime lastRepl = new DateTime(row.getBrReplLockDate().getTime());
 				DateTime xoutRec = new DateTime(row.getXoutReceived().getTime());
 				
 				if (lastRepl.plusDays(2).isBefore(xoutRec.getMillis())) {

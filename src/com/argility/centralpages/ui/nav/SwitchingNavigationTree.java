@@ -2,7 +2,7 @@ package com.argility.centralpages.ui.nav;
 
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.view.ProductionStatsView;
-import com.argility.centralpages.ui.view.StatsProdView;
+import com.argility.centralpages.ui.view.BranchProdDetailsView;
 import com.argility.centralpages.ui.view.SwitchImportFailedView;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.terminal.ThemeResource;
@@ -19,7 +19,7 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 	
 	public static final Object SW_PRODUCTION_LOG = "Search production log";
 	
-	private StatsProdView view = null;
+	private BranchProdDetailsView view = null;
 	
 	/**
 	 * 
@@ -97,9 +97,9 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 		
 	}
 	
-	public StatsProdView getStatsProdView() {
+	public BranchProdDetailsView getStatsProdView() {
 		if (view == null) {
-			view = new StatsProdView(CentralpagesApplication.getInstance());
+			view = new BranchProdDetailsView(CentralpagesApplication.getInstance());
 		}
 		return view;
 	}

@@ -1,7 +1,7 @@
 package com.argility.centralpages.ui.nav;
 
 import com.argility.centralpages.CentralpagesApplication;
-import com.argility.centralpages.ui.view.StatsProdView;
+import com.argility.centralpages.ui.view.BranchProdDetailsView;
 import com.argility.centralpages.ui.view.UucpStatusView;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.ui.Panel;
@@ -17,7 +17,7 @@ public class ReplicationNavigationTree extends AbstractNavigationTree {
 	public static final Object NOT_REPLICATED_DAYS = "Days since last replication";
 	public static final Object CENT_PROD_LOG = "Central production log";
 
-	private StatsProdView view = null;
+	private BranchProdDetailsView view = null;
 	private UucpStatusView uucpStatusView;
 
 	/**
@@ -86,9 +86,9 @@ public class ReplicationNavigationTree extends AbstractNavigationTree {
 		}
 	}
 
-	public StatsProdView getView() {
+	public BranchProdDetailsView getView() {
 		if (view == null) {
-			view = new StatsProdView(CentralpagesApplication.getInstance());
+			view = new BranchProdDetailsView(CentralpagesApplication.getInstance());
 		}
 		return view;
 	}
