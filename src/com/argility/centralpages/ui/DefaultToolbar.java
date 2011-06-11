@@ -1,9 +1,9 @@
 package com.argility.centralpages.ui;
 
 import com.argility.centralpages.CentralpagesApplication;
-import com.argility.centralpages.ui.nav.ReplicationNavigationTree;
+import com.argility.centralpages.ui.nav.CentralAccordion;
 import com.argility.centralpages.ui.nav.SwitchingErrorNavigationTree;
-import com.argility.centralpages.ui.nav.SwitchingNavigationTree;
+import com.argility.centralpages.ui.nav.SwitchingNavAccordion;
 import com.argility.centralpages.ui.nav.SwitchingTransTree;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
@@ -16,7 +16,7 @@ import com.vaadin.ui.HorizontalLayout;
 public class DefaultToolbar extends HorizontalLayout implements Button.ClickListener{
 	
 	private Button switchingButton = new Button("Switching");
-	private Button replicationButton = new Button("Replication");
+	private Button centralButton = new Button("Central");
 	private Button switchingErrorsButton = new Button("Switching Errors");
 	private Button switchingTransButton = new Button("Switching Transactions"); 
 	
@@ -27,17 +27,17 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 		switchingButton.addListener((Button.ClickListener)this);
 		addComponent(switchingButton);
 		
-		replicationButton.setIcon(new ThemeResource("icons/replication.png"));
-		replicationButton.addListener((Button.ClickListener)this);
-		addComponent(replicationButton);
+		centralButton.setIcon(new ThemeResource("icons/replication.png"));
+		centralButton.addListener((Button.ClickListener)this);
+		addComponent(centralButton);
 		
 		switchingErrorsButton.setIcon(new ThemeResource("icons/sw_errors.png"));
 		switchingErrorsButton.addListener((Button.ClickListener)this);
-		addComponent(switchingErrorsButton);
+		//addComponent(switchingErrorsButton);
 		
 		switchingTransButton.setIcon(new ThemeResource("icons/switching2.png"));
 		switchingTransButton.addListener((Button.ClickListener)this);
-		addComponent(switchingTransButton);
+		//addComponent(switchingTransButton);
 		
 		setMargin(true);
 		setSpacing(true);
@@ -61,20 +61,23 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 		CentralpagesApplication app = CentralpagesApplication.getInstance();
 		
 		switchingButton.setStyleName("toolbar-deselected");
-		replicationButton.setStyleName("toolbar-deselected");
+		centralButton.setStyleName("toolbar-deselected");
 		switchingErrorsButton.setStyleName("toolbar-deselected");
 		switchingTransButton.setStyleName("toolbar-deselected");
 		
 		source.setStyleName("toolbar-selected");
 		
 		if (source == switchingButton) {
-			app.setNavigationTree(new SwitchingNavigationTree());
-		} else if (source == replicationButton) {
-			app.setNavigationTree(new ReplicationNavigationTree());
+			//app.setNavigationComponent(new SwitchingNavigationTree());
+			app.setNavigationComponent(new SwitchingNavAccordion());
+		} else if (source == centralButton) {
+			//app.setNavigationComponent(new ReplicationNavigationTree());
+			app.setNavigationComponent(new CentralAccordion());
+			
 		} else if (source == switchingErrorsButton) {
-			app.setNavigationTree(new SwitchingErrorNavigationTree());
+			app.setNavigationComponent(new SwitchingErrorNavigationTree());
 		} else if (source == switchingTransButton) {
-			app.setNavigationTree(new SwitchingTransTree());
+			app.setNavigationComponent(new SwitchingTransTree());
 		}
 	}
 }

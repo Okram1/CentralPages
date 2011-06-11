@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.argility.centralpages.ui.DefaultToolbar;
 import com.argility.centralpages.ui.nav.AbstractNavigationTree;
-import com.argility.centralpages.ui.nav.SwitchingNavigationTree;
+import com.argility.centralpages.ui.nav.SwitchingNavAccordion;
 import com.vaadin.Application;
 import com.vaadin.data.Item;
 import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
@@ -79,14 +79,14 @@ public class CentralpagesApplication extends Application implements
 
 		verticalLayout.setExpandRatio(horizontalSplit, 1);
 		horizontalSplit
-				.setSplitPosition(200, HorizontalSplitPanel.UNITS_PIXELS);
+				.setSplitPosition(210, HorizontalSplitPanel.UNITS_PIXELS);
 
 		getMainWindow().setContent(verticalLayout);
 
 	}
 
 	private void initDefaultView() {
-		setNavigationTree(new SwitchingNavigationTree());
+		setNavigationComponent(new SwitchingNavAccordion());
 		// setTopView(new Panel("Top View Panel"));
 		setTopView(new DefaultToolbar());
 	}
@@ -96,7 +96,7 @@ public class CentralpagesApplication extends Application implements
 		topView = component;
 	}
 
-	public void setNavigationTree(AbstractNavigationTree tree) {
+	public void setNavigationComponent(Component tree) {
 		horizontalSplit.setFirstComponent(tree);
 	}
 

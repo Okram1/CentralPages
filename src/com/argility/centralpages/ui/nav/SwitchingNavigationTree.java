@@ -10,11 +10,11 @@ import com.vaadin.ui.Panel;
 
 public class SwitchingNavigationTree extends AbstractNavigationTree {
 
-	public static final Object SW_OVERVIEW = "Switching overview";
-	public static final Object SW_LOAD_CRASHED = "Switching Import failed";
-	public static final Object SW_IMPORT_BEHIND = "Switching import behind";
+	public static final Object SW_OVERVIEW = "Overview";
+	public static final Object SW_LOAD_CRASHED = "Import into switching failed";
+	public static final Object SW_IMPORT_BEHIND = "Import into switching behind";
 	public static final Object SW_REPLICATED_AND_NOT_LOADED = "Replicated and not imported";
-	public static final Object SW_NOT_LOADED_FOR_DAYS = "Not imported for days";
+	public static final Object SW_NOT_LOADED_FOR_DAYS = "Days since last import";
 	public static final Object SW_LOAD_TRANS_SKIPPED = "Search skipped audits";
 	
 	public static final Object SW_PRODUCTION_LOG = "Search production log";
