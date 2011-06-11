@@ -46,11 +46,11 @@ public class BranchProdDetailsView extends VerticalSplitPanel implements
 		setStatsTable(dao.getCentralProcCrashedList());
 
 		table.setVisibleColumns(new String[] { "brCde", "central",
-				"brReplLockDate", "replLocked", "xoutReceived", "xoutQueued",
-				"replDiff", "replProcess", "triadProcess" });
+				"replLocked", "brReplLockDate", "xoutReceived", "xoutQueued",
+				"replDiff", "replProcess"});
 		table.setColumnHeaders(new String[] { "Branch", "Central",
-				"Last Replicated", "Repl Locked", "Xout Received",
-				"Xout Queued", "Replication diff", "Process", "Triad Process" });
+				"Repl Locked", "Last Replicated", "Xout Received",
+				"Xout Queued", "Replication diff", "Process"});
 		table.setSortContainerPropertyId("brReplLockDate");
 		table.removeGeneratedColumn("brCde");
 

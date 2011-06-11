@@ -63,6 +63,10 @@ public class BranchProdDetsTableCellStyleGenerator implements CellStyleGenerator
 					style = errorField;
 				}
 			}*/
+		} else if (propertyId.equals("replLocked")) {
+			if (row.getReplLocked()) {
+				style = WARN;
+			}
 		}
 		
 		return style;
