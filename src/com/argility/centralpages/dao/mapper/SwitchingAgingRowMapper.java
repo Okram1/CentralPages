@@ -7,9 +7,10 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.argility.centralpages.data.SwitchingAgingCount;
 
-public class SwitchingAgingRowMapper implements RowMapper<SwitchingAgingCount> {
+public class SwitchingAgingRowMapper<T> implements RowMapper<SwitchingAgingCount> {
 
 	public static String SELECT_SQL_BY_BR_AND_TYPE = "SELECT act_typ, " +
+			"act_desc, " +
 			"total_5days, " +
 			"total_10days, " +
 			"total_12months_plus, " +
@@ -18,7 +19,8 @@ public class SwitchingAgingRowMapper implements RowMapper<SwitchingAgingCount> {
 			"total_count, " +
 			"total_2days, " +
 			"total_12months " +
-			"	FROM daily_switching_mail_by_branch_by_type ";
+			"	FROM daily_switching_mail_by_branch_by_type " +
+			"	JOIN action_typ USING (act_typ)";
 	
 	public static String SELECT_SQL_BY_BRANCH = "SELECT br_cde," +
 			"total_5days, " +
@@ -30,7 +32,8 @@ public class SwitchingAgingRowMapper implements RowMapper<SwitchingAgingCount> {
 			"total_12months " +
 			"	FROM daily_switching_mail_by_branch ";
 	
-	public static String SELECT_SQL_BY_TYPE = "SELECT act_typ, " +
+	public static String SELECT_SQL_BY_TYPE = "SELECT act_typ," +
+			"act_desc, " +
 			"total_5days, " +
 			"total_10days, " +
 			"total_12months_plus, " +
@@ -38,7 +41,8 @@ public class SwitchingAgingRowMapper implements RowMapper<SwitchingAgingCount> {
 			"total_count, " +
 			"total_2days, " +
 			"total_12months " +
-			"	FROM daily_switching_mail_by_type ";
+			"	FROM daily_switching_mail_by_type " +
+			"	JOIN action_typ USING (act_typ)";
 	
 	boolean isBranch, isType, isBoth;
 	
@@ -53,6 +57,7 @@ public class SwitchingAgingRowMapper implements RowMapper<SwitchingAgingCount> {
 		
 		if (isBranch || isBoth) data.setBrCde(rs.getString("br_cde"));
 		if (isType || isBoth) data.setActTyp(rs.getInt("act_typ"));
+		if (isType || isBoth) data.setActDesc(rs.getString("act_desc"));
 		data.setTotalCount(rs.getInt("total_count"));
 		data.setTotal2days(rs.getInt("total_2days"));
 		data.setTotal5days(rs.getInt("total_5days"));

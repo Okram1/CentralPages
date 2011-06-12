@@ -61,5 +61,6 @@
 	<bean id="switchingErrorsDAO" class="com.argility.centralpages.dao.jdbcimpl.SwitchingErrorsJdbcDAO" parent="abstractDAO"/>
 	<bean id="systemStatsDAO" class="com.argility.centralpages.dao.jdbcimpl.SystemStatsJdbcDAO" parent="abstractDAO"/>
 	<bean id="switchingTransDAO" class="com.argility.centralpages.dao.jdbcimpl.SwitchingTransJdbcDAO" parent="abstractDAO"/>
+	<bean id="switchingAgingDAO" class="com.argility.centralpages.dao.jdbcimpl.SwitchingAgingJdbcDAO" parent="abstractDAO"/>
 	
 </beans>

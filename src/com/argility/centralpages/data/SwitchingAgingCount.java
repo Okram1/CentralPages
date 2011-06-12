@@ -14,7 +14,8 @@ public class SwitchingAgingCount implements Serializable {
 	private Integer total6months;
 	private Integer total12months;
 	private Integer total12monthsPlus;
-
+	private String actDesc;
+	
 	public SwitchingAgingCount() {}
 
 	public String getBrCde() {
@@ -87,6 +88,14 @@ public class SwitchingAgingCount implements Serializable {
 
 	public void setTotal12monthsPlus(Integer total12monthsPlus) {
 		this.total12monthsPlus = total12monthsPlus;
+	}
+
+	public String getActDesc() {
+		return actDesc;
+	}
+
+	public void setActDesc(String actDesc) {
+		this.actDesc = actDesc;
 	}
 
 }
