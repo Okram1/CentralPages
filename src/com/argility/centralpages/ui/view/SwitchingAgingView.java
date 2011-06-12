@@ -5,15 +5,15 @@ import java.util.List;
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.dao.SwitchingAgingStatsDAO;
 import com.argility.centralpages.data.SwitchingAgingCount;
+import com.argility.centralpages.ui.AbstractVerticalSplitPanel;
 import com.argility.centralpages.ui.table.SwitchingAgingTable;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Table;
-import com.vaadin.ui.VerticalSplitPanel;
 
 @SuppressWarnings("serial")
-public class SwitchingAgingView extends VerticalSplitPanel implements Property.ValueChangeListener{
+public class SwitchingAgingView extends AbstractVerticalSplitPanel implements Property.ValueChangeListener{
 	
 	private SwitchingAgingStatsDAO dao;
 	private SwitchingAgingTable table;
@@ -29,7 +29,7 @@ public class SwitchingAgingView extends VerticalSplitPanel implements Property.V
 		table.setVisibleColumns(SwitchingAgingTable.BR_COLUMNS);
 		table.setColumnHeaders(SwitchingAgingTable.COL_HEADINGS_BR);
 		
-		showTable(table);
+		createSearchableTable(table, "brCde", "Enter action type and hit enter to search");
 	}
 	
 	public void wireAllAgingByActionType() {
@@ -38,18 +38,18 @@ public class SwitchingAgingView extends VerticalSplitPanel implements Property.V
 		table.setVisibleColumns(SwitchingAgingTable.TYPE_COLUMNS);
 		table.setColumnHeaders(SwitchingAgingTable.COL_HEADINGS_TYPE);
 		
-		showTable(table);
+		createSearchableTable(table, "actTyp", "Enter action type and hit enter to search");
+		
 	}
 	
 	public void wireAllAgingByBranchAndType() {
 		setSwitchingAgingTable(dao.getAllSwitchingAgingByBranchAndType(), false);
-		
-		showTable(table);
+		createSearchableTable(table, "brCde", "Enter branch code and hit enter to search");
 	}
 	
 	public void wireAgingByBranch(String brCde) {
 		setSwitchingAgingTable(dao.getSwitchingAgingByBranch(brCde), false);
-		
+//		createSearchableTable(table, "brCde", "Enter branch code and hit enter to search");
 		showTable(table);
 	}
 	
@@ -96,6 +96,8 @@ public class SwitchingAgingView extends VerticalSplitPanel implements Property.V
 			} else if (cnt.getActTyp() != null) {
 				createBottomAgingTable(dao.getSwitchingAgingByType(cnt.getActTyp()));
 			}
+		} else if (prop == searchField) {
+			applySearch();
 		}
 	}
 

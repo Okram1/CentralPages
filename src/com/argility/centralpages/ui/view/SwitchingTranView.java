@@ -12,6 +12,7 @@ import com.argility.centralpages.data.BranchCountsBean;
 import com.argility.centralpages.data.SwAudit;
 import com.argility.centralpages.data.SwitchingAgingCount;
 import com.argility.centralpages.data.SwitchingTran;
+import com.argility.centralpages.ui.AbstractVerticalSplitPanel;
 import com.argility.centralpages.ui.SwAuditHorizontalSplit;
 import com.argility.centralpages.ui.form.SwitchingTransSearchForm;
 import com.argility.centralpages.ui.table.ActTypCountTable;
@@ -23,10 +24,9 @@ import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Table;
-import com.vaadin.ui.VerticalSplitPanel;
 
 @SuppressWarnings("serial")
-public class SwitchingTranView extends VerticalSplitPanel implements Property.ValueChangeListener{
+public class SwitchingTranView extends AbstractVerticalSplitPanel implements Property.ValueChangeListener{
 
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
@@ -59,49 +59,59 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 		
 	}
 	
-	public void wireSwitchingForBranchData(String brCde) {
-		createSwitchTranTable(dao.getSwitchTransToBranch(brCde));
+	public void wireSwitchingOboBranchData(String brCde) {
+		table = createSwitchTranTable(dao.getSwitchTransToBranch(brCde));
+		createSearchableTable(table, "audTs", "Enter date(yyyy-mm-dd hh:mm) and hit enter to search");
+		//wireTable(table);
 	}
 	
 	public void wireSwitchingFromBranchData(String brCde) {
-		createSwitchTranTable(dao.getSwitchTransFromBranch(brCde));
+		table = createSwitchTranTable(dao.getSwitchTransFromBranch(brCde));
+		createSearchableTable(table, "audTs", "Enter date(yyyy-mm-dd hh:mm) and hit enter to search");
+		//wireTable(table);
 	}
 	
 	public void wireSwitchingByActionTypeData(Integer actTyp) {
-		createSwitchTranTable(dao.getSwitchTransByActionType(actTyp));
+		table = createSwitchTranTable(dao.getSwitchTransByActionType(actTyp));
+		createSearchableTable(table, "audTs", "Enter date(yyyy-mm-dd hh:mm) and hit enter to search");
+		//wireTable(table);
 	}
 	
 	public void wireSwitchingByAuditData(Integer audId) {
-		createSwitchTranTable(dao.getSwitchTransByAuditId(audId));
+		table = createSwitchTranTable(dao.getSwitchTransByAuditId(audId));
+		createSearchableTable(table, "audTs", "Enter date(yyyy-mm-dd hh:mm) and hit enter to search");
+		//wireTable(table);
 	}
 	
 	public void wireTotalByActionTypeData() {
-		log.info("wireTotalByActionTypeData()");
-		createActTypCountTable(dao.getTotalsByActionType(), true);
-		wireTable(actTypCountTable);
+		actTypCountTable = createActTypCountTable(dao.getTotalsByActionType(), true);
+		createSearchableTable(actTypCountTable, "actTyp", "Enter action type and hit enter to search");
 	}
 	
 	public void wireTotalBySendingBranchData() {
 		countTbl = createSwCountsTable(dao.getTotalsBySendingBranch(), false, true);
-		wireTable(countTbl);
+		countTbl.setSelectable(false);
+		createSearchableTable(countTbl, "brCde", "Enter branch code and hit enter to search");
 	}
 	
 	public void wireTotalByOboBranchData() {
 		countTbl = createSwCountsTable(dao.getTotalsByOboBranch(), true, true);
-		wireTable(countTbl);
+		createSearchableTable(countTbl, "brCde", "Enter branch code and hit enter to search");
 	}
 	
 	public void wireForBranchByActionTypeData(String oboBrCde) {
-		createActTypCountTable(dao.getAllByActionTypeForBranch(oboBrCde), false);
-		wireTable(actTypCountTable);
+		actTypCountTable = createActTypCountTable(dao.getAllByActionTypeForBranch(oboBrCde), false);
+		createSearchableTable(actTypCountTable, "actTyp", "Enter action type and hit enter to search");
+		//wireTable(actTypCountTable);
 	}
 	
 	public void wireFromBranchByActionTypeData(String brCde) {
-		createActTypCountTable(dao.getAllByActionTypeFromBranch(brCde), false);
-		wireTable(actTypCountTable);
+		actTypCountTable = createActTypCountTable(dao.getAllByActionTypeFromBranch(brCde), false);
+		createSearchableTable(actTypCountTable, "actTyp", "Enter action type and hit enter to search");
+		//wireTable(actTypCountTable);
 	}
 	
-	public void createSwitchTranTable(List<SwitchingTran> list) {
+	public SwitchingTranTable createSwitchTranTable(List<SwitchingTran> list) {
 		BeanItemContainer<SwitchingTran> cont = new BeanItemContainer<SwitchingTran>(SwitchingTran.class, list);
 		table = new SwitchingTranTable(cont);
 		
@@ -117,7 +127,7 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 		table.setImmediate(true);
 		table.addBrTotalCountFooter();
 		
-		wireTable(table);
+		return table;
 	}
 	
 	public ActTypCountTable createActTypCountTable(List<ActionTypeCountBean> list, boolean selectable) {
@@ -182,7 +192,7 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 		setSplitPosition(40);
 
 	}
-
+	
 	public void valueChange(ValueChangeEvent event) {
 		Property property = event.getProperty();
 		
@@ -230,6 +240,9 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 			agingTable = createSwitchingAgingTable(agingDao.getSwitchingAgingByType(bean.getActTyp()));
 			setSecondComponent(agingTable);
 			setSplitPosition(50);
+		} else if (property == searchField) {
+			log.info("Search field changed");
+			applySearch();
 		}
 	}
 }

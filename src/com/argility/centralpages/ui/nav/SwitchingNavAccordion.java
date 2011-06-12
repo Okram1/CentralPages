@@ -19,6 +19,8 @@ public class SwitchingNavAccordion extends Accordion {
 		addTab(swTranTree, "Switching Transactions", new ThemeResource("icons/22/preferences-system-network-2.png"));
 		addTab(swErrorTree, "Switching Errors", new ThemeResource("icons/22/db_remove.png"));
 		
+		setSelectedTab(swTranTree);
+		
 		setHeight("50%");
 	}
 

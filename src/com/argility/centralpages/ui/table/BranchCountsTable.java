@@ -23,7 +23,7 @@ public class BranchCountsTable extends Table implements ClickListener{
 	public static final String[] COL_HEADINGS = new String[] {"Branch Code","Total"};
 	
 	private boolean toBranchSearch;
-	private boolean showErrors;
+	private final boolean showErrors;
 	
 	public BranchCountsTable(boolean showErrors, Container cont) {
 		super(null, cont);

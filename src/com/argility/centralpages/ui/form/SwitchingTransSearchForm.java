@@ -96,7 +96,7 @@ public class SwitchingTransSearchForm extends Form implements Property.ValueChan
 	}
 
 	private void wireByToBranch(String searchValue) {
-		getView().wireSwitchingForBranchData(searchValue);
+		getView().wireSwitchingOboBranchData(searchValue);
 		CentralpagesApplication.getInstance().setMainView(getView());
 	}
 

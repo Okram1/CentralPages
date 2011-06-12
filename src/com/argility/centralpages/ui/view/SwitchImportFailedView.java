@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.dao.SwitchLoadFailedDAO;
 import com.argility.centralpages.data.SwitchLoadFailed;
+import com.argility.centralpages.ui.AbstractVerticalSplitPanel;
 import com.argility.centralpages.ui.table.SwitchLoadFailedTable;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
@@ -24,11 +25,10 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalSplitPanel;
 import com.vaadin.ui.Window.Notification;
 
 @SuppressWarnings("serial")
-public class SwitchImportFailedView extends VerticalSplitPanel implements
+public class SwitchImportFailedView extends AbstractVerticalSplitPanel implements
 	Property.ValueChangeListener{
 
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
@@ -61,6 +61,8 @@ public class SwitchImportFailedView extends VerticalSplitPanel implements
 				setSecondComponent(ta);
 				setSplitPosition(40);
 			}
+		} else if (property == searchField) {
+			applySearch();
 		}
 	}
 	
@@ -73,14 +75,16 @@ public class SwitchImportFailedView extends VerticalSplitPanel implements
 		table.setSortContainerPropertyId("dateTime");
 		table.setSortAscending(false);
 		
-		setFirstComponent(table);
-		setSplitPosition(100);
-		
 		setSizeFull();
 		table.setSizeFull();
 		table.addBrTotalCountFooter();
 		
 		table.addListener((Property.ValueChangeListener) this);
+		
+		//setFirstComponent(table);
+		//setSplitPosition(100);
+		
+		createSearchableTable(table, "brCde", "Enter branch code and hit enter to search.");
 	}
 	
 	class SearchForm extends Form implements

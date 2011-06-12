@@ -10,6 +10,7 @@ import com.argility.centralpages.dao.SystemStatsDAO;
 import com.argility.centralpages.data.BranchInfo;
 import com.argility.centralpages.data.BranchProdDetails;
 import com.argility.centralpages.data.BranchProdDetailsContainer;
+import com.argility.centralpages.ui.AbstractVerticalSplitPanel;
 import com.argility.centralpages.ui.form.BranchInfoForm;
 import com.argility.centralpages.ui.form.BranchProdDetailsForm;
 import com.argility.centralpages.ui.table.BranchProdDetailsTable;
@@ -17,10 +18,9 @@ import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.VerticalSplitPanel;
 
 @SuppressWarnings("serial")
-public class BranchProdDetailsView extends VerticalSplitPanel implements
+public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 		Property.ValueChangeListener {
 
 	protected transient Logger log = Logger
@@ -59,9 +59,10 @@ public class BranchProdDetailsView extends VerticalSplitPanel implements
 	}
 
 	private void wireTable(boolean fullSize) {
-		setFirstComponent(table);
-		if (fullSize)
-			setSplitPosition(100);
+		//setFirstComponent(table);
+		//if (fullSize)
+		//	setSplitPosition(100);
+		createSearchableTable(table, "brCde", "Enter branch code and hit enter to search.");
 	}
 
 	private BranchProdDetailsTable setStatsTable(List<BranchProdDetails> list) {
@@ -110,6 +111,8 @@ public class BranchProdDetailsView extends VerticalSplitPanel implements
 
 		table.setSortContainerPropertyId("brCde");
 
+		//createSearchableTable(table, "brCde", "Enter branch code and hit enter to search.");
+		
 		wireTable(true);
 	}
 
@@ -202,6 +205,8 @@ public class BranchProdDetailsView extends VerticalSplitPanel implements
 				setSecondComponent(hsp);
 				setSplitPosition(40);
 			}
+		} else if (property == searchField) {
+			applySearch();
 		}
 	}
 
