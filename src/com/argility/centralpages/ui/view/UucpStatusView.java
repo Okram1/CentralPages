@@ -8,16 +8,16 @@ import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.dao.SystemStatsDAO;
 import com.argility.centralpages.data.BranchInfo;
 import com.argility.centralpages.data.UucpStatus;
+import com.argility.centralpages.ui.AbstractVerticalSplitPanel;
 import com.argility.centralpages.ui.form.BranchInfoForm;
 import com.argility.centralpages.ui.table.UucpStatusTable;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.TextArea;
-import com.vaadin.ui.VerticalSplitPanel;
 
 @SuppressWarnings("serial")
-public class UucpStatusView extends VerticalSplitPanel implements Property.ValueChangeListener{
+public class UucpStatusView extends AbstractVerticalSplitPanel implements Property.ValueChangeListener{
 
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
@@ -51,8 +51,10 @@ public class UucpStatusView extends VerticalSplitPanel implements Property.Value
 		table.setImmediate(true);
 		table.addListener(this);
 		
-		setFirstComponent(table);
-		setSplitPosition(100);
+		createSearchableTable(table, "brCde", "Entere branch code and hit enter to search.");
+		
+		//setFirstComponent(table);
+		//setSplitPosition(100);
 	}
 	
 	private BranchInfoForm createBranchInfoForm(String brCde) {
@@ -84,6 +86,8 @@ public class UucpStatusView extends VerticalSplitPanel implements Property.Value
 				setSecondComponent(form);
 			}
 			setSplitPosition(50);
+		} else if (prop == searchField) {
+			applySearch();
 		}
 	}
 
