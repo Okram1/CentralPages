@@ -48,7 +48,7 @@ public class BranchProdDetailsJdbcDAO extends AbstractDAO implements BranchProdD
 	public List<BranchProdDetails> getSwNotImportedForDaysList() {
 		log.info("getSwNotImportedForDaysList()");
 		String sql = BranchProdDetailsRowMapper.SELECT_COLUMNS_SQL + 
-		" WHERE last_sw_load < now() - '5 days'::interval ORDER by last_sw_load";
+		" WHERE last_sw_load < now() - '3 days'::interval ORDER by last_sw_load";
 		
 		return getJdbcTemplate().query(sql, new BranchProdDetailsRowMapper<BranchProdDetails>());
 	}

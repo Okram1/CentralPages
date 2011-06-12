@@ -4,7 +4,11 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
-
+/**
+ * Base DAO that all other daos should extent
+ * @author Marko.Salic
+ *
+ */
 public abstract class AbstractDAO {
 
 	protected transient Logger log = Logger
