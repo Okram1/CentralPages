@@ -49,7 +49,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 				"replLocked", "brReplLockDate", "xoutReceived", "xoutQueued",
 				"replDiff", "replProcess"});
 		table.setColumnHeaders(new String[] { "Branch", "Central",
-				"Repl Locked", "Last Replicated", "Xout Received",
+				"Repl Locked", "Last Replicated", "Repl file received",
 				"Xout Queued", "Replication diff", "Process"});
 		table.setSortContainerPropertyId("brReplLockDate");
 		table.removeGeneratedColumn("brCde");
@@ -70,7 +70,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 				BranchProdDetails.class, list);
 		table = new BranchProdDetailsTable(cont);
 
-		table.addBrTotalCountFooter(cont);
+		table.addCountFooter("brCde");
 		table.addListener((Property.ValueChangeListener) this);
 
 		return table;
@@ -80,9 +80,9 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 		setStatsTable(dao.getXoutReceivedNotProcessedList());
 
 		table.setVisibleColumns(new String[] { "brCde", "central",
-				"brReplLockDate", "replLocked", "xoutReceived", "replDiff" });
+				"replLocked", "brReplLockDate", "xoutReceived", "xoutQueued", "replDiff" });
 		table.setColumnHeaders(new String[] { "Branch", "Central",
-				"Last Replicated", "Repl Locked", "Xout Received",
+				"Repl Locked", "Last Replicated", "Repl file received", "Xout Queued",
 				"Replication Diff" });
 		table.setSortContainerPropertyId("lastReplicated");
 		table.removeGeneratedColumn("brCde");
@@ -94,9 +94,10 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 		setStatsTable(dao.getNotReplicatedForDays());
 
 		table.setVisibleColumns(new String[] { "brCde", "central",
-				"brReplLockDate", "brReplUnlockDate", "replLocked", "xoutReceived", "replDiff" });
+				"replLocked", "brReplLockDate", "brReplUnlockDate", "xoutReceived", "xoutQueued", "replDiff" });
 		table.setColumnHeaders(new String[] { "Branch", "Central",
-				"Last Replicated", "Replication done", "Repl Locked", "Xout Received", "Repl Difference" });
+				"Repl Locked", "Last Replicated", "Replication done", "Repl file received", "Xout queued", 
+				"Repl Difference" });
 		table.setSortContainerPropertyId("brReplLockDate");
 		table.removeGeneratedColumn("brCde");
 

@@ -1,10 +1,9 @@
 package com.argility.centralpages.ui.table;
 
 import com.vaadin.data.Container;
-import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
-public class SwitchingAgingTable extends Table {
+public class SwitchingAgingTable extends AbstractTable {
 
 	public static final Object[] COLUMNS = new Object[] {
 		"brCde","actTyp","actDesc","totalCount","total2days","total5days","total10days","total6months","total12months","total12monthsPlus"
@@ -41,6 +40,8 @@ public class SwitchingAgingTable extends Table {
 		setSortAscending(false);
 		
 		setCellStyleGenerator(new AgingTableCellStyleGenerator());
+		
+		addCountFooter("brCde");
 	}
 
 }

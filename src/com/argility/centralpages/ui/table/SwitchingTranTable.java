@@ -4,10 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.vaadin.data.Container;
-import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
-public class SwitchingTranTable extends Table {
+public class SwitchingTranTable extends AbstractTable {
 
 	public static final Object[] COL_HEADINGS  = new Object[] {
 		"swAudId","brCde","audId","audTs","oboBrCde","actTyp","actDesc","swAudDte"
@@ -31,6 +30,8 @@ public class SwitchingTranTable extends Table {
 		setSortAscending(false);
 		
 		setSizeFull();
+		
+		addCountFooter("swAudId");
 	}
 	
 	public void addBrTotalCountFooter() {

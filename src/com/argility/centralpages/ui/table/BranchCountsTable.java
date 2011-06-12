@@ -15,7 +15,7 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.Runo;
 
 @SuppressWarnings("serial")
-public class BranchCountsTable extends Table implements ClickListener{
+public class BranchCountsTable extends AbstractTable implements ClickListener{
 	
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
@@ -26,9 +26,9 @@ public class BranchCountsTable extends Table implements ClickListener{
 	private final boolean showErrors;
 	
 	public BranchCountsTable(boolean showErrors, Container cont) {
-		super(null, cont);
 		
 		this.showErrors = showErrors;
+		setContainerDataSource(cont);
 		
 		setVisibleColumns(COL_ORDER);
 		setColumnHeaders(COL_HEADINGS);
@@ -47,6 +47,7 @@ public class BranchCountsTable extends Table implements ClickListener{
 		});
 		
 		setColumnReorderingAllowed(true);
+		addCountFooter("brCde");
 
 	}
 

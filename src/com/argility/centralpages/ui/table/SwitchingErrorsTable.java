@@ -5,11 +5,10 @@ import com.vaadin.data.util.filter.SimpleStringFilter;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
 
 @SuppressWarnings("serial")
-public class SwitchingErrorsTable extends Table {
+public class SwitchingErrorsTable extends AbstractTable {
 
 	public static final Object[] COL_NATURAL_ORDER = new Object[] {
 		"brCde", "audId", "oboBrCde", "swAudId", "actTyp", "actDesc", "error"
@@ -28,8 +27,8 @@ public class SwitchingErrorsTable extends Table {
 	}
 
 	public SwitchingErrorsTable(String caption, Container dataSource) {
-		super(caption, dataSource);
-		
+
+		setContainerDataSource(dataSource);
 		setColumnCollapsingAllowed(true);
 		
 		setVisibleColumns(COL_NATURAL_ORDER);
@@ -37,12 +36,7 @@ public class SwitchingErrorsTable extends Table {
 		
 		setSizeFull();
 		
-		addBrTotalCountFooter();
-	}
-
-	public void addBrTotalCountFooter() {
-		setFooterVisible(true);
-		setColumnFooter("brCde", getContainerDataSource().size() + " Rows");
+		addCountFooter("brCde");
 	}
 	
 	public HorizontalLayout getFilters() {

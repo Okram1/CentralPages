@@ -2,6 +2,7 @@ package com.argility.centralpages.ui;
 
 import org.apache.log4j.Logger;
 
+import com.argility.centralpages.ui.table.AbstractTable;
 import com.vaadin.data.Container;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItemContainer;
@@ -58,6 +59,10 @@ public class AbstractVerticalSplitPanel extends VerticalSplitPanel {
 			((BeanItemContainer<?>)c).removeAllContainerFilters();
 			((BeanItemContainer<?>)c).addContainerFilter(searchField.getData(),
 					searchField.getValue()+"" ,true, true);
+		}
+		
+		if (searchTable instanceof AbstractTable) {
+			((AbstractTable)searchTable).addCountFooter(searchField.getData());
 		}
 	}
 }

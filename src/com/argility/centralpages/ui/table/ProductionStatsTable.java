@@ -1,10 +1,9 @@
 package com.argility.centralpages.ui.table;
 
 import com.vaadin.data.Container;
-import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
-public class ProductionStatsTable extends Table {
+public class ProductionStatsTable extends AbstractTable {
 
 	public static final Object[] COL_NATURAL_ORDER = new Object[] {
 		"brCde", "dateTime", "audId", "message"
@@ -14,17 +13,11 @@ public class ProductionStatsTable extends Table {
 		"Branch", "Date", "Audit", "Message"
 	};
 	
-	public ProductionStatsTable() {
-		new SwitchLoadFailedTable(null);
-	}
-
-	public ProductionStatsTable(String caption) {
-		new ProductionStatsTable(caption, null);
-	}
-
 	public ProductionStatsTable(String caption, Container dataSource) {
-		super(caption, dataSource);
-		
+
+		setCaption(caption);
+		setContainerDataSource(dataSource);
+
 		setVisibleColumns(COL_NATURAL_ORDER);
 		setColumnHeaders(COL_HEADINGS);
 		
@@ -33,6 +26,8 @@ public class ProductionStatsTable extends Table {
 
 		setSelectable(true);
 		setImmediate(true);
+		
+		addCountFooter("brCde");
 
 	}
 }

@@ -1,10 +1,9 @@
 package com.argility.centralpages.ui.table;
 
 import com.vaadin.data.Container;
-import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
-public class UucpStatusTable extends Table {
+public class UucpStatusTable extends AbstractTable {
 
 	public UucpStatusTable(Container cont) {
 		
@@ -14,14 +13,9 @@ public class UucpStatusTable extends Table {
 		setColumnHeaders(new String[] {"Branch Code","Central","Last uucp communication","Status message"});
 		
 		setSizeFull();
+		addCountFooter("brCde");
 		
 		setCellStyleGenerator(new UucpStatusCellStyleGenerator());
 	}
-	
-	public void addBrTotalCountFooter() {
-		setFooterVisible(true);
-		setColumnFooter("brCde", getContainerDataSource().size() + " Rows");
-	}
-
-	
+		
 }

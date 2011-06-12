@@ -15,7 +15,7 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.themes.Runo;
 
 @SuppressWarnings("serial")
-public class ActTypCountTable extends Table implements ClickListener{
+public class ActTypCountTable extends AbstractTable implements ClickListener{
 
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
@@ -53,6 +53,8 @@ public class ActTypCountTable extends Table implements ClickListener{
 		
 		setSizeFull();
 		setColumnReorderingAllowed(true);
+		
+		addCountFooter("actTyp");
 	}
 
 	public void buttonClick(ClickEvent event) {

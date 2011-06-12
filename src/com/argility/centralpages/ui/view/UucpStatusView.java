@@ -45,7 +45,7 @@ public class UucpStatusView extends AbstractVerticalSplitPanel implements Proper
 		table = new UucpStatusTable(cont);
 		
 		table.setSortContainerPropertyId("central");
-		table.addBrTotalCountFooter();
+		table.addCountFooter("brCde");
 		
 		table.setSelectable(true);
 		table.setImmediate(true);

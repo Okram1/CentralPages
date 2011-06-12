@@ -1,10 +1,9 @@
 package com.argility.centralpages.ui.table;
 
 import com.vaadin.data.Container;
-import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
-public class SwitchLoadFailedTable extends Table {
+public class SwitchLoadFailedTable extends AbstractTable {
 
 	public static final Object[] COL_NATURAL_ORDER = new Object[] {
 		"brCde", "audId", "actTyp", "actDesc", "dateTime", "oboBrCde", "oboAudId"
@@ -14,17 +13,10 @@ public class SwitchLoadFailedTable extends Table {
 		"Branch", "Audit", "ActTyp", "Action Description", "Date", "OBO Branch", "OBO Audit"
 	};
 	
-	public SwitchLoadFailedTable() {
-		new SwitchLoadFailedTable(null);
-	}
-
-	public SwitchLoadFailedTable(String caption) {
-		super(caption);
-		new SwitchLoadFailedTable(caption, null);
-	}
-
 	public SwitchLoadFailedTable(String caption, Container dataSource) {
-		super(caption, dataSource);
+	
+		setCaption(caption);
+		setContainerDataSource(dataSource);
 		
 		setVisibleColumns(COL_NATURAL_ORDER);
 		setColumnHeaders(COL_HEADINGS);
@@ -34,6 +26,8 @@ public class SwitchLoadFailedTable extends Table {
 
 		setSelectable(true);
 		setImmediate(true);
+		
+		addCountFooter("brCde");
 
 	}
 	

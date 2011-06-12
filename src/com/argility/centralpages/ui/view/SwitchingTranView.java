@@ -23,7 +23,6 @@ import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")
 public class SwitchingTranView extends AbstractVerticalSplitPanel implements Property.ValueChangeListener{
@@ -178,11 +177,6 @@ public class SwitchingTranView extends AbstractVerticalSplitPanel implements Pro
 		countTbl.setSizeFull();
 		
 		return countTbl;
-	}
-	
-	private void wireTable(Table tbl) {
-		setFirstComponent(tbl);
-		setSplitPosition(100);
 	}
 	
 	private void setSwAuditSplit(SwitchingTran tran) {
