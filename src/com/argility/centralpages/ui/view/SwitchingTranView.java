@@ -5,16 +5,19 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.argility.centralpages.CentralpagesApplication;
+import com.argility.centralpages.dao.SwitchingAgingStatsDAO;
 import com.argility.centralpages.dao.SwitchingTransDAO;
 import com.argility.centralpages.data.ActionTypeCountBean;
 import com.argility.centralpages.data.BranchCountsBean;
 import com.argility.centralpages.data.SwAudit;
+import com.argility.centralpages.data.SwitchingAgingCount;
 import com.argility.centralpages.data.SwitchingTran;
-import com.argility.centralpages.ui.ActTypCountTable;
-import com.argility.centralpages.ui.BranchCountsTable;
 import com.argility.centralpages.ui.SwAuditHorizontalSplit;
-import com.argility.centralpages.ui.SwitchingTranTable;
-import com.argility.centralpages.ui.SwitchingTransSearchForm;
+import com.argility.centralpages.ui.form.SwitchingTransSearchForm;
+import com.argility.centralpages.ui.table.ActTypCountTable;
+import com.argility.centralpages.ui.table.BranchCountsTable;
+import com.argility.centralpages.ui.table.SwitchingAgingTable;
+import com.argility.centralpages.ui.table.SwitchingTranTable;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -28,14 +31,20 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
 	private SwitchingTransDAO dao;
+	private SwitchingAgingStatsDAO agingDao;
+	
 	private SwitchingTranTable table;
 	private ActTypCountTable actTypCountTable;
 	private BranchCountsTable countTbl;
+	private SwitchingAgingTable agingTable;
 	private SwitchingTransSearchForm searchForm;
 	
 	public SwitchingTranView() {
 		dao = (SwitchingTransDAO)CentralpagesApplication.getInstance()
 			.getSpringContext().getBean("switchingTransDAO");
+		
+		agingDao = (SwitchingAgingStatsDAO)CentralpagesApplication.getInstance()
+		.getSpringContext().getBean("switchingAgingDAO");
 		
 		setSizeFull();
 	}
@@ -68,7 +77,7 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 	
 	public void wireTotalByActionTypeData() {
 		log.info("wireTotalByActionTypeData()");
-		createActTypCountTable(dao.getTotalsByActionType());
+		createActTypCountTable(dao.getTotalsByActionType(), true);
 		wireTable(actTypCountTable);
 	}
 	
@@ -83,12 +92,12 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 	}
 	
 	public void wireForBranchByActionTypeData(String oboBrCde) {
-		createActTypCountTable(dao.getAllByActionTypeForBranch(oboBrCde));
+		createActTypCountTable(dao.getAllByActionTypeForBranch(oboBrCde), false);
 		wireTable(actTypCountTable);
 	}
 	
 	public void wireFromBranchByActionTypeData(String brCde) {
-		createActTypCountTable(dao.getAllByActionTypeFromBranch(brCde));
+		createActTypCountTable(dao.getAllByActionTypeFromBranch(brCde), false);
 		wireTable(actTypCountTable);
 	}
 	
@@ -111,7 +120,7 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 		wireTable(table);
 	}
 	
-	public ActTypCountTable createActTypCountTable(List<ActionTypeCountBean> list) {
+	public ActTypCountTable createActTypCountTable(List<ActionTypeCountBean> list, boolean selectable) {
 		log.info("createActTypCountTable()");
 		BeanItemContainer<ActionTypeCountBean> cont =
 			new BeanItemContainer<ActionTypeCountBean>(ActionTypeCountBean.class, list);
@@ -120,7 +129,25 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 		actTypCountTable.setSizeFull();
 		actTypCountTable.setColumnReorderingAllowed(true);
 		
+		if (selectable) {
+			actTypCountTable.setSelectable(true);
+			actTypCountTable.addListener((Property.ValueChangeListener)this);
+			actTypCountTable.setImmediate(true);
+		}
+		
 		return actTypCountTable;
+	}
+	
+	public SwitchingAgingTable createSwitchingAgingTable(List<SwitchingAgingCount> list) {
+		log.info("createSwitchingAgingTable()");
+		BeanItemContainer<SwitchingAgingCount> cont =
+			new BeanItemContainer<SwitchingAgingCount>(SwitchingAgingCount.class, list);
+		agingTable = new SwitchingAgingTable(cont);
+		
+		agingTable.setSizeFull();
+		agingTable.setColumnReorderingAllowed(true);
+		
+		return agingTable;
 	}
 	
 	public BranchCountsTable createSwCountsTable(List<BranchCountsBean> list, boolean toBranch, boolean selectable) {
@@ -172,13 +199,16 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 			} else {
 				if (countTbl.isToBranchSearch()) {
 					String oboBrCde = ""+item.getItemProperty("brCde").getValue();
-					actTypCountTable = createActTypCountTable(dao.getAllByActionTypeForBranch(oboBrCde));
+					//actTypCountTable = createActTypCountTable(dao.getAllByActionTypeForBranch(oboBrCde));
+					
+					agingTable = createSwitchingAgingTable(agingDao.getSwitchingAgingByBranch(oboBrCde));
+					setSecondComponent(agingTable);
 				} else {
 					String brCde = ""+item.getItemProperty("brCde").getValue();
-					actTypCountTable = createActTypCountTable(dao.getAllByActionTypeFromBranch(brCde));
+					actTypCountTable = createActTypCountTable(dao.getAllByActionTypeFromBranch(brCde), false);
+					setSecondComponent(actTypCountTable);
 				}
 				
-				setSecondComponent(actTypCountTable);
 				setSplitPosition(40);
 			}
 		} else if (property == table) {
@@ -191,6 +221,15 @@ public class SwitchingTranView extends VerticalSplitPanel implements Property.Va
 			
 			setSwAuditSplit(tran);
 			
+		} else if (property == actTypCountTable) {
+			ActionTypeCountBean bean = (ActionTypeCountBean)property.getValue();
+			if (bean == null) {
+				setSplitPosition(100);
+				return;
+			}
+			agingTable = createSwitchingAgingTable(agingDao.getSwitchingAgingByType(bean.getActTyp()));
+			setSecondComponent(agingTable);
+			setSplitPosition(50);
 		}
 	}
 }

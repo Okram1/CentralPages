@@ -1,4 +1,4 @@
-package com.argility.centralpages.ui;
+package com.argility.centralpages.ui.table;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,6 +6,8 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 
 import com.argility.centralpages.data.BranchProdDetailsContainer;
+import com.argility.centralpages.ui.BranchStatsProdColGenerator;
+import com.argility.centralpages.ui.CrashedAuditColGenerator;
 import com.vaadin.ui.Table;
 
 @SuppressWarnings("serial")

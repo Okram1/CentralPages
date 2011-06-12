@@ -20,7 +20,7 @@ public class SwitchingAgingRowMapper<T> implements RowMapper<SwitchingAgingCount
 			"total_2days, " +
 			"total_12months " +
 			"	FROM daily_switching_mail_by_branch_by_type " +
-			"	JOIN action_typ USING (act_typ)";
+			"	JOIN action_typ USING (act_typ) ";
 	
 	public static String SELECT_SQL_BY_BRANCH = "SELECT br_cde," +
 			"total_5days, " +
@@ -42,7 +42,7 @@ public class SwitchingAgingRowMapper<T> implements RowMapper<SwitchingAgingCount
 			"total_2days, " +
 			"total_12months " +
 			"	FROM daily_switching_mail_by_type " +
-			"	JOIN action_typ USING (act_typ)";
+			"	JOIN action_typ USING (act_typ) ";
 	
 	boolean isBranch, isType, isBoth;
 	

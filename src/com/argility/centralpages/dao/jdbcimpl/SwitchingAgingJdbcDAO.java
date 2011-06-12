@@ -31,13 +31,19 @@ public class SwitchingAgingJdbcDAO extends AbstractDAO implements SwitchingAging
 	}
 
 	public List<SwitchingAgingCount> getSwitchingAgingByType(Integer actTyp) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql  = SwitchingAgingRowMapper.SELECT_SQL_BY_BR_AND_TYPE + " WHERE act_typ = ?";
+		
+		return getJdbcTemplate().query(sql, 
+				new Object[] {actTyp},
+				new SwitchingAgingRowMapper<SwitchingAgingCount>(false, false, true));
 	}
 
 	public List<SwitchingAgingCount> getSwitchingAgingByBranch(String brCde) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql  = SwitchingAgingRowMapper.SELECT_SQL_BY_BR_AND_TYPE + " WHERE br_cde = ?";
+		
+		return getJdbcTemplate().query(sql, 
+				new Object[] {brCde},
+				new SwitchingAgingRowMapper<SwitchingAgingCount>(false, false, true));
 	}
 
 	public List<SwitchingAgingCount> getSwitchingAgingByBranchAndType(

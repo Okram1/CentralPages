@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import com.argility.centralpages.XmlPrettyPrintFormatter;
 import com.argility.centralpages.data.SwAudit;
+import com.argility.centralpages.ui.form.SwAuditForm;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.TextArea;
 

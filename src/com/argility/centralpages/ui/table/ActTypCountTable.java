@@ -1,4 +1,4 @@
-package com.argility.centralpages.ui;
+package com.argility.centralpages.ui.table;
 
 import org.apache.log4j.Logger;
 

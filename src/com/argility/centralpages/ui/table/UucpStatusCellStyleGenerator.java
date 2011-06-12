@@ -1,4 +1,4 @@
-package com.argility.centralpages.ui;
+package com.argility.centralpages.ui.table;
 
 import com.argility.centralpages.data.UucpStatus;
 import com.vaadin.ui.Table.CellStyleGenerator;

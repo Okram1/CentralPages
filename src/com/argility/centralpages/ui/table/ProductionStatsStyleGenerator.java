@@ -1,13 +1,10 @@
-package com.argility.centralpages.ui;
+package com.argility.centralpages.ui.table;
 
 import com.argility.centralpages.data.ProductionStats;
-import com.vaadin.ui.Table.CellStyleGenerator;
 
 @SuppressWarnings("serial")
-public class ProductionStatsStyleGenerator implements CellStyleGenerator {
+public class ProductionStatsStyleGenerator extends AbstractCellStyleGenerator {
 
-	public static String PROBLEM = "problem";
-	
 	public String getStyle(Object itemId, Object propertyId) {
 		ProductionStats stats = (ProductionStats)itemId;
 		String style = null;

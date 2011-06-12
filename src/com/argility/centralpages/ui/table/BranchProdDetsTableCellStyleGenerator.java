@@ -1,16 +1,12 @@
-package com.argility.centralpages.ui;
+package com.argility.centralpages.ui.table;
 
 import org.joda.time.DateTime;
 
 import com.argility.centralpages.data.BranchProdDetails;
-import com.vaadin.ui.Table.CellStyleGenerator;
 
 @SuppressWarnings("serial")
-public class BranchProdDetsTableCellStyleGenerator implements CellStyleGenerator {
+public class BranchProdDetsTableCellStyleGenerator extends AbstractCellStyleGenerator {
 
-	public static String PROBLEM = "problem";
-	public static String WARN = "warn";
-	
 	public String getStyle(Object itemId, Object propertyId) {
 		BranchProdDetails row = (BranchProdDetails)itemId;
 		String style = null;

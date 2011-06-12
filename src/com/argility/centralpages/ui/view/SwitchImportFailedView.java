@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.dao.SwitchLoadFailedDAO;
 import com.argility.centralpages.data.SwitchLoadFailed;
-import com.argility.centralpages.ui.SwitchLoadFailedTable;
+import com.argility.centralpages.ui.table.SwitchLoadFailedTable;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;

@@ -1,4 +1,4 @@
-package com.argility.centralpages.ui;
+package com.argility.centralpages.ui.table;
 
 import com.vaadin.data.Container;
 import com.vaadin.ui.Table;
@@ -39,6 +39,8 @@ public class SwitchingAgingTable extends Table {
 		setSortContainerPropertyId("totalCount");
 		setColumnExpandRatio("actDesc", 1f);
 		setSortAscending(false);
+		
+		setCellStyleGenerator(new AgingTableCellStyleGenerator());
 	}
 
 }

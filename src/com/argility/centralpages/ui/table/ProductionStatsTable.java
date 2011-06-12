@@ -1,4 +1,4 @@
-package com.argility.centralpages.ui;
+package com.argility.centralpages.ui.table;
 
 import com.vaadin.data.Container;
 import com.vaadin.ui.Table;

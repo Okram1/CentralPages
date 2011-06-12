@@ -9,7 +9,7 @@ import com.argility.centralpages.dao.SwitchingErrorsDAO;
 import com.argility.centralpages.data.SwAudit;
 import com.argility.centralpages.data.SwitchingErrors;
 import com.argility.centralpages.ui.SwAuditHorizontalSplit;
-import com.argility.centralpages.ui.SwitchingErrorsTable;
+import com.argility.centralpages.ui.table.SwitchingErrorsTable;
 import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
