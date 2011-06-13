@@ -20,7 +20,6 @@ public class AbstractVerticalSplitPanel extends VerticalSplitPanel {
 	protected Table searchTable;
 	
 	public void createSearchableTable(Table table, String searchProp, String searchPrompt) {
-		log.info("createSearchableTable");
 		searchTable = table;
 		
 		VerticalLayout vl = new VerticalLayout();
@@ -49,10 +48,11 @@ public class AbstractVerticalSplitPanel extends VerticalSplitPanel {
 	}
 	
 	protected void applySearch() {
-		log.info("applySearch " + searchTable);
 		if (searchTable == null) {
 			return;
 		}
+		
+		log.info("Applying search to table " + searchTable.getClass().getName());
 		
 		Container c = searchTable.getContainerDataSource();
 		if (c instanceof BeanItemContainer<?>) {

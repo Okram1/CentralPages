@@ -9,6 +9,7 @@ import com.argility.centralpages.data.SwitchingAgingCount;
 public class SwitchingAgingJdbcDAO extends AbstractDAO implements SwitchingAgingStatsDAO {
 
 	public List<SwitchingAgingCount> getAllSwitchingAgingByBranch() {
+		log.info("getAllSwitchingAgingByBranch()");
 		String sql  = SwitchingAgingRowMapper.SELECT_SQL_BY_BRANCH;
 		
 		return getJdbcTemplate().query(sql, 
@@ -16,6 +17,7 @@ public class SwitchingAgingJdbcDAO extends AbstractDAO implements SwitchingAging
 	}
 
 	public List<SwitchingAgingCount> getAllSwitchingAgingByBranchAndType() {
+		log.info("getAllSwitchingAgingByBranchAndType()");
 		String sql  = SwitchingAgingRowMapper.SELECT_SQL_BY_BR_AND_TYPE;
 		
 		return getJdbcTemplate().query(sql, 
@@ -24,6 +26,7 @@ public class SwitchingAgingJdbcDAO extends AbstractDAO implements SwitchingAging
 	}
 
 	public List<SwitchingAgingCount> getAllSwitchingAgingByType() {
+		log.info("getAllSwitchingAgingByType()");
 		String sql  = SwitchingAgingRowMapper.SELECT_SQL_BY_TYPE;
 		
 		return getJdbcTemplate().query(sql, 
@@ -31,6 +34,7 @@ public class SwitchingAgingJdbcDAO extends AbstractDAO implements SwitchingAging
 	}
 
 	public List<SwitchingAgingCount> getSwitchingAgingByType(Integer actTyp) {
+		log.info("getSwitchingAgingByType()");
 		String sql  = SwitchingAgingRowMapper.SELECT_SQL_BY_BR_AND_TYPE + " WHERE act_typ = ?";
 		
 		return getJdbcTemplate().query(sql, 
@@ -39,6 +43,7 @@ public class SwitchingAgingJdbcDAO extends AbstractDAO implements SwitchingAging
 	}
 
 	public List<SwitchingAgingCount> getSwitchingAgingByBranch(String brCde) {
+		log.info("getSwitchingAgingByBranch()");
 		String sql  = SwitchingAgingRowMapper.SELECT_SQL_BY_BR_AND_TYPE + " WHERE br_cde = ?";
 		
 		return getJdbcTemplate().query(sql, 
@@ -48,6 +53,7 @@ public class SwitchingAgingJdbcDAO extends AbstractDAO implements SwitchingAging
 
 	public List<SwitchingAgingCount> getSwitchingAgingByBranchAndType(
 			String brCde, Integer actTyp) {
+		log.info("()");
 		// TODO Auto-generated method stub
 		return null;
 	}

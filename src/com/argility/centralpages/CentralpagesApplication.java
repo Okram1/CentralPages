@@ -43,8 +43,7 @@ public class CentralpagesApplication extends Application implements
 	public void init() {
 
 		setTheme("centralpages");
-		//setTheme("chameleon-vaadin");
-
+		
 		initLayout();
 		initDefaultView();
 	}
@@ -69,7 +68,7 @@ public class CentralpagesApplication extends Application implements
 	}
 
 	private void initLayout() {
-		Window mainWindow = new Window("CentralPages Application");
+		Window mainWindow = new Window("Ellerines Central Pages");
 		setMainWindow(mainWindow);
 
 		verticalLayout.setSizeFull();

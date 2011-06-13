@@ -41,11 +41,16 @@ public class BranchProdDetailsTable extends AbstractTable {
 	@Override
 	protected String formatPropertyValue(Object rowId, Object colId,
 			com.vaadin.data.Property property) {
-		if (property.getType() == Date.class && property.getValue() != null) {
+		
+		if (property == null) {
+			return super.formatPropertyValue(rowId, colId, property);
+		}
+		
+		if (property.getValue() != null && property.getType() == Date.class) {
 			return sdf.format(property.getValue());
 		}
 
-		if (property.getType() == Boolean.class) {
+		if (property.getValue() != null && property.getType() == Boolean.class) {
 			boolean val = (Boolean) property.getValue();
 			if (val) {
 				return "YES";

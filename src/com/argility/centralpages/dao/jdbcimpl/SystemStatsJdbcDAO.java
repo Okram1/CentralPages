@@ -19,6 +19,7 @@ public class SystemStatsJdbcDAO extends AbstractDAO implements SystemStatsDAO {
 	}
 
 	public List<UucpStatus> getUucpStatusProblems() {
+		log.info("getUucpStatusProblems()");
 		String sql = UucpStatusRowMapper.SELECT_COLUMNS_SQL + 
 			" WHERE message != 'Conversation complete' ORDER BY central";
 

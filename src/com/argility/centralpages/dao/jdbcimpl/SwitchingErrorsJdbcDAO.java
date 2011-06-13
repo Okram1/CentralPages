@@ -38,7 +38,7 @@ public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
 	}
 
 	public List<ActionTypeCountBean> getActionTypeTotals() {
-		
+		log.info("getActionTypeTotals()");
 		String sql = "SELECT * FROM sw_error_by_action_type";
 		
 		List<ActionTypeCountBean> list = new ArrayList<ActionTypeCountBean>();
@@ -59,9 +59,6 @@ public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
 		
 		
 		log.info("Size is " + list.size());
-		ActionTypeCountBean b = list.get(1);
-		log.info("action " + b.getActionDesc());
-		
 		return list;
 	}
 
@@ -93,6 +90,7 @@ public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
 	}
 
 	public List<ActionTypeCountBean> getActionTypeTotalsWithError() {
+		log.info("getActionTypeTotalsWithError()");
 		
 		String sql = "SELECT * FROM sw_error_by_error_type";
 		
@@ -147,6 +145,7 @@ public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
 	}
 
 	public List<BranchCountsBean> getTotalsBySendingBranch() {
+		log.info("getTotalsBySendingBranch()");
 		
 		String sql = "SELECT switching_errors.br_cde, " +
 				"count(1) FROM switching_errors " +
@@ -173,6 +172,7 @@ public class SwitchingErrorsJdbcDAO extends AbstractDAO implements
 	}
 	
 	public List<BranchCountsBean> getTotalsByReceivingBranch() {
+		log.info("getTotalsByReceivingBranch()");
 		
 		String sql = "SELECT switching_errors.obo_br_cde, " +
 				"count(1) FROM switching_errors " +

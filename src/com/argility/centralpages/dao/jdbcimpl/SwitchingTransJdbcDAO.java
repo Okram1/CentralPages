@@ -18,7 +18,7 @@ import com.argility.centralpages.data.SwitchingTran;
 public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTransDAO {
 
 	public List<BranchCountsBean> getTotalsBySendingBranch() {
-		
+		log.info("getTotalsBySendingBranch()");
 		String sql = "SELECT sw_audit_ctrl.br_cde, "
 				+ "count(1) FROM sw_audit_ctrl "
 				+ " WHERE sw_audit_ctrl.obo_aud_id is null "
@@ -46,6 +46,7 @@ public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTrans
 	}
 
 	public List<BranchCountsBean> getTotalsByOboBranch() {
+		log.info("getTotalsByOboBranch()");
 		
 		String sql = "SELECT sw_audit_ctrl.obo_br_cde, "
 				+ "count(1) FROM sw_audit_ctrl "
@@ -72,13 +73,16 @@ public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTrans
 	}
 
 	public List<ActionTypeCountBean> getTotalsByActionType() {
-		String sql = "SELECT act_typ, "
+		log.info("getTotalsByActionType()");
+		/*String sql = "SELECT act_typ, "
 				+ "	act_desc, "
 				+ "	count(1) from sw_audit_ctrl join sw_audit using (sw_aud_id) "
 				+ "	join action_typ using (act_typ) "
 				+ " WHERE sw_audit_ctrl.obo_aud_id is null "
-				+ "		group by act_typ, act_desc order by count desc";
+				+ "		group by act_typ, act_desc order by count desc";*/
 
+		String sql = "SELECT * FROM sw_by_action_type";
+		
 		List<ActionTypeCountBean> list = new ArrayList<ActionTypeCountBean>();
 
 		list = getJdbcTemplate().query(sql,
@@ -99,6 +103,7 @@ public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTrans
 	}
 
 	public List<ActionTypeCountBean> getAllByActionTypeForBranch(String brCde) {
+		log.info("getAllByActionTypeForBranch("+brCde+")");
 		String sql = "SELECT act_typ, " +
 				"act_desc, " +
 				"count(1) " +
@@ -130,6 +135,7 @@ public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTrans
 	}
 
 	public List<ActionTypeCountBean> getAllByActionTypeFromBranch(String brCde) {
+		log.info("getAllByActionTypeFromBranch("+brCde+")");
 		String sql = "SELECT act_typ, " +
 				"act_desc, " +
 				"count(1) " +
@@ -161,6 +167,7 @@ public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTrans
 	}
 
 	public List<SwitchingTran> getSwitchTransToBranch(String oboBrCde) {
+		log.info("getSwitchTransToBranch("+oboBrCde+")");
 		String sql = SwitchingTranMapper.SELECT_COL_SQL + 
 			" WHERE sw_audit_ctrl.obo_aud_id is null AND sw_audit_ctrl.obo_br_cde = ?";
 			
@@ -170,6 +177,7 @@ public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTrans
 	}
 
 	public List<SwitchingTran> getSwitchTransFromBranch(String brCde) {
+		log.info("getSwitchTransFromBranch("+brCde+")");
 		String sql = SwitchingTranMapper.SELECT_COL_SQL + 
 		" WHERE sw_audit_ctrl.obo_aud_id is null AND sw_audit_ctrl.br_cde = ?";
 		
@@ -179,6 +187,7 @@ public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTrans
 	}
 
 	public List<SwitchingTran> getSwitchTransByActionType(Integer actTyp) {
+		log.info("getSwitchTransByActionType("+actTyp+")");
 		String sql = SwitchingTranMapper.SELECT_COL_SQL + 
 		" WHERE sw_audit_ctrl.obo_aud_id is null AND act_typ = ?";
 		
@@ -188,6 +197,7 @@ public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTrans
 	}
 
 	public List<SwitchingTran> getSwitchTransByAuditId(Integer audId) {
+		log.info("getSwitchTransByAuditId("+audId+")");
 		String sql = SwitchingTranMapper.SELECT_COL_SQL + " WHERE sw_audit_ctrl.aud_id = ?";
 		
 		return getJdbcTemplate().query(sql,
@@ -196,6 +206,7 @@ public class SwitchingTransJdbcDAO extends AbstractDAO implements SwitchingTrans
 	}
 
 	public List<SwitchingTran> getSwitchTransBySwAuditId(Integer swAudId) {
+		log.info("getSwitchTransBySwAuditId("+swAudId+")");
 		String sql = SwitchingTranMapper.SELECT_COL_SQL + 
 		" WHERE sw_audit_ctrl.obo_aud_id is null AND sw_audit_ctrl.sw_aud_id = ?";
 		
