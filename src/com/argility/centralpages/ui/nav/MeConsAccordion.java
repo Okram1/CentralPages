@@ -8,6 +8,7 @@ public class MeConsAccordion extends Accordion {
 
 	public MeConsAccordion() {
 		addTab(new MeReportNavTree(), "Monthend Reports",  new ThemeResource("icons/22/db_update.png"));
+		//addTab(new ConsProcessNavTree(), "Cons process details", null);
 		
 		setHeight("50%");
 	}
