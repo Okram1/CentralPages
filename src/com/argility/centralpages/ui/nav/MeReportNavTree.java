@@ -7,8 +7,8 @@ import com.vaadin.event.ItemClickEvent;
 @SuppressWarnings("serial")
 public class MeReportNavTree extends AbstractNavigationTree {
 
-	public static final Object ME_OUTSTANDING_ON_CENTRAL = "Instore ME not on central";
-	public static final Object ME_ON_CENTRAL_OUTSTANDING_ON_BATCH = "Central ME not on batch";
+	public static final Object ME_OUTSTANDING_ON_CENTRAL = "Instore ME missing on central";
+	public static final Object ME_ON_CENTRAL_OUTSTANDING_ON_BATCH = "Central ME missing on batch";
 	public static final Object ME_ON_CENTRAL_NOT_ROLLED = "ME not rolled on central";
 	
 	private BranchMeDetailsView brMeDetView;
