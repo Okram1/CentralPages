@@ -1,8 +1,10 @@
 package com.argility.centralpages.data;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BranchInfo {
+@SuppressWarnings("serial")
+public class BranchInfo implements Serializable{
 
 	private String brCde;
 	private String brDesc;

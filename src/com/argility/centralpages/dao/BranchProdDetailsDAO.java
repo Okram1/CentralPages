@@ -86,4 +86,6 @@ public interface BranchProdDetailsDAO {
 	 * @return List<BranchProdDetails> object holding the branch details
 	 */
 	public List<BranchProdDetails> getNotReplicatedForDays();
+	
+	public BranchProdDetails getProdDetailsForBranch(String brCde);
 }

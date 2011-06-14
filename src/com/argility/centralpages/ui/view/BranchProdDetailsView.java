@@ -18,6 +18,7 @@ import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.ui.HorizontalSplitPanel;
+import com.vaadin.ui.Window.Notification;
 
 @SuppressWarnings("serial")
 public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
@@ -26,18 +27,18 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 	protected transient Logger log = Logger
 			.getLogger(this.getClass().getName());
 
-	protected CentralpagesApplication app;
 	protected SystemStatsDAO sysStatsDao;
 	protected BranchProdDetailsDAO dao;
 	protected BranchProdDetailsTable table;
 	protected BranchProdDetailsForm form;
 
-	public BranchProdDetailsView(CentralpagesApplication app) {
-		this.app = app;
-		dao = (BranchProdDetailsDAO) app.getSpringContext().getBean(
-				"branchProdDetailsDAO");
-		sysStatsDao = (SystemStatsDAO) app.getSpringContext().getBean(
-				"systemStatsDAO");
+	public BranchProdDetailsView() {
+		dao = (BranchProdDetailsDAO) CentralpagesApplication.getInstance().
+			getSpringContext().getBean("branchProdDetailsDAO");
+		
+		sysStatsDao = (SystemStatsDAO) CentralpagesApplication.getInstance().
+			getSpringContext().getBean("systemStatsDAO");
+		
 		addStyleName("view");
 	}
 
@@ -83,7 +84,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 				"replLocked", "brReplLockDate", "xoutReceived", "xoutQueued", "replDiff" });
 		table.setColumnHeaders(new String[] { "Branch", "Central",
 				"Repl Locked", "Last Replicated", "Repl file received", "Xout Queued",
-				"Replication Diff" });
+				"Repl audit Diff" });
 		table.setSortContainerPropertyId("lastReplicated");
 		table.removeGeneratedColumn("brCde");
 
@@ -97,7 +98,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 				"replLocked", "brReplLockDate", "xoutReceived", "xoutQueued", "replDiff" });
 		table.setColumnHeaders(new String[] { "Branch", "Central",
 				"Repl Locked", "Last Replicated", "Repl file received", "Xout queued", 
-				"Repl Difference" });
+				"Repl audit diff" });
 		table.setSortContainerPropertyId("brReplLockDate");
 		table.removeGeneratedColumn("brCde");
 
@@ -124,7 +125,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 		table.setVisibleColumns(new String[] { "brCde", "central",
 				"lastSwLoad", "swDiff", "swCrashed", "swCrashAudId" });
 		table.setColumnHeaders(new String[] { "Branch", "Central",
-				"Last Switching Load", "Transactions Outstanding", "Import Crashed",
+				"Last Switching Load", "Switch audit diff", "Import Crashed",
 				"Crash audit id" });
 		table.setSortContainerPropertyId("swDiff");
 		table.setSortAscending(false);
@@ -141,12 +142,18 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 		table.setVisibleColumns(new String[] { "brCde", "central", "replLocked",
 				"brReplLockDate", "xoutReceived", "lastSwLoad", "swDiff", "swCrashed", "swCrashAudId" });
 		table.setColumnHeaders(new String[] { "Branch", "Central", "Repl locked",
-				"Last Replication", "Last replication file", "Last Switching load", "Transactions Outstanding",
+				"Last Replication", "Last replication file", "Last Switching load", "Switch audit diff",
 				"Import Crashed", "Crash audit" });
 		table.setSortContainerPropertyId("swDiff");
 		table.setSortAscending(false);
 
-		wireTable(true);
+		CentralpagesApplication.getInstance().getMainWindow().showNotification("Please note, " +
+				"the 'Switch audit diff' column is the difference between the maximum audit_id on central " +
+				"and the maximum audit_id on switching and does NOT necessarily mean that the audits are " +
+				"switching transactions.", 
+				Notification.TYPE_TRAY_NOTIFICATION);
+		
+		wireTable(true); 
 	}
 
 	public void wireSwitchingNotImportedForDaysData() {
@@ -156,7 +163,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 				"brReplLockDate", "replLocked", "xoutReceived", "lastSwLoad", "swDiff" });
 		table.setColumnHeaders(new String[] { "Branch", "Central",
 				"Last Replicated", "Replication Locked", "Xout Received", "Last Switching Load",
-				"Switching Trans Outstanding" });
+				"Switching audit difference" });
 		table.setSortContainerPropertyId("lastSwLoad");
 
 		wireTable(true);
@@ -169,7 +176,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 				"replLocked", "brReplLockDate", "xoutReceived", "lastSwLoad", "swDiff" });
 		table.setColumnHeaders(new String[] { "Branch", "Central",
 				"Replication Locked", "Last Replicated", "Xout Received", "Last Switching Load",
-				"Switching Trans Outstanding" });
+				"Switching audit difference" });
 		table.setSortContainerPropertyId("lastSwLoad");
 		table.removeGeneratedColumn("brCde");
 

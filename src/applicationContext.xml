@@ -21,10 +21,10 @@
 		<!-- property name="url" value="jdbc:postgresql://localhost:5432/db0740" /-->
 		<!-- property name="url" value="jdbc:postgresql://c9900:59900/c9900" /-->
 		
-		<property name="url" value="jdbc:postgresql://c9900:59900/c9900"/>
+		<property name="url" value="jdbc:postgresql://localhost:5432/db0740"/>
 		
-		<property name="username" value="ellerines" />
-		<property name="password" value="ellerines" />
+		<property name="username" value="postgres" />
+		<property name="password" value="postgres" />
 
 		<!-- Connection pooling setup -->
 		<property name="initialSize" value="2" />
@@ -62,5 +62,6 @@
 	<bean id="systemStatsDAO" class="com.argility.centralpages.dao.jdbcimpl.SystemStatsJdbcDAO" parent="abstractDAO"/>
 	<bean id="switchingTransDAO" class="com.argility.centralpages.dao.jdbcimpl.SwitchingTransJdbcDAO" parent="abstractDAO"/>
 	<bean id="switchingAgingDAO" class="com.argility.centralpages.dao.jdbcimpl.SwitchingAgingJdbcDAO" parent="abstractDAO"/>
+	<bean id="branchMeDetailsDAO" class="com.argility.centralpages.dao.jdbcimpl.BranchMeDetailsJdbcDAO" parent="abstractDAO"/>
 	
 </beans>

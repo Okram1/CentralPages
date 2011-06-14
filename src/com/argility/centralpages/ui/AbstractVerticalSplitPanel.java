@@ -52,7 +52,7 @@ public class AbstractVerticalSplitPanel extends VerticalSplitPanel {
 			return;
 		}
 		
-		log.info("Applying search to table " + searchTable.getClass().getName());
+		log.info("Applying search to table " + searchTable.getClass().getName() + " on column " + searchField.getData());
 		
 		Container c = searchTable.getContainerDataSource();
 		if (c instanceof BeanItemContainer<?>) {

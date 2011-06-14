@@ -40,7 +40,7 @@ public class BranchProdDetailsJdbcDAO extends AbstractDAO implements BranchProdD
 	public List<BranchProdDetails> getReplicateAndNotImportedList() {
 		log.info("getReplicateAndNotImportedList()");
 		String sql = BranchProdDetailsRowMapper.SELECT_COLUMNS_SQL + 
-		" WHERE (br_repl_lock_date-last_sw_load) > '12:00:00' ORDER by last_sw_load";
+		" WHERE (br_repl_lock_date-last_sw_load) > '24:00:00' ORDER by last_sw_load";
 		
 		return getJdbcTemplate().query(sql, new BranchProdDetailsRowMapper<BranchProdDetails>());
 	}
@@ -67,6 +67,15 @@ public class BranchProdDetailsJdbcDAO extends AbstractDAO implements BranchProdD
 		" WHERE br_repl_lock_date < now() - '5 days'::interval ORDER by br_repl_lock_date";
 		
 		return getJdbcTemplate().query(sql, new BranchProdDetailsRowMapper<BranchProdDetails>());
+	}
+
+	public BranchProdDetails getProdDetailsForBranch(String brCde) {
+		log.info("getProdDetailsForBranch()");
+		String sql = BranchProdDetailsRowMapper.SELECT_COLUMNS_SQL + " WHERE br_cde = ?";
+		
+		return getJdbcTemplate().queryForObject(sql,
+				new Object[] {brCde},
+				new BranchProdDetailsRowMapper<BranchProdDetails>());
 	}
 
 }

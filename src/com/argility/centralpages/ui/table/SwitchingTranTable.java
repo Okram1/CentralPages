@@ -34,11 +34,6 @@ public class SwitchingTranTable extends AbstractTable {
 		addCountFooter("swAudId");
 	}
 	
-	public void addBrTotalCountFooter() {
-		setFooterVisible(true);
-		setColumnFooter("swAudId", getContainerDataSource().size() + " Rows");
-	}
-	
 	@Override
 	protected String formatPropertyValue(Object rowId, Object colId,
 			com.vaadin.data.Property property) {

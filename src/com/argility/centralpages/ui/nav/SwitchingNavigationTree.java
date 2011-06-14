@@ -99,7 +99,7 @@ public class SwitchingNavigationTree extends AbstractNavigationTree {
 	
 	public BranchProdDetailsView getStatsProdView() {
 		if (view == null) {
-			view = new BranchProdDetailsView(CentralpagesApplication.getInstance());
+			view = new BranchProdDetailsView();
 		}
 		return view;
 	}

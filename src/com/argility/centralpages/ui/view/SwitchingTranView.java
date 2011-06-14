@@ -119,12 +119,10 @@ public class SwitchingTranView extends AbstractVerticalSplitPanel implements Pro
 		
 		table.setNullSelectionAllowed(true);
 		
-		table.addBrTotalCountFooter();
-		
 		table.addListener((Property.ValueChangeListener) this);
 		table.setSelectable(true);
 		table.setImmediate(true);
-		table.addBrTotalCountFooter();
+		table.addCountFooter("swAudId");
 		
 		return table;
 	}

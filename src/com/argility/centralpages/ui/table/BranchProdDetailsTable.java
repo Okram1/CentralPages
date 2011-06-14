@@ -3,18 +3,13 @@ package com.argility.centralpages.ui.table;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
-
 import com.argility.centralpages.data.BranchProdDetailsContainer;
 import com.argility.centralpages.ui.BranchStatsProdColGenerator;
 import com.argility.centralpages.ui.CrashedAuditColGenerator;
 
 @SuppressWarnings("serial")
 public class BranchProdDetailsTable extends AbstractTable {
-
-	protected transient Logger log = Logger
-			.getLogger(this.getClass().getName());
-
+	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
 	public BranchProdDetailsTable(BranchProdDetailsContainer cont) {

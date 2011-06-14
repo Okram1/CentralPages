@@ -88,7 +88,7 @@ public class ReplicationNavigationTree extends AbstractNavigationTree {
 
 	public BranchProdDetailsView getView() {
 		if (view == null) {
-			view = new BranchProdDetailsView(CentralpagesApplication.getInstance());
+			view = new BranchProdDetailsView();
 		}
 		return view;
 	}

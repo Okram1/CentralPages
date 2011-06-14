@@ -2,9 +2,8 @@ package com.argility.centralpages.ui;
 
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.ui.nav.CentralAccordion;
-import com.argility.centralpages.ui.nav.SwitchingErrorNavigationTree;
+import com.argility.centralpages.ui.nav.MeConsAccordion;
 import com.argility.centralpages.ui.nav.SwitchingNavAccordion;
-import com.argility.centralpages.ui.nav.SwitchingTransTree;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -17,8 +16,10 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 	
 	private Button switchingButton = new Button("Switching");
 	private Button centralButton = new Button("Central");
-	private Button switchingErrorsButton = new Button("Switching Errors");
-	private Button switchingTransButton = new Button("Switching Transactions"); 
+	//private Button switchingErrorsButton = new Button("Switching Errors");
+	//private Button switchingTransButton = new Button("Switching Transactions");
+	
+	private Button meConsButton = new Button("ME Cons");
 	
 	public DefaultToolbar() {
 		
@@ -31,13 +32,17 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 		centralButton.addListener((Button.ClickListener)this);
 		addComponent(centralButton);
 		
-		switchingErrorsButton.setIcon(new ThemeResource("icons/sw_errors.png"));
-		switchingErrorsButton.addListener((Button.ClickListener)this);
+		//switchingErrorsButton.setIcon(new ThemeResource("icons/sw_errors.png"));
+		//switchingErrorsButton.addListener((Button.ClickListener)this);
 		//addComponent(switchingErrorsButton);
 		
-		switchingTransButton.setIcon(new ThemeResource("icons/switching2.png"));
-		switchingTransButton.addListener((Button.ClickListener)this);
+		//switchingTransButton.setIcon(new ThemeResource("icons/switching2.png"));
+		//switchingTransButton.addListener((Button.ClickListener)this);
 		//addComponent(switchingTransButton);
+		
+		meConsButton.setIcon(new ThemeResource("icons/switching2.png"));
+		meConsButton.addListener((Button.ClickListener)this);
+		addComponent(meConsButton);
 		
 		setMargin(true);
 		setSpacing(true);
@@ -62,8 +67,9 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 		
 		switchingButton.setStyleName("toolbar-deselected");
 		centralButton.setStyleName("toolbar-deselected");
-		switchingErrorsButton.setStyleName("toolbar-deselected");
-		switchingTransButton.setStyleName("toolbar-deselected");
+		//switchingErrorsButton.setStyleName("toolbar-deselected");
+		//switchingTransButton.setStyleName("toolbar-deselected");
+		meConsButton.setStyleName("toolbar-deselected");
 		
 		source.setStyleName("toolbar-selected");
 		
@@ -74,10 +80,8 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 			//app.setNavigationComponent(new ReplicationNavigationTree());
 			app.setNavigationComponent(new CentralAccordion());
 			
-		} else if (source == switchingErrorsButton) {
-			app.setNavigationComponent(new SwitchingErrorNavigationTree());
-		} else if (source == switchingTransButton) {
-			app.setNavigationComponent(new SwitchingTransTree());
+		} else if (source == meConsButton) {
+			app.setNavigationComponent(new MeConsAccordion());
 		}
 	}
 }
