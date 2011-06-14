@@ -169,12 +169,15 @@ public class AbstractVerticalSplitPanel extends VerticalSplitPanel {
 	private String getSearchValue(Field field, Class<?> colType) {
 		String searchValue = field.getValue() + "";
 
+		log.info("Cal type is " + colType);
 		if (colType == Boolean.class) {
 			if ("yes".equalsIgnoreCase(searchValue)) {
 				searchValue = "true";
 			} else if ("no".equalsIgnoreCase(searchValue)) {
 				searchValue = "false";
 			}
+		} else if (colType == java.util.Date.class) {
+			searchValue = searchValue.replaceAll("/", "-");
 		}
 
 		return searchValue;
