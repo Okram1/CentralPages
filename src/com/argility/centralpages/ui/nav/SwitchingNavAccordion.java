@@ -15,7 +15,7 @@ public class SwitchingNavAccordion extends Accordion {
 		swNavTree = new SwitchingNavigationTree();
 		swErrorTree = new SwitchingErrorNavigationTree();
 		
-		addTab(swNavTree, "Switching report", new ThemeResource("icons/22/db_update.png"));
+		addTab(swNavTree, "Switching report", new ThemeResource("icons/22/svn-commit.png"));
 		addTab(swTranTree, "Switching Transactions", new ThemeResource("icons/22/preferences-system-network-2.png"));
 		addTab(swErrorTree, "Switching Errors", new ThemeResource("icons/22/db_remove.png"));
 		

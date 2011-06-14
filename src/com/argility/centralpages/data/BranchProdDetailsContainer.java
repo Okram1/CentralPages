@@ -10,12 +10,12 @@ public class BranchProdDetailsContainer extends BeanItemContainer<BranchProdDeta
 		Serializable {
 
 	public static final Object[] NATURAL_COL_ORDER = new Object[] {
-		"brCde","central","brReplLockDate","replLocked","xoutReceived", "xoutQueued", "replProcess", 
+		"brCde","central","replLocked","brReplLockDate","xoutReceived", "xoutQueued", "replProcess", 
 		"replAuditUpTo", "replUpTo", "replDiff", "lastSwLoad", "swAudUpTo", "swDiff", "swCrashed", "swCrashAudId"
 	};
 	
 	public static final String[] COL_HEADERS_ENGLISH = new String[] {
-		"Branch","Central","Last Replicated","Rep Locked","Xout Received","Xout Queued", "Repl Process", 
+		"Branch","Central","Rep Locked","Last Replicated","Xout Received","Xout Queued", "Repl Process", 
 		"Repl Audit UpTo", "Repl UpTo", "Repl Diff", "Last Sw Load", "Sw Aud UpTo", "Sw Diff", "Sw Crashed", "Error AudId"
 	};
 	

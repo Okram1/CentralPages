@@ -9,7 +9,7 @@ public class MeReportNavTree extends AbstractNavigationTree {
 
 	public static final Object ME_OUTSTANDING_ON_CENTRAL = "Instore ME missing on central";
 	public static final Object ME_ON_CENTRAL_OUTSTANDING_ON_BATCH = "Central ME missing on batch";
-	public static final Object ME_ON_CENTRAL_NOT_ROLLED = "ME not rolled on central";
+	public static final Object ME_ON_CENTRAL_NOT_ROLLED = "Fin proc not rolled on central";
 	
 	private BranchMeDetailsView brMeDetView;
 	

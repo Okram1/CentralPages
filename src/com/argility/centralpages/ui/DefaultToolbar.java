@@ -40,7 +40,7 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 		//switchingTransButton.addListener((Button.ClickListener)this);
 		//addComponent(switchingTransButton);
 		
-		meConsButton.setIcon(new ThemeResource("icons/switching2.png"));
+		meConsButton.setIcon(new ThemeResource("icons/32/db_update.png"));
 		meConsButton.addListener((Button.ClickListener)this);
 		addComponent(meConsButton);
 		
