@@ -56,7 +56,7 @@ public class BranchProdDetailsJdbcDAO extends AbstractDAO implements BranchProdD
 	public List<BranchProdDetails> getXoutReceivedNotProcessedList() {
 		log.info("getXoutReceivedNotProcessedList()");
 		String sql = BranchProdDetailsRowMapper.SELECT_COLUMNS_SQL + 
-		" WHERE (xout_received-br_repl_lock_date) > '12:00:00' ORDER by br_repl_lock_date";
+		" WHERE (xout_received-br_repl_lock_date) > '16:00:00' ORDER by br_repl_lock_date";
 		
 		return getJdbcTemplate().query(sql, new BranchProdDetailsRowMapper<BranchProdDetails>());
 	}
@@ -64,7 +64,9 @@ public class BranchProdDetailsJdbcDAO extends AbstractDAO implements BranchProdD
 	public List<BranchProdDetails> getNotReplicatedForDays() {
 		log.info("getNotReplicatedForDays()");
 		String sql = BranchProdDetailsRowMapper.SELECT_COLUMNS_SQL +
-		" WHERE br_repl_lock_date < now() - '5 days'::interval ORDER by br_repl_lock_date";
+		" WHERE br_repl_lock_date < now() - '5 days'::interval " +
+		" OR br_repl_lock_date IS null " +
+		" ORDER by br_repl_lock_date";
 		
 		return getJdbcTemplate().query(sql, new BranchProdDetailsRowMapper<BranchProdDetails>());
 	}
