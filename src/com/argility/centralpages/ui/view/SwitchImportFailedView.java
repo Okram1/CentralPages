@@ -151,10 +151,12 @@ public class SwitchImportFailedView extends AbstractVerticalSplitPanel implement
 				}
 			});
 			
-			Button showAll = new Button("Show all");
+			final Button showAll = new Button("Show all");
 			showAll.addListener(new ClickListener() {
 				public void buttonClick(ClickEvent event) {
+					showAll.setEnabled(false); //TODO test this
 					createTable(dao.getAllSwitchLoadFailed());
+					showAll.setEnabled(true);
 				}
 			});
 			

@@ -37,7 +37,7 @@ public class SwitchingTransSearchForm extends Form implements Property.ValueChan
 		select.addItem(AUDIT_SEARCH_OPT);
 		//select.addItem(SW_AUDIT_SEARCH_OPT);
 		select.setNullSelectionAllowed(false);
-		select.setValue(TYPE_SEARCH_OPT);
+		select.setValue(AUDIT_SEARCH_OPT);
 		//select.addListener((ValueChangeListener)this);
 		
 		final TextField field = new TextField("Search value");

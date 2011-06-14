@@ -13,7 +13,7 @@ public class ReplicationNavigationTree extends AbstractNavigationTree {
 	public static final Object UUCP_STATUS_PROBLEMS = "Show problems";
 	public static final Object OVERVIEW = "Replication Overview";
 	public static final Object CRASHED_PROC = "Crashed Processes";
-	public static final Object XOUT_NOT_PROCESSED = "Xout file not processed";
+	public static final Object XOUT_NOT_PROCESSED = "Replication file not processed";
 	public static final Object NOT_REPLICATED_DAYS = "Days since last replication";
 	public static final Object CENT_PROD_LOG = "Central production log";
 

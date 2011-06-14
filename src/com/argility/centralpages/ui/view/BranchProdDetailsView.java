@@ -94,9 +94,9 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 		setStatsTable(dao.getNotReplicatedForDays());
 
 		table.setVisibleColumns(new String[] { "brCde", "central",
-				"replLocked", "brReplLockDate", "brReplUnlockDate", "xoutReceived", "xoutQueued", "replDiff" });
+				"replLocked", "brReplLockDate", "xoutReceived", "xoutQueued", "replDiff" });
 		table.setColumnHeaders(new String[] { "Branch", "Central",
-				"Repl Locked", "Last Replicated", "Replication done", "Repl file received", "Xout queued", 
+				"Repl Locked", "Last Replicated", "Repl file received", "Xout queued", 
 				"Repl Difference" });
 		table.setSortContainerPropertyId("brReplLockDate");
 		table.removeGeneratedColumn("brCde");
@@ -138,10 +138,10 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 	public void wireHighSwitchingVolumesToImportData() {
 		setStatsTable(dao.getSwImportBehindList());
 
-		table.setVisibleColumns(new String[] { "brCde", "central",
-				"brReplLockDate", "lastSwLoad", "swDiff", "swCrashed", "swCrashAudId" });
-		table.setColumnHeaders(new String[] { "Branch", "Central",
-				"Last Replication", "Last Switching load", "Transactions Outstanding",
+		table.setVisibleColumns(new String[] { "brCde", "central", "replLocked",
+				"brReplLockDate", "xoutReceived", "lastSwLoad", "swDiff", "swCrashed", "swCrashAudId" });
+		table.setColumnHeaders(new String[] { "Branch", "Central", "Repl locked",
+				"Last Replication", "Last replication file", "Last Switching load", "Transactions Outstanding",
 				"Import Crashed", "Crash audit" });
 		table.setSortContainerPropertyId("swDiff");
 		table.setSortAscending(false);
