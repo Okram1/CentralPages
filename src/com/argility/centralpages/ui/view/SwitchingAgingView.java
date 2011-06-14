@@ -29,7 +29,7 @@ public class SwitchingAgingView extends AbstractVerticalSplitPanel implements Pr
 		table.setVisibleColumns(SwitchingAgingTable.BR_COLUMNS);
 		table.setColumnHeaders(SwitchingAgingTable.COL_HEADINGS_BR);
 		
-		createSearchableTable(table, "brCde", "Enter action type and hit enter to search");
+		createSingleColumnSearchableTable(table, "brCde", "Enter action type and hit enter to search");
 	}
 	
 	public void wireAllAgingByActionType() {
@@ -38,13 +38,13 @@ public class SwitchingAgingView extends AbstractVerticalSplitPanel implements Pr
 		table.setVisibleColumns(SwitchingAgingTable.TYPE_COLUMNS);
 		table.setColumnHeaders(SwitchingAgingTable.COL_HEADINGS_TYPE);
 		
-		createSearchableTable(table, "actTyp", "Enter action type and hit enter to search");
+		createSingleColumnSearchableTable(table, "actTyp", "Enter action type and hit enter to search");
 		
 	}
 	
 	public void wireAllAgingByBranchAndType() {
 		setSwitchingAgingTable(dao.getAllSwitchingAgingByBranchAndType(), false);
-		createSearchableTable(table, "brCde", "Enter branch code and hit enter to search");
+		createSingleColumnSearchableTable(table, "brCde", "Enter branch code and hit enter to search");
 	}
 	
 	public void wireAgingByBranch(String brCde) {
@@ -96,9 +96,7 @@ public class SwitchingAgingView extends AbstractVerticalSplitPanel implements Pr
 			} else if (cnt.getActTyp() != null) {
 				createBottomAgingTable(dao.getSwitchingAgingByType(cnt.getActTyp()));
 			}
-		} else if (prop == searchField) {
-			applySearch();
-		}
+		} 
 	}
 
 }

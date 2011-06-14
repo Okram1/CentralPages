@@ -25,6 +25,8 @@ public class SwAuditForm extends Form {
 		
 		getLayout().setMargin(true);
 		
+		setFormFieldFactory(new NullToEmptyFieldFactory());
+		
 		setItemDataSource(new BeanItem<SwAudit>(data));
 		
 		setVisibleItemProperties(VISIBLE_PROPERTIES);

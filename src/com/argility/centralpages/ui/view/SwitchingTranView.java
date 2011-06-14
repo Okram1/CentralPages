@@ -60,53 +60,56 @@ public class SwitchingTranView extends AbstractVerticalSplitPanel implements Pro
 	
 	public void wireSwitchingOboBranchData(String brCde) {
 		table = createSwitchTranTable(dao.getSwitchTransToBranch(brCde));
-		createSearchableTable(table, "audTs", "Enter date(yyyy-mm-dd hh:mm) and hit enter to search");
-		//wireTable(table);
+		createMultiSearchTranTable(table);
 	}
 	
 	public void wireSwitchingFromBranchData(String brCde) {
 		table = createSwitchTranTable(dao.getSwitchTransFromBranch(brCde));
-		createSearchableTable(table, "audTs", "Enter date(yyyy-mm-dd hh:mm) and hit enter to search");
-		//wireTable(table);
+		createMultiSearchTranTable(table);
 	}
 	
 	public void wireSwitchingByActionTypeData(Integer actTyp) {
 		table = createSwitchTranTable(dao.getSwitchTransByActionType(actTyp));
-		createSearchableTable(table, "audTs", "Enter date(yyyy-mm-dd hh:mm) and hit enter to search");
-		//wireTable(table);
+		createMultiSearchTranTable(table);
 	}
 	
 	public void wireSwitchingByAuditData(Integer audId) {
 		table = createSwitchTranTable(dao.getSwitchTransByAuditId(audId));
-		createSearchableTable(table, "audTs", "Enter date(yyyy-mm-dd hh:mm) and hit enter to search");
-		//wireTable(table);
+		createMultiSearchTranTable(table);
 	}
 	
 	public void wireTotalByActionTypeData() {
 		actTypCountTable = createActTypCountTable(dao.getTotalsByActionType(), true);
-		createSearchableTable(actTypCountTable, "actTyp", "Enter action type and hit enter to search");
+		createSingleColumnSearchableTable(actTypCountTable, "actTyp", "Enter action type and hit enter to search");
 	}
 	
 	public void wireTotalBySendingBranchData() {
 		countTbl = createSwCountsTable(dao.getTotalsBySendingBranch(), false, true);
 		countTbl.setSelectable(false);
-		createSearchableTable(countTbl, "brCde", "Enter branch code and hit enter to search");
+		createSingleColumnSearchableTable(countTbl, "brCde", "Enter branch code and hit enter to search");
 	}
 	
 	public void wireTotalByOboBranchData() {
 		countTbl = createSwCountsTable(dao.getTotalsByOboBranch(), true, true);
-		createSearchableTable(countTbl, "brCde", "Enter branch code and hit enter to search");
+		createSingleColumnSearchableTable(countTbl, "brCde", "Enter branch code and hit enter to search");
 	}
 	
 	public void wireForBranchByActionTypeData(String oboBrCde) {
 		actTypCountTable = createActTypCountTable(dao.getAllByActionTypeForBranch(oboBrCde), false);
-		createSearchableTable(actTypCountTable, "actTyp", "Enter action type and hit enter to search");
+		createSingleColumnSearchableTable(actTypCountTable, "actTyp", "Enter action type and hit enter to search");
 		//wireTable(actTypCountTable);
 	}
 	
+	public void createMultiSearchTranTable(SwitchingTranTable table) {
+		createSelectSearchableTable(table,
+				toStringArray(SwitchingTranTable.COL_NATURAL_ORDER), 
+				SwitchingTranTable.HEADING_NAMES);
+	}
+	
+	
 	public void wireFromBranchByActionTypeData(String brCde) {
 		actTypCountTable = createActTypCountTable(dao.getAllByActionTypeFromBranch(brCde), false);
-		createSearchableTable(actTypCountTable, "actTyp", "Enter action type and hit enter to search");
+		createSingleColumnSearchableTable(actTypCountTable, "actTyp", "Enter action type and hit enter to search");
 		//wireTable(actTypCountTable);
 	}
 	
@@ -232,9 +235,6 @@ public class SwitchingTranView extends AbstractVerticalSplitPanel implements Pro
 			agingTable = createSwitchingAgingTable(agingDao.getSwitchingAgingByType(bean.getActTyp()));
 			setSecondComponent(agingTable);
 			setSplitPosition(50);
-		} else if (property == searchField) {
-			log.info("Search field changed");
-			applySearch();
-		}
+		} 
 	}
 }

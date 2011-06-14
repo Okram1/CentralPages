@@ -18,14 +18,6 @@ public class SwitchingErrorsTable extends AbstractTable {
 		"Branch", "Audit", "OBO br", "Sw audit", "Action typ", "Action Description", "Error"
 	};
 	
-	public SwitchingErrorsTable() {
-		new SwitchingErrorsTable(null);
-	}
-
-	public SwitchingErrorsTable(String caption) {
-		new SwitchingErrorsTable(caption, null);
-	}
-
 	public SwitchingErrorsTable(String caption, Container dataSource) {
 
 		setContainerDataSource(dataSource);
@@ -36,7 +28,7 @@ public class SwitchingErrorsTable extends AbstractTable {
 		
 		setSizeFull();
 		
-		addCountFooter("brCde");
+		addCountFooter();
 	}
 	
 	public HorizontalLayout getFilters() {

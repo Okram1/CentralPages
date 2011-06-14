@@ -18,6 +18,7 @@ import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.ui.HorizontalSplitPanel;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.Window.Notification;
 
 @SuppressWarnings("serial")
@@ -60,10 +61,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 	}
 
 	private void wireTable(boolean fullSize) {
-		//setFirstComponent(table);
-		//if (fullSize)
-		//	setSplitPosition(100);
-		createSearchableTable(table, "brCde", "Enter branch code and hit enter to search.");
+		createSingleColumnSearchableTable(table, "brCde", "Enter branch code and hit enter to search.");
 	}
 
 	private BranchProdDetailsTable setStatsTable(List<BranchProdDetails> list) {
@@ -88,7 +86,9 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 		table.setSortContainerPropertyId("lastReplicated");
 		table.removeGeneratedColumn("brCde");
 
-		wireTable(true);
+		createSelectSearchableTable(table,
+				new String[] {"brCde", "central"},
+				new String[] {"Branch", "Central"});
 	}
 
 	public void wireNotReplicatedForDaysData() {
@@ -113,9 +113,10 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 
 		table.setSortContainerPropertyId("brCde");
 
-		//createSearchableTable(table, "brCde", "Enter branch code and hit enter to search.");
+		createSelectSearchableTable(table,
+				new String[] {"brCde", "central"},
+				new String[] {"Branch", "Central"});
 		
-		wireTable(true);
 	}
 
 	public void wireImportSwitchingFailedData() {
@@ -129,10 +130,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 				"Crash audit id" });
 		table.setSortContainerPropertyId("swDiff");
 		table.setSortAscending(false);
-
-		// table.addGeneratedColumn("swCrashAudId", new
-		// CrashedAuditColGenerator());
-
+	
 		wireTable(true);
 	}
 
@@ -153,7 +151,9 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 				"switching transactions.", 
 				Notification.TYPE_TRAY_NOTIFICATION);
 		
-		wireTable(true); 
+		createSelectSearchableTable(table,
+				new String[] {"brCde", "central", "replLocked"},
+				new String[] {"Branch", "Central", "Replication Locked"});
 	}
 
 	public void wireSwitchingNotImportedForDaysData() {
@@ -186,14 +186,20 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 	public HorizontalSplitPanel getBottomPanel(BranchProdDetails statsProd) {
 		HorizontalSplitPanel hsp = new HorizontalSplitPanel();
 
+		BranchInfoForm brForm = null;
 		BranchInfo brInfo = sysStatsDao.getBrInfo(statsProd.getBrCde());
 
 		form = new BranchProdDetailsForm(statsProd);
-		BranchInfoForm brForm = new BranchInfoForm(brInfo);
-
+		
 		hsp.setFirstComponent(form);
-		hsp.setSecondComponent(brForm);
-
+		
+		if (brInfo != null) {
+			brForm = new BranchInfoForm(brInfo);
+			hsp.setSecondComponent(brForm);
+		} else {
+			hsp.setSecondComponent(new Panel("Unable to get branch profile for branch " + statsProd.getBrCde()));
+		}
+		
 		return hsp;
 	}
 
@@ -213,9 +219,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 				setSecondComponent(hsp);
 				setSplitPosition(40);
 			}
-		} else if (property == searchField) {
-			applySearch();
-		}
+		} 
 	}
 
 }

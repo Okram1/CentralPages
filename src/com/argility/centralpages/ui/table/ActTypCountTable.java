@@ -54,7 +54,7 @@ public class ActTypCountTable extends AbstractTable implements ClickListener{
 		setSizeFull();
 		setColumnReorderingAllowed(true);
 		
-		addCountFooter("actTyp");
+		addCountFooter();
 	}
 
 	public void buttonClick(ClickEvent event) {

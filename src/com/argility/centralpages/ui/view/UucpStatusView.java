@@ -51,7 +51,7 @@ public class UucpStatusView extends AbstractVerticalSplitPanel implements Proper
 		table.setImmediate(true);
 		table.addListener(this);
 		
-		createSearchableTable(table, "brCde", "Entere branch code and hit enter to search.");
+		createSingleColumnSearchableTable(table, "brCde", "Enter branch code and hit enter to search.");
 		
 		//setFirstComponent(table);
 		//setSplitPosition(100);
@@ -86,9 +86,7 @@ public class UucpStatusView extends AbstractVerticalSplitPanel implements Proper
 				setSecondComponent(form);
 			}
 			setSplitPosition(50);
-		} else if (prop == searchField) {
-			applySearch();
-		}
+		} 
 	}
 
 }

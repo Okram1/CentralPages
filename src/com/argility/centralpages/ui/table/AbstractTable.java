@@ -13,10 +13,23 @@ public abstract class AbstractTable extends Table {
 	
 	public void addCountFooter(Object property) {
 		Container cont = getContainerDataSource();
-		if (cont == null || property == null) {
+		Object col = property;
+		
+		if (cont == null) {
 			return;
 		}
+		
+		if (property == null && getVisibleColumns() != null) {
+			col = getVisibleColumns()[0];
+		} else {
+			return;
+		}
+		
 		setFooterVisible(true);
-		setColumnFooter(property,"<b>" + cont.size() + " Rows<b/>");
+		setColumnFooter(col,"<b>" + cont.size() + " Rows<b/>");
+	}
+	
+	public void addCountFooter() {
+		addCountFooter(null);
 	}
 }

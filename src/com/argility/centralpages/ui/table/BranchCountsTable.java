@@ -47,7 +47,7 @@ public class BranchCountsTable extends AbstractTable implements ClickListener{
 		});
 		
 		setColumnReorderingAllowed(true);
-		addCountFooter("brCde");
+		addCountFooter();
 
 	}
 
@@ -74,7 +74,7 @@ public class BranchCountsTable extends AbstractTable implements ClickListener{
 	private void showSwitchErrors(String branch) {
 		SwitchingErrorsView view = new SwitchingErrorsView();
 		if (toBranchSearch) {
-			view.wireByToBranch(branch);
+			view.wireByOboBranch(branch);
 		} else {
 			view.wireByFromBranch(branch);
 		}

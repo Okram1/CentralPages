@@ -23,7 +23,9 @@ public class BranchMeDetailsRowMapper<T> implements RowMapper<BranchMeDetails> {
 			"me_copied_to_batch, " +
 			"dump_waiting_on_batch, " +
 			"me_replicate_started_date, " +
-			"imported_on_batch " +
+			"imported_on_batch, " +
+			"procs_done, " +
+			"procs_crashed " +
 			"	FROM branch_me_status " +
 			"	JOIN branch_prod_details USING (br_cde) " +
 			"	JOIN uucp_status USING (br_cde) " +
@@ -47,6 +49,8 @@ public class BranchMeDetailsRowMapper<T> implements RowMapper<BranchMeDetails> {
 		data.setMeDumpCopiedToBatch(rs.getBoolean("me_copied_to_batch"));
 		data.setMeReplicateStarted(rs.getTimestamp("me_replicate_started_date"));
 		data.setImportedOnBatch(rs.getBoolean("imported_on_batch"));
+		data.setConsProcsDone(rs.getInt("procs_done"));
+		data.setConsProcsFailed(rs.getInt("procs_crashed"));
 		
 		return data;
 	}

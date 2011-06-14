@@ -3,11 +3,8 @@ package com.argility.centralpages.ui.form;
 import org.apache.log4j.Logger;
 
 import com.argility.centralpages.data.BranchProdDetails;
-import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.DateField;
-import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.TextField;
@@ -31,27 +28,13 @@ public class BranchProdDetailsForm extends Form {
 	
 	public BranchProdDetailsForm(BranchProdDetails data) {
 		
-		setFormFieldFactory(new FieldFactory());
+		setFormFieldFactory(new NullToEmptyFieldFactory());
 		
 		setItemDataSource(new BeanItem<BranchProdDetails>(data));
 		
 		setVisibleItemProperties(VISIBLE_PROPERTIES);
 		
 		setReadOnly(true);
-	}
-	
-	class FieldFactory extends DefaultFieldFactory {
-		
-		@Override
-		public Field createField(Item item, Object propertyId,
-				 Component uiContext) {
-			Field field = super.createField(item, propertyId, uiContext);
-			if (field instanceof TextField) {
-				((TextField) field).setNullRepresentation("");
-			}
-			
-			return field;
-		}
 	}
 	
 	@Override

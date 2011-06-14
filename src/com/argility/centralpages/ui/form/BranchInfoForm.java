@@ -21,6 +21,7 @@ public class BranchInfoForm extends Form {
 	public BranchInfoForm(BranchInfo brInfo) {
 		Item i = new BeanItem<BranchInfo>(brInfo);
 		
+		setFormFieldFactory(new NullToEmptyFieldFactory());
 		setItemDataSource(i);
 		
 		setVisibleItemProperties(VISIBLE_PROPERTIES);

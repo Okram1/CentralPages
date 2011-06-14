@@ -24,6 +24,8 @@ public class BranchMeDetails {
 	private Boolean meDumpWaitingOnBatch;
 	private Date meReplicateStarted;
 	private Boolean importedOnBatch;
+	private Integer consProcsDone;
+	private Integer consProcsFailed;
 	
 	public BranchMeDetails() {
 		// TODO Auto-generated constructor stub
@@ -147,6 +149,22 @@ public class BranchMeDetails {
 
 	public void setImportedOnBatch(Boolean importedOnBatch) {
 		this.importedOnBatch = importedOnBatch;
+	}
+
+	public Integer getConsProcsDone() {
+		return consProcsDone;
+	}
+
+	public void setConsProcsDone(Integer consProcsDone) {
+		this.consProcsDone = consProcsDone;
+	}
+
+	public Integer getConsProcsFailed() {
+		return consProcsFailed;
+	}
+
+	public void setConsProcsFailed(Integer consProcsFailed) {
+		this.consProcsFailed = consProcsFailed;
 	}
 
 }

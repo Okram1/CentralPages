@@ -8,7 +8,7 @@ import com.vaadin.data.Container;
 @SuppressWarnings("serial")
 public class SwitchingTranTable extends AbstractTable {
 
-	public static final Object[] COL_HEADINGS  = new Object[] {
+	public static final Object[] COL_NATURAL_ORDER  = new Object[] {
 		"swAudId","brCde","audId","audTs","oboBrCde","actTyp","actDesc","swAudDte"
 	};
 	
@@ -23,7 +23,7 @@ public class SwitchingTranTable extends AbstractTable {
 		
 		setContainerDataSource(cont);
 		
-		setVisibleColumns(COL_HEADINGS);
+		setVisibleColumns(COL_NATURAL_ORDER);
 		setColumnHeaders(HEADING_NAMES);
 		
 		setSortContainerPropertyId("swAudId");
@@ -31,7 +31,7 @@ public class SwitchingTranTable extends AbstractTable {
 		
 		setSizeFull();
 		
-		addCountFooter("swAudId");
+		addCountFooter();
 	}
 	
 	@Override

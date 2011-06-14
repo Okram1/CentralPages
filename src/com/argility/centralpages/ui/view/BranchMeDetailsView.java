@@ -28,10 +28,8 @@ public class BranchMeDetailsView extends AbstractVerticalSplitPanel implements P
 			.getSpringContext().getBean("branchMeDetailsDAO");
 		
 		brProdDao = (BranchProdDetailsDAO) CentralpagesApplication.getInstance()
-		.getSpringContext().getBean("branchProdDetailsDAO");
+			.getSpringContext().getBean("branchProdDetailsDAO");
 
-		
-		//setSizeFull();
 	}
 	
 	public void wireBranchMonthendNotOnCentralData() {
@@ -42,7 +40,7 @@ public class BranchMeDetailsView extends AbstractVerticalSplitPanel implements P
 		brMeDetsTable.setColumnHeaders(new String[] {"Branch","Central","Instore Status",
 				"Last instore update","Last UUCP comm","UUCP message"});
 		
-		createSearchableTable(brMeDetsTable, "brCde", "Please enter branch code and hit enter to search");
+		createSingleColumnSearchableTable(brMeDetsTable, "brCde", "Enter branch code and hit enter to search");
 	}
 	
 	public void wireMonthendOnCentralOutstandingOnBatch() {
@@ -53,18 +51,26 @@ public class BranchMeDetailsView extends AbstractVerticalSplitPanel implements P
 		brMeDetsTable.setColumnHeaders(new String[] {"Branch","Central","Batch","Repl locked",
 				"Repl file waiting","Replication process","ME dump copy queued","ME dump copied","ME dump waiting on batch"});
 		
-		createSearchableTable(brMeDetsTable, "brCde", "Please enter branch code and hit enter to search");
+		createSelectSearchableTable(brMeDetsTable, 
+				new String[] {"brCde","central","brBatch","replLocked",
+								"xoutQueued","meCopyQueued","meDumpCopiedToBatch","meDumpWaitingOnBatch"}, 
+				new String[] {"Branch","Central","Batch","Replication locked",
+								"Repl file waiting","ME dump copy queued","ME dump copied","ME dump waiting on batch"});
 	}
 	
 	public void wireMonthendOnCentralNotRolled() {
 		brMeDetsTable = createBranchMeDetailsTable(dao.getOnCentralNotRolledList());
 		
 		brMeDetsTable.setVisibleColumns(new Object[] {"brCde","central","replLocked",
-				"xoutQueued","replProcess","meReplicateStarted","importedOnBatch"});
-		brMeDetsTable.setColumnHeaders(new String[] {"Branch","Central","Repl locked",
-				"Repl file waiting","Replication process","ME replicate date","Imported on batch"});
+				"xoutQueued","replProcess","meReplicateStarted",
+				"importedOnBatch", "consProcsDone", "consProcsFailed"});
+		brMeDetsTable.setColumnHeaders(new String[] {"Branch","Central","Replication locked",
+				"Repl file waiting","Replication process","ME replicate date",
+				"Imported on batch","ME procs done","ME procs failed"});
 		
-		createSearchableTable(brMeDetsTable, "brCde", "Please enter branch code and hit enter to search");
+		createSelectSearchableTable(brMeDetsTable, 
+				new String[] {"brCde","central","replLocked","importedOnBatch"}, 
+				new String[] {"Branch","Central","Replication Locked","Imported on batch"});
 	}
 	
 	public BranchMeDetailsTable createBranchMeDetailsTable(List<BranchMeDetails> list) {
@@ -97,10 +103,7 @@ public class BranchMeDetailsView extends AbstractVerticalSplitPanel implements P
 				setSecondComponent(form);
 				setSplitPosition(40);
 			}
-			
-		} else if (property == searchField) {
-			applySearch();
-		}
+		} 
 		
 	}
 }

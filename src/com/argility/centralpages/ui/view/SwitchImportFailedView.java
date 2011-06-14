@@ -61,9 +61,7 @@ public class SwitchImportFailedView extends AbstractVerticalSplitPanel implement
 				setSecondComponent(ta);
 				setSplitPosition(40);
 			}
-		} else if (property == searchField) {
-			applySearch();
-		}
+		} 
 	}
 	
 	private void createTable(List<SwitchLoadFailed> list) {
@@ -84,7 +82,7 @@ public class SwitchImportFailedView extends AbstractVerticalSplitPanel implement
 		//setFirstComponent(table);
 		//setSplitPosition(100);
 		
-		createSearchableTable(table, "brCde", "Enter branch code and hit enter to search.");
+		createSingleColumnSearchableTable(table, "brCde", "Enter branch code and hit enter to search.");
 	}
 	
 	class SearchForm extends Form implements

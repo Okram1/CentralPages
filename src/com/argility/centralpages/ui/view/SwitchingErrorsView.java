@@ -8,6 +8,7 @@ import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.dao.SwitchingErrorsDAO;
 import com.argility.centralpages.data.SwAudit;
 import com.argility.centralpages.data.SwitchingErrors;
+import com.argility.centralpages.ui.AbstractVerticalSplitPanel;
 import com.argility.centralpages.ui.SwAuditHorizontalSplit;
 import com.argility.centralpages.ui.table.SwitchingErrorsTable;
 import com.vaadin.data.Item;
@@ -24,10 +25,9 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalSplitPanel;
 
 @SuppressWarnings("serial")
-public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChangeListener{
+public class SwitchingErrorsView extends AbstractVerticalSplitPanel implements ValueChangeListener{
 
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
@@ -93,7 +93,7 @@ public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChan
 				} else if (searchType == BR_SEARCH_OPT) {
 					wireByFromBranch(searchValue);
 				} else if (searchType == OBO_BR_SEARCH_OPT) {
-					wireByToBranch(searchValue);
+					wireByOboBranch(searchValue);
 				} else if (searchType == ERROR_SEARCH_OPT) {
 					wireByErrorMessage(searchValue);
 				} else if (searchType == AUDIT_SEARCH_OPT) {
@@ -132,7 +132,7 @@ public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChan
 		createTable(dao.getSwitchingErrorsFromBranch(brCde));
 	}
 	
-	public void wireByToBranch(String brCde) {
+	public void wireByOboBranch(String brCde) {
 		createTable(dao.getSwitchingErrorsToBranch(brCde));
 	}
 	
@@ -159,8 +159,12 @@ public class SwitchingErrorsView extends VerticalSplitPanel implements ValueChan
 		table.setSelectable(true);
 		table.setImmediate(true);
 		
-		setFirstComponent(table);
-		setSplitPosition(100);
+		createSelectSearchableTable(table,
+				toStringArray(SwitchingErrorsTable.COL_NATURAL_ORDER), 
+				SwitchingErrorsTable.COL_HEADINGS);
+		
+		//setFirstComponent(table);
+		//setSplitPosition(100);
 	}
 
 	public void valueChange(ValueChangeEvent event) {
