@@ -38,7 +38,7 @@ public interface BranchProdDetailsDAO {
 	 * @param 
 	 * @return List<BranchProdDetails> object holding the branch details
 	 */
-	public List<BranchProdDetails> getSwImportBehindList();
+	public List<BranchProdDetails> getSwImportFromCentralBehindList();
 
 	/**
 	 * Branches that have been replicated after the last switching import and still

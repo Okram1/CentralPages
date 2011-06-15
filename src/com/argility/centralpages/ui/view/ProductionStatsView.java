@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import com.argility.centralpages.CentralpagesApplication;
 import com.argility.centralpages.dao.ProductionStatsDAO;
 import com.argility.centralpages.data.ProductionStats;
+import com.argility.centralpages.ui.AbstractVerticalSplitPanel;
 import com.argility.centralpages.ui.table.ProductionStatsStyleGenerator;
 import com.argility.centralpages.ui.table.ProductionStatsTable;
 import com.vaadin.data.Item;
@@ -26,10 +27,9 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.VerticalSplitPanel;
 
 @SuppressWarnings("serial")
-public class ProductionStatsView extends VerticalSplitPanel implements
+public class ProductionStatsView extends AbstractVerticalSplitPanel implements
 		Property.ValueChangeListener {
 
 	public static final String SEARCH_BR_CDE = "Search by branch";
@@ -72,9 +72,14 @@ public class ProductionStatsView extends VerticalSplitPanel implements
 	}
 
 	private void wireTable() {
+		
 		table.setSizeFull();
-		setFirstComponent(table);
-		setSplitPosition(100);
+		createSelectSearchableTable(table, 
+				toStringArray(ProductionStatsTable.COL_NATURAL_ORDER), 
+				ProductionStatsTable.COL_HEADINGS);
+		
+		//setFirstComponent(table);
+		//setSplitPosition(100);
 	}
 	
 	private Form getSearchForm() {
@@ -147,6 +152,7 @@ public class ProductionStatsView extends VerticalSplitPanel implements
 
 	public void wireSearchByAudit(Integer search) {
 		setProductionStatsTable(dao.getAllProductionStatsForAudit(search));
+		
 		wireTable();
 	}
 	

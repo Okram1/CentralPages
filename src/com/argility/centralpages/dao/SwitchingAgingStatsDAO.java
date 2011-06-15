@@ -6,7 +6,7 @@ import com.argility.centralpages.data.SwitchingAgingCount;
 
 public interface SwitchingAgingStatsDAO {
 
-	public List<SwitchingAgingCount> getAllSwitchingAgingByBranch();
+	public List<SwitchingAgingCount> getAllSwitchingAgingByOboBranch();
 	
 	public List<SwitchingAgingCount> getAllSwitchingAgingByBranchAndType();
 	
@@ -14,7 +14,7 @@ public interface SwitchingAgingStatsDAO {
 	
 	public List<SwitchingAgingCount> getSwitchingAgingByType(Integer actTyp);
 	
-	public List<SwitchingAgingCount> getSwitchingAgingByBranch(String brCde);
+	public List<SwitchingAgingCount> getSwitchingAgingByOboBranch(String brCde);
 	
 	public List<SwitchingAgingCount> getSwitchingAgingByBranchAndType(String brCde, Integer actTyp);
 	

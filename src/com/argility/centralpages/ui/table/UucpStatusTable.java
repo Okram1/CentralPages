@@ -13,7 +13,7 @@ public class UucpStatusTable extends AbstractTable {
 		setColumnHeaders(new String[] {"Branch Code","Central","Last uucp communication","Status message"});
 		
 		setSizeFull();
-		addCountFooter("brCde");
+		addRowCountFooter("brCde");
 		
 		setCellStyleGenerator(new UucpStatusCellStyleGenerator());
 	}

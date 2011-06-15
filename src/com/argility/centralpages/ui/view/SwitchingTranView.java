@@ -23,6 +23,7 @@ import com.vaadin.data.Item;
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.ui.Window.Notification;
 
 @SuppressWarnings("serial")
 public class SwitchingTranView extends AbstractVerticalSplitPanel implements Property.ValueChangeListener{
@@ -70,6 +71,7 @@ public class SwitchingTranView extends AbstractVerticalSplitPanel implements Pro
 	
 	public void wireSwitchingByActionTypeData(Integer actTyp) {
 		table = createSwitchTranTable(dao.getSwitchTransByActionType(actTyp));
+		
 		createMultiSearchTranTable(table);
 	}
 	
@@ -80,17 +82,25 @@ public class SwitchingTranView extends AbstractVerticalSplitPanel implements Pro
 	
 	public void wireTotalByActionTypeData() {
 		actTypCountTable = createActTypCountTable(dao.getTotalsByActionType(), true);
+		actTypCountTable.addTotalSumFooter("count");
+		
+		CentralpagesApplication.getInstance().getMainWindow().showNotification(
+				"This is an hourly snapshot view and not realtime.", 
+				Notification.TYPE_TRAY_NOTIFICATION);
+		
 		createSingleColumnSearchableTable(actTypCountTable, "actTyp", "Enter action type and hit enter to search");
 	}
 	
 	public void wireTotalBySendingBranchData() {
 		countTbl = createSwCountsTable(dao.getTotalsBySendingBranch(), false, true);
 		countTbl.setSelectable(false);
+		countTbl.addTotalSumFooter("count");
 		createSingleColumnSearchableTable(countTbl, "brCde", "Enter branch code and hit enter to search");
 	}
 	
 	public void wireTotalByOboBranchData() {
 		countTbl = createSwCountsTable(dao.getTotalsByOboBranch(), true, true);
+		countTbl.addTotalSumFooter("count");
 		createSingleColumnSearchableTable(countTbl, "brCde", "Enter branch code and hit enter to search");
 	}
 	
@@ -125,7 +135,7 @@ public class SwitchingTranView extends AbstractVerticalSplitPanel implements Pro
 		table.addListener((Property.ValueChangeListener) this);
 		table.setSelectable(true);
 		table.setImmediate(true);
-		table.addCountFooter("swAudId");
+		table.addRowCountFooter("swAudId");
 		
 		return table;
 	}
@@ -206,7 +216,7 @@ public class SwitchingTranView extends AbstractVerticalSplitPanel implements Pro
 					String oboBrCde = ""+item.getItemProperty("brCde").getValue();
 					//actTypCountTable = createActTypCountTable(dao.getAllByActionTypeForBranch(oboBrCde));
 					
-					agingTable = createSwitchingAgingTable(agingDao.getSwitchingAgingByBranch(oboBrCde));
+					agingTable = createSwitchingAgingTable(agingDao.getSwitchingAgingByOboBranch(oboBrCde));
 					setSecondComponent(agingTable);
 				} else {
 					String brCde = ""+item.getItemProperty("brCde").getValue();

@@ -8,9 +8,9 @@ import com.argility.centralpages.data.SwitchingAgingCount;
 
 public class SwitchingAgingJdbcDAO extends AbstractDAO implements SwitchingAgingStatsDAO {
 
-	public List<SwitchingAgingCount> getAllSwitchingAgingByBranch() {
-		log.info("getAllSwitchingAgingByBranch()");
-		String sql  = SwitchingAgingRowMapper.SELECT_SQL_BY_BRANCH;
+	public List<SwitchingAgingCount> getAllSwitchingAgingByOboBranch() {
+		log.info("getAllSwitchingAgingByOboBranch()");
+		String sql  = SwitchingAgingRowMapper.SELECT_SQL_BY_OBO_BRANCH;
 		
 		return getJdbcTemplate().query(sql, 
 				new SwitchingAgingRowMapper<SwitchingAgingCount>(true, false, false));
@@ -42,7 +42,7 @@ public class SwitchingAgingJdbcDAO extends AbstractDAO implements SwitchingAging
 				new SwitchingAgingRowMapper<SwitchingAgingCount>(false, false, true));
 	}
 
-	public List<SwitchingAgingCount> getSwitchingAgingByBranch(String brCde) {
+	public List<SwitchingAgingCount> getSwitchingAgingByOboBranch(String brCde) {
 		log.info("getSwitchingAgingByBranch()");
 		String sql  = SwitchingAgingRowMapper.SELECT_SQL_BY_BR_AND_TYPE + " WHERE br_cde = ?";
 		

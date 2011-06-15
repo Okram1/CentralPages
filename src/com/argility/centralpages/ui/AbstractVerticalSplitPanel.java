@@ -162,7 +162,10 @@ public class AbstractVerticalSplitPanel extends VerticalSplitPanel {
 		}
 
 		if (searchTable instanceof AbstractTable) {
-			((AbstractTable) searchTable).addCountFooter();
+			((AbstractTable) searchTable).addRowCountFooter();
+			if (((AbstractTable) searchTable).getTotalProperty() != null) {
+				((AbstractTable) searchTable).addTotalSumFooter();
+			}
 		}
 	}
 

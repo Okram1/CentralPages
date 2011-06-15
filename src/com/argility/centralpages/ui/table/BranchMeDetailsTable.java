@@ -13,7 +13,7 @@ public class BranchMeDetailsTable extends AbstractTable {
 	public BranchMeDetailsTable(Container cont) {
 		setContainerDataSource(cont);
 		
-		addCountFooter("brCde");
+		addRowCountFooter("brCde");
 		
 		setCellStyleGenerator(new BranchMeDetailsCellStyleGen());
 	}

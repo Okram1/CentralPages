@@ -28,7 +28,7 @@ public class SwitchingErrorsTable extends AbstractTable {
 		
 		setSizeFull();
 		
-		addCountFooter();
+		addRowCountFooter();
 	}
 	
 	public HorizontalLayout getFilters() {

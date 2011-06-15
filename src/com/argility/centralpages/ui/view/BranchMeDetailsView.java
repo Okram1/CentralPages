@@ -14,6 +14,11 @@ import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItemContainer;
 
+/**
+ * This the the main ME details view, use it to display various monthend stats
+ * @author marko.salic
+ *
+ */
 @SuppressWarnings("serial")
 public class BranchMeDetailsView extends AbstractVerticalSplitPanel implements Property.ValueChangeListener{
 
@@ -32,6 +37,9 @@ public class BranchMeDetailsView extends AbstractVerticalSplitPanel implements P
 
 	}
 	
+	/**
+	 * Show us all the branches where the monthend is outstanding on central
+	 */
 	public void wireBranchMonthendNotOnCentralData() {
 		brMeDetsTable = createBranchMeDetailsTable(dao.getOutstandingOnCentralList());
 		
@@ -43,6 +51,9 @@ public class BranchMeDetailsView extends AbstractVerticalSplitPanel implements P
 		createSingleColumnSearchableTable(brMeDetsTable, "brCde", "Enter branch code and hit enter to search");
 	}
 	
+	/**
+	 * Show us all the branches where we received the ME on central but the import on batch is still outstanding
+	 */
 	public void wireMonthendOnCentralOutstandingOnBatch() {
 		brMeDetsTable = createBranchMeDetailsTable(dao.getOnCentralAndOutstandingOnBatchList());
 		
@@ -58,6 +69,9 @@ public class BranchMeDetailsView extends AbstractVerticalSplitPanel implements P
 								"Repl file waiting","ME dump copy queued","ME dump copied","ME dump waiting on batch"});
 	}
 	
+	/**
+	 * Show all branches that are still outstanding to roll fin proc per on central
+	 */
 	public void wireMonthendOnCentralNotRolled() {
 		brMeDetsTable = createBranchMeDetailsTable(dao.getOnCentralNotRolledList());
 		
@@ -73,6 +87,11 @@ public class BranchMeDetailsView extends AbstractVerticalSplitPanel implements P
 				new String[] {"Branch","Central","Replication Locked","Imported on batch"});
 	}
 	
+	/**
+	 * Create the BranchMeDetailsTable using the provided data
+	 * @param list
+	 * @return
+	 */
 	public BranchMeDetailsTable createBranchMeDetailsTable(List<BranchMeDetails> list) {
 		
 		BeanItemContainer<BranchMeDetails> cont = new BeanItemContainer<BranchMeDetails>(BranchMeDetails.class, list);
@@ -84,11 +103,14 @@ public class BranchMeDetailsView extends AbstractVerticalSplitPanel implements P
 		brMeDetsTable.addListener((Property.ValueChangeListener) this);
 		brMeDetsTable.setSelectable(true);
 		brMeDetsTable.setImmediate(true);
-		brMeDetsTable.addCountFooter("brCde");
+		brMeDetsTable.addRowCountFooter("brCde");
 
 		return brMeDetsTable;
 	}
 
+	/**
+	 * Handle the value change events from the BranchMeDetailsTable table
+	 */
 	public void valueChange(ValueChangeEvent event) {
 		Property property = event.getProperty();
 		

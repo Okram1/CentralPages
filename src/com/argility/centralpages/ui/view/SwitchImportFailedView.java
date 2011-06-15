@@ -75,7 +75,7 @@ public class SwitchImportFailedView extends AbstractVerticalSplitPanel implement
 		
 		setSizeFull();
 		table.setSizeFull();
-		table.addBrTotalCountFooter();
+		table.addRowCountFooter();
 		
 		table.addListener((Property.ValueChangeListener) this);
 		

@@ -41,7 +41,7 @@ public class SwitchingAgingTable extends AbstractTable {
 		
 		setCellStyleGenerator(new AgingTableCellStyleGenerator());
 		
-		addCountFooter("brCde");
+		addRowCountFooter("brCde");
 	}
 
 }

@@ -31,7 +31,7 @@ public class SwitchingTranTable extends AbstractTable {
 		
 		setSizeFull();
 		
-		addCountFooter();
+		addRowCountFooter();
 	}
 	
 	@Override

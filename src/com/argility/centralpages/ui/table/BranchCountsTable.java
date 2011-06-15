@@ -47,7 +47,7 @@ public class BranchCountsTable extends AbstractTable implements ClickListener{
 		});
 		
 		setColumnReorderingAllowed(true);
-		addCountFooter();
+		addRowCountFooter();
 
 	}
 

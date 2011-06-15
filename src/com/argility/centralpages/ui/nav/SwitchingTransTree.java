@@ -19,7 +19,7 @@ public class SwitchingTransTree extends AbstractNavigationTree {
 	public static final String TOT_BY_OBO_BRANCH = "Totals by obo branch";
 	
 	public static final String AGING_TOT_ACT_TYP = "Aging switching by action type";
-	public static final String AGING_TOT_BRANCH = "Aging switching by branch";
+	public static final String AGING_TOT_OBO_BRANCH = "Aging switching by obo branch";
 	public static final String AGING_TOT_BRANCH_TYPE = "Aging switching by branch/type";
 	
 	public static final String SW_TRAN_SEARCH = "Search transactions";
@@ -43,8 +43,8 @@ public class SwitchingTransTree extends AbstractNavigationTree {
 		addItem(AGING_TOT_ACT_TYP);
 		setChildrenAllowed(AGING_TOT_ACT_TYP, false);
 		
-		addItem(AGING_TOT_BRANCH);
-		setChildrenAllowed(AGING_TOT_BRANCH, false);
+		addItem(AGING_TOT_OBO_BRANCH);
+		setChildrenAllowed(AGING_TOT_OBO_BRANCH, false);
 		
 		addItem(AGING_TOT_BRANCH_TYPE);
 		setChildrenAllowed(AGING_TOT_BRANCH_TYPE, false);
@@ -77,8 +77,8 @@ public class SwitchingTransTree extends AbstractNavigationTree {
 		} else if (itemId == AGING_TOT_ACT_TYP) {
 			getAgingView().wireAllAgingByActionType();
 			app.setMainView(getAgingView());
-		} else if (itemId == AGING_TOT_BRANCH) {
-			getAgingView().wireAllAgingByBranchCode();
+		} else if (itemId == AGING_TOT_OBO_BRANCH) {
+			getAgingView().wireAllAgingByOboBranchCode();
 			app.setMainView(getAgingView());
 		} else if (itemId == AGING_TOT_BRANCH_TYPE) {
 			getAgingView().wireAllAgingByBranchAndType();

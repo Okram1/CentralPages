@@ -21,6 +21,11 @@ import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Window.Notification;
 
+/**
+ * Main production details view
+ * @author marko.salic
+ *
+ */
 @SuppressWarnings("serial")
 public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 		Property.ValueChangeListener {
@@ -43,6 +48,9 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 		addStyleName("view");
 	}
 
+	/**
+	 * Show branches with crashed central processes
+	 */
 	public void wireCentralProcessCrashedData() {
 
 		setStatsTable(dao.getCentralProcCrashedList());
@@ -69,7 +77,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 				BranchProdDetails.class, list);
 		table = new BranchProdDetailsTable(cont);
 
-		table.addCountFooter("brCde");
+		table.addRowCountFooter("brCde");
 		table.addListener((Property.ValueChangeListener) this);
 
 		return table;
@@ -135,7 +143,7 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 	}
 
 	public void wireHighSwitchingVolumesToImportData() {
-		setStatsTable(dao.getSwImportBehindList());
+		setStatsTable(dao.getSwImportFromCentralBehindList());
 
 		table.setVisibleColumns(new String[] { "brCde", "central", "replLocked",
 				"brReplLockDate", "xoutReceived", "lastSwLoad", "swDiff", "swCrashed", "swCrashAudId" });

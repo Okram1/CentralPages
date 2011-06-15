@@ -29,7 +29,7 @@ public class BranchProdDetailsTable extends AbstractTable {
 		addGeneratedColumn("swCrashAudId", new CrashedAuditColGenerator());
 		addGeneratedColumn("brCde", new BranchStatsProdColGenerator());
 		
-		addCountFooter("brCde");
+		addRowCountFooter();
 		// addStyleName("view");
 	}
 	

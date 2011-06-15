@@ -27,14 +27,8 @@ public class SwitchLoadFailedTable extends AbstractTable {
 		setSelectable(true);
 		setImmediate(true);
 		
-		addCountFooter("brCde");
+		addRowCountFooter("brCde");
 
 	}
 	
-	public void addBrTotalCountFooter() {
-		setFooterVisible(true);
-		setColumnFooter("brCde", getContainerDataSource().size() + " Rows");
-	}
-
-
 }

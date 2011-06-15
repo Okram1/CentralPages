@@ -15,6 +15,7 @@ import com.vaadin.data.Item;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Window.Notification;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DefaultFieldFactory;
 import com.vaadin.ui.Field;
@@ -24,7 +25,6 @@ public class SwErrorsCountView extends AbstractVerticalSplitPanel {
 
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
-	protected CentralpagesApplication app = null;
 	protected SwitchingErrorsDAO dao = null;
 	
 	private ActTypCountTable table;
@@ -37,46 +37,79 @@ public class SwErrorsCountView extends AbstractVerticalSplitPanel {
 		setSizeFull();
 	}
 
+	/**
+	 * Show table of all failing transactions grouped by error message and type
+	 */
 	public void wireCountByErrorData() {
 		initTable(dao.getActionTypeTotalsWithError());
+		
+		CentralpagesApplication.getInstance().getMainWindow().showNotification(
+				"This is an hourly snapshot view and not realtime.", 
+				Notification.TYPE_TRAY_NOTIFICATION);
 		
 		createSelectSearchableTable(table, 
 				new String[] {"actTyp","error"}, 
 				new String[] {"Action Type","Error"});
 	}
 	
+	/**
+	 * Show table of all failing transactions grouped by action type
+	 */
 	public void wireCountByActionTypeData() {
 		initTable(dao.getActionTypeTotals());
 		
 		table.setVisibleColumns(new Object[] {"actTyp","actionDesc","count"});
 		table.setColumnHeaders(new String[] {"Action Type","Transaction Description","Total"});
 		
+		table.addTotalSumFooter("count");
+		
+		CentralpagesApplication.getInstance().getMainWindow().showNotification(
+				"This is an hourly snapshot view and not realtime.", 
+				Notification.TYPE_TRAY_NOTIFICATION);
+		
 		createSingleColumnSearchableTable(table, "actTyp", "Enter action type and hit enter to search.");
 		
 	}
 	
+	/**
+	 * Show table of all failing transactions grouped obo branch
+	 */
 	public void wireToBranchCounts() {
 		initSwErrCntTable(dao.getTotalsByReceivingBranch());
 		
 		countTbl.setToBranchSearch(true);
 		countTbl.setColumnHeaders(new String[] {"Branch Code","Total"});
 		
-		createSingleColumnSearchableTable(countTbl, "brCde", "Enter branch code and hit enter to search.");
-	}
-	
-	public void wireFromBranchCounts() {
-		initSwErrCntTable(dao.getTotalsBySendingBranch());
-		countTbl.setToBranchSearch(false);
+		countTbl.addTotalSumFooter("count");
 		
 		createSingleColumnSearchableTable(countTbl, "brCde", "Enter branch code and hit enter to search.");
 	}
 	
-	public void initTable(List<ActionTypeCountBean> list) {
+	/**
+	 * Show table of all failing transactions grouped by sending branch
+	 */
+	public void wireFromBranchCounts() {
+		initSwErrCntTable(dao.getTotalsBySendingBranch());
+		countTbl.setToBranchSearch(false);
+		countTbl.addTotalSumFooter("count");
+		
+		createSingleColumnSearchableTable(countTbl, "brCde", "Enter branch code and hit enter to search.");
+	}
+	
+	/**
+	 * Create an ActTypCountTable using the provided list as the data to display
+	 * @param list
+	 */
+	private void initTable(List<ActionTypeCountBean> list) {
 		BeanItemContainer<ActionTypeCountBean> cont = 
 			new BeanItemContainer<ActionTypeCountBean>(ActionTypeCountBean.class, list);
 		table = new ActTypCountTable(true, cont);
 	}
 	
+	/**
+	 * Create the BranchCountsTable using the provided list as the data
+	 * @param list
+	 */
 	public void initSwErrCntTable(List<BranchCountsBean> list) {
 		BeanItemContainer<BranchCountsBean> cont = 
 			new BeanItemContainer<BranchCountsBean>(BranchCountsBean.class, list);
@@ -84,6 +117,11 @@ public class SwErrorsCountView extends AbstractVerticalSplitPanel {
 		countTbl.setSizeFull();
 	}
 	
+	/**
+	 * This field factory allows us to make the action type a clickable link 
+	 * @author marko.salic
+	 *
+	 */
 	class MyFieldFactory extends DefaultFieldFactory {
 		
 		SwErrorsCountView view = null;

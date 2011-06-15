@@ -30,9 +30,9 @@ public class BranchProdDetailsJdbcDAO extends AbstractDAO implements BranchProdD
 		return getJdbcTemplate().query(sql, new BranchProdDetailsRowMapper<BranchProdDetails>());
 	}
 
-	public List<BranchProdDetails> getSwImportBehindList() {
+	public List<BranchProdDetails> getSwImportFromCentralBehindList() {
 		log.info("getSwManyToImportList()");
-		String sql = BranchProdDetailsRowMapper.SELECT_COLUMNS_SQL + " WHERE sw_diff > 1000";
+		String sql = BranchProdDetailsRowMapper.SELECT_COLUMNS_SQL + " WHERE sw_diff > 1500";
 		
 		return getJdbcTemplate().query(sql, new BranchProdDetailsRowMapper<BranchProdDetails>());
 	}
@@ -40,7 +40,8 @@ public class BranchProdDetailsJdbcDAO extends AbstractDAO implements BranchProdD
 	public List<BranchProdDetails> getReplicateAndNotImportedList() {
 		log.info("getReplicateAndNotImportedList()");
 		String sql = BranchProdDetailsRowMapper.SELECT_COLUMNS_SQL + 
-		" WHERE (br_repl_lock_date-last_sw_load) > '24:00:00' ORDER by last_sw_load";
+		" WHERE (br_repl_lock_date-last_sw_load) > '24:00:00' " +
+		" AND sw_diff > 0 ORDER by last_sw_load";
 		
 		return getJdbcTemplate().query(sql, new BranchProdDetailsRowMapper<BranchProdDetails>());
 	}

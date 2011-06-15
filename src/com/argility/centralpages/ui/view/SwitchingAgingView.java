@@ -23,8 +23,8 @@ public class SwitchingAgingView extends AbstractVerticalSplitPanel implements Pr
 			.getSpringContext().getBean("switchingAgingDAO");
 	}
 	
-	public void wireAllAgingByBranchCode() {
-		setSwitchingAgingTable(dao.getAllSwitchingAgingByBranch(), true);
+	public void wireAllAgingByOboBranchCode() {
+		setSwitchingAgingTable(dao.getAllSwitchingAgingByOboBranch(), true);
 		
 		table.setVisibleColumns(SwitchingAgingTable.BR_COLUMNS);
 		table.setColumnHeaders(SwitchingAgingTable.COL_HEADINGS_BR);
@@ -47,8 +47,8 @@ public class SwitchingAgingView extends AbstractVerticalSplitPanel implements Pr
 		createSingleColumnSearchableTable(table, "brCde", "Enter branch code and hit enter to search");
 	}
 	
-	public void wireAgingByBranch(String brCde) {
-		setSwitchingAgingTable(dao.getSwitchingAgingByBranch(brCde), false);
+	public void wireAgingByOboBranch(String brCde) {
+		setSwitchingAgingTable(dao.getSwitchingAgingByOboBranch(brCde), false);
 //		createSearchableTable(table, "brCde", "Enter branch code and hit enter to search");
 		showTable(table);
 	}
@@ -92,7 +92,7 @@ public class SwitchingAgingView extends AbstractVerticalSplitPanel implements Pr
 			if (cnt.getBrCde() != null && cnt.getActTyp() != null) {
 				//createBottomAgingTable(dao.getSwitchingAgingByBranchAndType(cnt.getBrCde(), cnt.getActTyp()));
 			} else if (cnt.getBrCde() != null) {
-				createBottomAgingTable(dao.getSwitchingAgingByBranch(cnt.getBrCde()));
+				createBottomAgingTable(dao.getSwitchingAgingByOboBranch(cnt.getBrCde()));
 			} else if (cnt.getActTyp() != null) {
 				createBottomAgingTable(dao.getSwitchingAgingByType(cnt.getActTyp()));
 			}

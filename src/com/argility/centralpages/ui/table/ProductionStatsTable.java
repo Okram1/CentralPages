@@ -27,7 +27,7 @@ public class ProductionStatsTable extends AbstractTable {
 		setSelectable(true);
 		setImmediate(true);
 		
-		addCountFooter("brCde");
+		addRowCountFooter("brCde");
 
 	}
 }
