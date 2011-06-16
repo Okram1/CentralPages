@@ -79,10 +79,10 @@ public class SwitchImportFailedView extends AbstractVerticalSplitPanel implement
 		
 		table.addListener((Property.ValueChangeListener) this);
 		
-		//setFirstComponent(table);
-		//setSplitPosition(100);
+		createSelectSearchableTable(table, 
+				toStringArray(SwitchLoadFailedTable.COL_NATURAL_ORDER), 
+				SwitchLoadFailedTable.COL_HEADINGS);
 		
-		createSingleColumnSearchableTable(table, "brCde", "Enter branch code and hit enter to search.");
 	}
 	
 	class SearchForm extends Form implements

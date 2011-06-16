@@ -40,7 +40,7 @@ public class BranchProdDetailsJdbcDAO extends AbstractDAO implements BranchProdD
 	public List<BranchProdDetails> getReplicateAndNotImportedList() {
 		log.info("getReplicateAndNotImportedList()");
 		String sql = BranchProdDetailsRowMapper.SELECT_COLUMNS_SQL + 
-		" WHERE (br_repl_lock_date-last_sw_load) > '24:00:00' " +
+		" WHERE (br_repl_lock_date-last_sw_load) > '23:00:00' " +
 		" AND sw_diff > 0 ORDER by last_sw_load";
 		
 		return getJdbcTemplate().query(sql, new BranchProdDetailsRowMapper<BranchProdDetails>());
