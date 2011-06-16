@@ -54,7 +54,7 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 		Embedded em = new Embedded("", new ThemeResource("images/" + image));
 		em.setHeight("55px");
 		addComponent(em);
-		setComponentAlignment(em, Alignment.MIDDLE_RIGHT);
+		setComponentAlignment(em, Alignment.TOP_RIGHT);
 		setExpandRatio(em, 1);
 		
 		setStyleName("toolbar");

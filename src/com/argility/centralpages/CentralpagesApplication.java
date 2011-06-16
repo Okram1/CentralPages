@@ -34,6 +34,7 @@ public class CentralpagesApplication extends Application implements
 
 	private transient SpringContextHelper springContext;
 
+	private int navSplit = 220;
 	/**
 	 * 
 	 */
@@ -78,7 +79,7 @@ public class CentralpagesApplication extends Application implements
 
 		verticalLayout.setExpandRatio(horizontalSplit, 1);
 		horizontalSplit
-				.setSplitPosition(210, HorizontalSplitPanel.UNITS_PIXELS);
+				.setSplitPosition(navSplit, HorizontalSplitPanel.UNITS_PIXELS);
 
 		getMainWindow().setContent(verticalLayout);
 
@@ -86,7 +87,6 @@ public class CentralpagesApplication extends Application implements
 
 	private void initDefaultView() {
 		setNavigationComponent(new SwitchingNavAccordion());
-		// setTopView(new Panel("Top View Panel"));
 		setTopView(new DefaultToolbar());
 	}
 

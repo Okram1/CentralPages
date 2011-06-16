@@ -153,10 +153,8 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 		table.setSortContainerPropertyId("swDiff");
 		table.setSortAscending(false);
 
-		CentralpagesApplication.getInstance().getMainWindow().showNotification("Please note, " +
-				"the 'Switch audit diff' column is the difference between the maximum audit_id on central " +
-				"and the maximum audit_id on switching and does NOT necessarily mean that the audits are " +
-				"switching transactions.", 
+		CentralpagesApplication.getInstance().getMainWindow().showNotification("Please note, not all " +
+				"'switch audit diff' transactions are switching transactions.", 
 				Notification.TYPE_TRAY_NOTIFICATION);
 		
 		createSelectSearchableTable(table,
