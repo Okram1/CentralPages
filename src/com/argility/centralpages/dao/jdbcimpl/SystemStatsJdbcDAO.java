@@ -6,8 +6,10 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 import com.argility.centralpages.dao.SystemStatsDAO;
 import com.argility.centralpages.dao.mapper.BranchInfoRowMapper;
+import com.argility.centralpages.dao.mapper.CentralSystemDetailsRowMapper;
 import com.argility.centralpages.dao.mapper.UucpStatusRowMapper;
 import com.argility.centralpages.data.BranchInfo;
+import com.argility.centralpages.data.CentralSystemDetails;
 import com.argility.centralpages.data.UucpStatus;
 
 public class SystemStatsJdbcDAO extends AbstractDAO implements SystemStatsDAO {
@@ -41,6 +43,14 @@ public class SystemStatsJdbcDAO extends AbstractDAO implements SystemStatsDAO {
 		log.info("BR INFO " + brInfo);
 		
 		return brInfo;
+	}
+
+	public List<CentralSystemDetails> getCentralSystemDetails() {
+		log.info("getCentralSystemDetails()");
+		
+		String sql = CentralSystemDetailsRowMapper.SELECT_COLUMNS_SQL;
+		
+		return getJdbcTemplate().query(sql, new CentralSystemDetailsRowMapper<CentralSystemDetails>());
 	}
 
 }

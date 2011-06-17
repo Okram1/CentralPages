@@ -121,6 +121,10 @@
    background-color: #FFF777;
 }
 
+.v-table-cell-content-ok {
+   background-color: #76FF98;
+}
+
 .toolbar .v-button .v-button-wrap {
 	/*border: outset 2px ;*/
 	border: none 2px ;

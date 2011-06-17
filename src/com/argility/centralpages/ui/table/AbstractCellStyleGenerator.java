@@ -7,5 +7,6 @@ public abstract class AbstractCellStyleGenerator implements CellStyleGenerator{
 
 	public static String PROBLEM = "problem";
 	public static String WARN = "warn";
+	public static String OK = "ok";
 	
 }

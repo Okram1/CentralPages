@@ -3,6 +3,7 @@ package com.argility.centralpages.dao;
 import java.util.List;
 
 import com.argility.centralpages.data.BranchInfo;
+import com.argility.centralpages.data.CentralSystemDetails;
 import com.argility.centralpages.data.UucpStatus;
 
 public interface SystemStatsDAO {
@@ -12,4 +13,6 @@ public interface SystemStatsDAO {
 	public List<UucpStatus> getUucpStatusProblems();
 	
 	public BranchInfo getBrInfo(String brCde);
+	
+	public List<CentralSystemDetails> getCentralSystemDetails();
 }
