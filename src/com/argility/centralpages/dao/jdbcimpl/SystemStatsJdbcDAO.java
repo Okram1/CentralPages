@@ -14,18 +14,35 @@ import com.argility.centralpages.data.UucpStatus;
 
 public class SystemStatsJdbcDAO extends AbstractDAO implements SystemStatsDAO {
 
-	public List<UucpStatus> getAllUucpStatus() {
+	public List<UucpStatus> getAllCentralUucpStatus() {
 		String sql = UucpStatusRowMapper.SELECT_COLUMNS_SQL;
+
+		return getJdbcTemplate().query(sql, new UucpStatusRowMapper<UucpStatus>());
+	}
+	
+	public List<UucpStatus> getAllSwitchingUucpStatus() {
+		String sql = UucpStatusRowMapper.SW_SELECT_COLUMNS_SQL;
 
 		return getJdbcTemplate().query(sql, new UucpStatusRowMapper<UucpStatus>());
 	}
 
 	public List<UucpStatus> getUucpStatusProblems() {
 		log.info("getUucpStatusProblems()");
-		String sql = UucpStatusRowMapper.SELECT_COLUMNS_SQL + 
-			" WHERE message != 'Conversation complete' ORDER BY central";
+		
+		String where = " WHERE message != 'Conversation complete' ORDER BY central";
+		
+		String sqlCentral = UucpStatusRowMapper.SELECT_COLUMNS_SQL + where;
+		String sqlSwitching = UucpStatusRowMapper.SW_SELECT_COLUMNS_SQL + where; 
+		
 
-		return getJdbcTemplate().query(sql, new UucpStatusRowMapper<UucpStatus>());
+		List<UucpStatus> uucpProblemCentral = 
+			getJdbcTemplate().query(sqlCentral, new UucpStatusRowMapper<UucpStatus>());
+		List<UucpStatus> uucpProblemSwitching = 
+			getJdbcTemplate().query(sqlSwitching, new UucpStatusRowMapper<UucpStatus>());
+		
+		uucpProblemCentral.addAll(uucpProblemSwitching);
+		
+		return uucpProblemCentral;
 	}
 
 	public BranchInfo getBrInfo(String brCde) {
@@ -53,4 +70,23 @@ public class SystemStatsJdbcDAO extends AbstractDAO implements SystemStatsDAO {
 		return getJdbcTemplate().query(sql, new CentralSystemDetailsRowMapper<CentralSystemDetails>());
 	}
 
+	public List<UucpStatus> getUucpStatusForCentral(String central) {
+		log.info("getUucpStatusForCentral("+central+")");
+		
+		String where = "WHERE central = ? ORDER BY central";
+		
+		String sql = UucpStatusRowMapper.SELECT_COLUMNS_SQL;
+		
+		if (central.equals("9900")) {
+			sql = UucpStatusRowMapper.SW_SELECT_COLUMNS_SQL;
+		}
+
+		sql += where;
+		
+		return getJdbcTemplate().query(sql,
+				new Object[] {central},
+				new UucpStatusRowMapper<UucpStatus>());
+	}
+
+	
 }

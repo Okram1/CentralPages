@@ -11,6 +11,8 @@ public class UucpStatusRowMapper<T> implements RowMapper<UucpStatus> {
 
 	public static String SELECT_COLUMNS_SQL = "SELECT last_uucp_comm, br_cde, central, message FROM uucp_status ";
 	
+	public static String SW_SELECT_COLUMNS_SQL = "SELECT last_uucp_comm, br_cde, central, message FROM sw_uucp_status ";
+	
 	public UucpStatus mapRow(ResultSet rs, int arg1) throws SQLException {
 		UucpStatus data = new UucpStatus();
 		
