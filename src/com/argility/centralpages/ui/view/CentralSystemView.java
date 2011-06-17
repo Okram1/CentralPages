@@ -106,6 +106,7 @@ public class CentralSystemView extends AbstractVerticalSplitPanel
 			
 			CentralSystemDetails dets = (CentralSystemDetails)centSysTable.getValue();
 			uucpStatusTable = createUucpStatusTable(dao.getUucpStatusForCentral(dets.getCentral()));
+			uucpStatusTable.setSelectable(false);
 			setSecondComponent(uucpStatusTable);
 			setSplitPosition(50);
 			

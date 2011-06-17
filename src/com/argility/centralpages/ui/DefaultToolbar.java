@@ -51,8 +51,9 @@ public class DefaultToolbar extends HorizontalLayout implements Button.ClickList
 		
 		String image = "cooltext528009102.png";
 		image = "cp_logo_metallic.png";
-		Embedded em = new Embedded("", new ThemeResource("images/" + image));
-		em.setHeight("55px");
+		//image = "ehl-centralpages.png";
+		Embedded em = new Embedded(null, new ThemeResource("images/" + image));
+		em.setHeight("63px");
 		addComponent(em);
 		setComponentAlignment(em, Alignment.TOP_RIGHT);
 		setExpandRatio(em, 1);

@@ -21,10 +21,10 @@
 		<!-- property name="url" value="jdbc:postgresql://localhost:5432/db0740" /-->
 		<!-- property name="url" value="jdbc:postgresql://c9900:59900/c9900" /-->
 		
-		<property name="url" value="jdbc:postgresql://c9900:59900/c9900"/>
+		<property name="url" value="jdbc:postgresql://localhost:5432/db0740"/>
 		
-		<property name="username" value="ellerines" />
-		<property name="password" value="ellerines" />
+		<property name="username" value="postgres" />
+		<property name="password" value="postgres" />
 
 		<!-- Connection pooling setup -->
 		<property name="initialSize" value="2" />

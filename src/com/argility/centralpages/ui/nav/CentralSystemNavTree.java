@@ -9,8 +9,8 @@ public class CentralSystemNavTree extends AbstractNavigationTree {
 
 	public static final String CENTRAL_SYSTEM_STATUS = "Central System Overview";
 	public static final Object UUCP_STATUS = "UUCP Status";
-	public static final Object UUCP_STATUS_ALL_CENTRAL = "All central uucp status";
-	public static final Object UUCP_STATUS_ALL_SWITCHING = "All switching uucp status";
+	public static final Object UUCP_STATUS_ALL_CENTRAL = "Central uucp status";
+	public static final Object UUCP_STATUS_ALL_SWITCHING = "Switching uucp status";
 	public static final Object UUCP_STATUS_PROBLEMS = "Show problems";
 	
 	private CentralSystemView centSysView;
@@ -32,6 +32,8 @@ public class CentralSystemNavTree extends AbstractNavigationTree {
 		addItem(UUCP_STATUS_PROBLEMS);
 		setChildrenAllowed(UUCP_STATUS_PROBLEMS, false);
 		setParent(UUCP_STATUS_PROBLEMS, UUCP_STATUS);
+		
+		expandItem(UUCP_STATUS);
 	}
 	
 	public void itemClick(ItemClickEvent event) {
