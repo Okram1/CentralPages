@@ -124,6 +124,8 @@ public class BranchMeDetailsView extends AbstractVerticalSplitPanel implements P
 				form = new BranchProdDetailsForm(prodDets);
 				setSecondComponent(form);
 				setSplitPosition(40);
+				
+				//brMeDetsTable.scrollAndSetFirstItem(dets);
 			}
 		} 
 		

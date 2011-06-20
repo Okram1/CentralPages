@@ -93,4 +93,22 @@ public abstract class AbstractTable extends Table {
 	public void setTotalProperty(Object totalProperty) {
 		this.totalProperty = totalProperty;
 	}
+	
+	public void scrollAndSetFirstItem(Object item) {
+		log.info("getItemIds().size() " + getItemIds().size());
+		log.info("getPageLength() " + getPageLength());
+		log.info("getCurrentPageFirstItemIndex() " + getCurrentPageFirstItemIndex());
+		
+		if (getItemIds().size() <= getPageLength()) {
+			setPageLength(0);
+		}
+		if (getCurrentPageFirstItemIndex() > getPageLength()) {
+			//setCurrentPageFirstItemIndex(0);
+			//setPageLength(0);
+			//setCurrentPageFirstItemIndex(getCurrentPageFirstItemIndex() - getPageLength());
+		}
+		
+		setCurrentPageFirstItemId(item);
+		requestRepaint();
+	}
 }

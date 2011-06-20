@@ -224,6 +224,8 @@ public class BranchProdDetailsView extends AbstractVerticalSplitPanel implements
 
 				setSecondComponent(hsp);
 				setSplitPosition(40);
+				
+				//table.scrollAndSetFirstItem(sp);
 			}
 		} 
 	}
