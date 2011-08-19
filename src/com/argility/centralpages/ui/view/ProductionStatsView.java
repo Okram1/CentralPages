@@ -32,9 +32,9 @@ import com.vaadin.ui.TextField;
 public class ProductionStatsView extends AbstractVerticalSplitPanel implements
 		Property.ValueChangeListener {
 
-	public static final String SEARCH_BR_CDE = "Search by branch";
-	public static final String SEARCH_DATE = "Search by date";
-	public static final String SEARCH_AUDIT = "Search by audit";
+	public static final String SEARCH_BR_CDE = "branch";
+	public static final String SEARCH_DATE = "date";
+	public static final String SEARCH_AUDIT = "audit";
 
 	protected transient Logger log = Logger
 			.getLogger(this.getClass().getName());
@@ -86,7 +86,7 @@ public class ProductionStatsView extends AbstractVerticalSplitPanel implements
 
 		form = new Form();
 
-		select = new NativeSelect("Please select search type");
+		select = new NativeSelect("Search by");
 		select.setWidth("30%");
 		select.addItem(SEARCH_BR_CDE);
 		select.addItem(SEARCH_DATE);

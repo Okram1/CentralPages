@@ -31,12 +31,12 @@ public class SwitchingErrorsView extends AbstractVerticalSplitPanel implements V
 
 	protected transient Logger log = Logger.getLogger(this.getClass().getName());
 	
-	public static final String BR_SEARCH_OPT = "Search using branch code";
-	public static final String TYPE_SEARCH_OPT = "Search using action type";
-	public static final String OBO_BR_SEARCH_OPT = "Search using obo branch code";
-	public static final String ERROR_SEARCH_OPT = "Search using error message";
-	public static final String AUDIT_SEARCH_OPT = "Search using audit id";
-	public static final String SW_AUDIT_SEARCH_OPT = "Search using switch audit id";
+	public static final String BR_SEARCH_OPT = "branch code";
+	public static final String TYPE_SEARCH_OPT = "action type";
+	public static final String OBO_BR_SEARCH_OPT = "obo branch code";
+	public static final String ERROR_SEARCH_OPT = "error message";
+	public static final String AUDIT_SEARCH_OPT = "audit id";
+	public static final String SW_AUDIT_SEARCH_OPT = "switch audit id";
 	
 	protected SwitchingErrorsDAO dao;
 	
@@ -56,7 +56,7 @@ public class SwitchingErrorsView extends AbstractVerticalSplitPanel implements V
 	public void createCaptureForm() {
 		searchForm = new Form();
 		
-		select = new NativeSelect("Please select search type");
+		select = new NativeSelect("Search by");
 		select.setWidth("30%");
 		select.addItem(TYPE_SEARCH_OPT);
 		select.addItem(BR_SEARCH_OPT);
